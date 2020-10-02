@@ -1,0 +1,23 @@
+{
+  "name": "Rad-Music-App",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jshint index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Team-Schrodingers-Cats/Rad-Music-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Team-Schrodingers-Cats/Rad-Music-App/issues"
+  },
+  "devDependencies": {
+    "jshint": "^2.12.0"
+  },
+  "homepage": "https://github.com/Team-Schrodingers-Cats/Rad-Music-App#readme"
+}
