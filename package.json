@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jshint index.js"
+    "test": "jshint index.js",
+    "lint": "eslint --fix"
+  },
+  "husky": {
+    "hooks" :{
+      "pre-commit" : "npm run lint",
+      "pre-push" : "npm run lint"
+    }
   },
   "repository": {
     "type": "git",
@@ -17,6 +24,8 @@
     "url": "https://github.com/Team-Schrodingers-Cats/Rad-Music-App/issues"
   },
   "devDependencies": {
+    "eslint": "^7.10.0",
+    "husky": "^4.3.0",
     "jshint": "^2.12.0"
   },
   "homepage": "https://github.com/Team-Schrodingers-Cats/Rad-Music-App#readme"
