@@ -54,7 +54,7 @@ Awesome!  You can add information about future musical spectacles to let all you
 
 > Profile Page
 
-![enter image description here](https://i.imgur.com/QxWx0wW.png)
+![profile](https://i.imgur.com/0ZCdg2Y.png)
 
 ## Database
 
