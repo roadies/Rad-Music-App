@@ -1,5 +1,6 @@
-Contributing
-    General Workflow
+# Contributing
+
+## General Workflow
         Fork the repo
             Cut a namespaced feature branch from master
             -bug/...
@@ -7,7 +8,7 @@ Contributing
             -test/...
             -doc/...
             -refactor/...
-            Make commits to your feature branch. Prefix each commit like so:
+        Make commits to your feature branch. Prefix each commit like so:
             -(add) new feature
             -(fix) inconsistent tests [Fixes #0]
             -(refactor) ...
@@ -20,7 +21,7 @@ Contributing
     Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
 
 
-Detailed Workflow
+## Detailed Workflow
 Fork the repo
 Use github’s interface to make a fork of the repo, then add that repo as an upstream remote:
 git remote add upstream https://github.com/reactorcore/<NAME_OF_REPO>.git
@@ -32,7 +33,8 @@ test/...
 doc/...
 refactor/...
 These commands will help you do this:
-# Creates your branch and brings you there
+
+## Creates your branch and brings you there
 git checkout -b `your-branch-name`
 Make commits to your feature branch.
 Prefix each commit like so
