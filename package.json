@@ -25,8 +25,10 @@
   },
   "devDependencies": {
     "eslint": "^7.10.0",
+    "eslint-config-airbnb": "^18.2.0",
     "husky": "^4.3.0",
     "jshint": "^2.12.0"
   },
-  "homepage": "https://github.com/Team-Schrodingers-Cats/Rad-Music-App#readme"
+  "homepage": "https://github.com/Team-Schrodingers-Cats/Rad-Music-App#readme",
+  "dependencies": {}
 }
