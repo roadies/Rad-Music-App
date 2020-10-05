@@ -1,5 +1,8 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
-import Index from './HomePage/Index';
+import Splash from './splash/Splash';
+import Add from './Add/Add';
 
 class App extends Component {
   constructor(props) {
@@ -7,11 +10,17 @@ class App extends Component {
 
     this.state = {
       view: 'Home',
-      isLoggedIn: false,
+      isLoggedIn: true,
     };
 
     this.changeView = this.changeView.bind(this);
     this.renderView = this.renderView.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({
+      isLoggedIn: true,
+    });
   }
 
   changeView(option) {
@@ -24,9 +33,12 @@ class App extends Component {
     const { view } = this.state;
 
     if (view === 'Home') {
-      return <Index />;
+      return <Add />;
     }
-    return (<div>Hello</div>);
+    if (view === 'Add') {
+      return <Add />;
+    }
+    return (<div>end of return</div>);
   }
 
   render() {
@@ -34,25 +46,25 @@ class App extends Component {
     if (!isLoggedIn) {
       return (
         <div>
-          Splash Page
+          <Splash />
         </div>
       );
     }
     return (
       <div className="overall-container">
         <div className="nav-bar">
-          <span className="Home" onClick={() => this.changeView('Home')}>
+          {/* <span className="Home" onClick={() => this.changeView('Home')}>
             INSERT LANDING PAGE
-          </span>
-          <span className="Add" onClick={() => this.changeView('Add')}>
-            INSERT Add PAGE
-          </span>
-          <span className="Search" onClick={() => this.changeView('Search')}>
+          </span> */}
+          {/* <span className="Add" onClick={() => this.changeView('Add')}>
+            <Add />
+          </span> */}
+          {/* <span className="Search" onClick={() => this.changeView('Search')}>
             INSERT Search PAGE
           </span>
           <span className="Profile" onClick={() => this.changeView('Profile')}>
             INSERT Profile PAGE
-          </span>
+          </span> */}
         </div>
         <div className="main">
           {this.renderView()}
