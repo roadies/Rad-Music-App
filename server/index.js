@@ -4,7 +4,7 @@ const dbConnection = require('./db/index.js');
 
 const app = express();
 const port = process.env.PORT || 3000;
-const DIST_DIR = path.join(__dirname, '../dist'); // NEW
+const DIST_DIR = path.join(__dirname, '../client/dist'); // NEW
 const HTML_FILE = path.join(DIST_DIR, 'index.html'); // NEW
 const mockResponse = {
   foo: 'bar',
