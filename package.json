@@ -1,10 +1,12 @@
 {
   "name": "Rad-Music-App",
   "version": "1.0.0",
-  "description": "",
+  "description": "An app to help you find live music near you",
   "main": "index.js",
   "scripts": {
-    "test": "jshint index.js",
+    "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
     "lint": "eslint --fix"
   },
   "husky": {
@@ -24,6 +26,10 @@
     "url": "https://github.com/Team-Schrodingers-Cats/Rad-Music-App/issues"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
     "eslint": "^7.10.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.1",
@@ -31,7 +37,9 @@
     "eslint-plugin-react": "^7.21.3",
     "eslint-plugin-react-hooks": "^4.1.2",
     "husky": "^4.3.0",
-    "jshint": "^2.12.0"
+    "jshint": "^2.12.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
   },
   "homepage": "https://github.com/Team-Schrodingers-Cats/Rad-Music-App#readme",
   "dependencies": {
