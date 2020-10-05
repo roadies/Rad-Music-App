@@ -1,14 +1,8 @@
-// import { React } from 'react';
-// import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
-// class Profile extends React (
+const Profile = () => (
+  <div>Testing!</div>
+);
 
-//   render() {
-//     return (
-//     <div>Welcome to React!</div>
-//     )
-  
-// )
-// }
-
-// export default Profile;
+export default Profile;

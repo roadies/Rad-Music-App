@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Profile from './Profile/Profile';
 
 class App extends Component {
   constructor(props) {
@@ -13,11 +14,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        Testing 123
+        <Profile />
       </div>
-    )
+    );
   }
-
 }
 
 export default App;
