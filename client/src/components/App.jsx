@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Index from './HomePage/Index';
+import Search from './search/Search';
 
 class App extends Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class App extends Component {
     if (!isLoggedIn) {
       return (
         <div>
-          Splash Page
+          <Search />
         </div>
       );
     }
