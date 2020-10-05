@@ -2,15 +2,15 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const htmlPlugin = new HtmlWebPackPlugin({
-  template: './src/index.html',
+  template: './client/src/index.html',
   filename: './index.html',
 });
 module.exports = {
-  entry: './src/index.js',
-  output: { 
-    path: path.join(__dirname, 'dist'),
+  entry: './client/src/index.js',
+  output: {
+    path: path.join(__dirname, '/client/dist'),
     filename: '[name].js',
-  }, 
+  },
   plugins: [htmlPlugin],
   module: {
     rules: [
@@ -22,7 +22,7 @@ module.exports = {
         },
       },
       {
-        resolve: { 
+        resolve: {
           extensions: ['.js', '.jsx'],
         },
       },
