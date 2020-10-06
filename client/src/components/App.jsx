@@ -88,10 +88,9 @@ class App extends Component {
                 style={{
                   // border: 'solid blue 2px',
                   height: '90vh',
-                  backgroundColor: '#c4c4c4',
                 }}
               >
-                <Navbar>
+                <Navbar bg='dark' variant='dark' >
                   <Nav defaultActiveKey="/home" className="flex-column">
                     {/* <Nav.Link onClick={() => { console.log('This HAS BEEN CLICKED') }}>Add</Nav.Link> */}
                     <Nav.Link onClick={() => { this.changeView('Add'); }}>Add</Nav.Link>
