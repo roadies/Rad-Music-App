@@ -6,7 +6,14 @@ import third from './sample_data/third.png';
 
 const Photos = () => (
 
-  <Carousel>
+  <Carousel
+    className="photo-carousel"
+    style={{
+      marginTop: 10,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    }}
+  >
     <Carousel.Item>
       <img
         width="100%"
