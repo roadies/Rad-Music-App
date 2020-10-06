@@ -1,17 +1,10 @@
-const express = require('express');
+require('dotenv').config();
+require('./db/index.js');
 
-const app = express();
-const port = process.env.PORT || 3000;
-const mockResponse = {
-  foo: 'bar',
-  bar: 'foo',
-};
-app.get('/api', (req, res) => {
-  res.send(mockResponse);
-});
-app.get('/', (req, res) => {
-  res.status(200).send('Hello World!');
-});
-app.listen(port, () => {
-  console.log(`App listening on port: ${port}`);
+const { app } = require('./app');
+
+const PORT = 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server listening on :${PORT}`);
 });

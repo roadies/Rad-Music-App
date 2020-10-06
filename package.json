@@ -4,9 +4,10 @@
   "description": "An app to help you find live music near you",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js",
+    "start": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" ",
-    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch",
+    "build": "webpack --mode production --config webpack.config.js --watch",
     "lint": "eslint --fix"
   },
   "husky": {
@@ -36,13 +37,27 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.21.3",
     "eslint-plugin-react-hooks": "^4.1.2",
+    "file-loader": "^6.1.0",
+    "html-webpack-plugin": "^4.5.0",
     "husky": "^4.3.0",
     "jshint": "^2.12.0",
+    "sequelize": "^6.3.5",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   },
   "homepage": "https://github.com/Team-Schrodingers-Cats/Rad-Music-App#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "@popperjs/core": "^2.5.3",
+    "axios": "^0.20.0",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.5.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jquery": "^3.5.1",
+    "mysql2": "^2.2.5",
+    "popper.js": "^1.16.1",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.3.0",
+    "react-dom": "^16.13.1"
   }
 }
