@@ -15,28 +15,23 @@ class Profile extends Component {
 
   render() {
     return (
-      <Container>
+      <div as={Container}>
         <Row>
-          <Col md={3}>
+          <Col sm={3}>
             <img src={profilepic} alt="cat in vest" style={{ height: 250, width: 250 }} />
             <div className="bio"> My name is Mittens.  I am 6 years old.  I love punk rock. </div>
             <input type="text" style={{ height: 50, width: 250 }} />
             <button className="bio_button" type="submit"> Update Bio </button>
           </Col>
           <Col md={6}>
-            Status update and selected images go here
+            <input type="text" style={{ width: '100%' }} />
+            <button className="status_button" type="submit"> Update Status </button>
           </Col>
-          <Col md={3}>
+          <Col sm={3}>
             Navbar goes here
           </Col>
         </Row>
-      </Container>
-      // <div>
-      //   <img src={profilepic} alt="cat in vest" />
-      //   <div className="bio"> My name is Mittens.  I am 6 years old.  I love punk rock. </div>
-      //   <input type="text" style={{ height: 50, width: 250 }} />
-      //   <button className="bio_button" type="submit"> Update Bio </button>
-      // </div>
+      </div>
     );
   }
 }
