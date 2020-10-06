@@ -4,8 +4,50 @@ import {
 } from 'react-bootstrap';
 
 const Add = () => (
-  <div as={Container} className="addPageView">
-    Testing Add Page
+  <div className="container-fluid" style={{ margin: 'auto' }}>
+    <Container>
+      <Row style={{ marginRight: '0px', marginLeft: '0px'}}>
+        <Col style={{ }} lg={2}>
+          <div className="add-page-form">
+            <Form>
+              <Col>
+                <Row>
+                  <Form.Control placeholder="Band Name" />
+                </Row>
+                <Row>
+                  <Form.Control placeholder="Date" />
+                </Row>
+                <Row>
+                  <Form.Control placeholder="Venue" />
+                </Row>
+                <Row>
+                  <Form.Control placeholder="Genre" />
+                </Row>
+                <Row>
+                  <Form.Control as="textarea" placeholder="Details" />
+                </Row>
+                <Row>
+                  <div style={{ border: 'solid 1px black', borderRadius: '3px' }}>
+                    Preview of info
+                  </div>
+                </Row>
+              </Col>
+            </Form>
+          </div>
+        </Col>
+        <Col style={{ padding: '5px' }} lg={10}>
+          <div style={{ display: 'block', height: '90vh', width: '50vw' }}>
+            <iframe
+              style={{ height: '90vh', width: '60vw' }}
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC5Ik6djb4DtWRTRdQGyBCYWnk0gtXWL_w
+    &q=NewOrleans+LA"
+              allowFullScreen
+              title="map"
+            />
+          </div>
+        </Col>
+      </Row>
+    </Container>
   </div>
 );
 
