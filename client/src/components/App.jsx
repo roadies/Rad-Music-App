@@ -54,7 +54,7 @@ class App extends Component {
     if (!isLoggedIn) {
       return (
         <div>
-          <Splash />
+          <Profile />
         </div>
       );
     }

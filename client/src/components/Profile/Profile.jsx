@@ -4,8 +4,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-// import profilepic from './sample_data/profilepic.jpg';
-// import Photos from './Photos';
+import profilepic from './sample_data/profilepic.jpg';
+import PhotoCarousel from './PhotoCarousel';
+
 const Profile = () => {
   const [bio, setBio] = useState('');
   const [status, setStatus] = useState('');
@@ -30,10 +31,11 @@ const Profile = () => {
     marginRight: 'auto',
   };
   return (
+
     <div as={Container}>
       <Row>
-        <Col md={3}>
-          <img src="https://i.imgur.com/xRAaYI3.jpg" alt="cat in vest" style={imgStyle} />
+        <Col sm={3}>
+          <img src={profilepic} alt="cat in vest" style={imgStyle} />
           <div
             className="bio"
             style={{
@@ -48,7 +50,7 @@ const Profile = () => {
           </div>
           <Form className="bio-form" style={{ marginTop: 10 }}>
             <Form.Group controlId="exampleForm.ControlTextarea1">
-              <Form.Control type="text" rows="3" name="bio" value={bio} onChange={(e) => setBio(e.target.value)} />
+              <Form.Control as="textarea" rows="3" name="bio" value={bio} onChange={(e) => setBio(e.target.value)} />
             </Form.Group>
           </Form>
           <Button
@@ -65,7 +67,7 @@ const Profile = () => {
           </Button>
           <div className="calendar" style={calStyle}> Calendar </div>
         </Col>
-        <Col lg={6}>
+        <Col md={6}>
           <div
             className="status"
             style={{
@@ -97,13 +99,15 @@ const Profile = () => {
           >
             Update Status
           </Button>
-          {/* <Photos /> */}
+          <PhotoCarousel />
         </Col>
         {/* <Col sm={3}>
           Navbar goes here
         </Col> */}
       </Row>
     </div>
+
   );
 };
+
 export default Profile;

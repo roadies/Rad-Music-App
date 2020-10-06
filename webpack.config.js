@@ -26,6 +26,12 @@ module.exports = {
           extensions: ['.js', '.jsx'],
         },
       },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'file-loader',
+        ],
+      },
     ],
   },
 };
