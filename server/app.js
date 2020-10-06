@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const { Shows } = require('./api/shows');
 const { Pictures } = require('./api/pictures');
 
-
 const CLIENT_PATH = path.resolve(__dirname, '../client/dist');
 const app = express();
 
