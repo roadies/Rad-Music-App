@@ -8,7 +8,7 @@ const Splash = ({ changeView }) => (
         <Nav className="mr-auto" className="justify-content-end">
           <Nav.Link href="#signUp">Sign Up</Nav.Link>
           <Nav.Link href="#Login">Login</Nav.Link>
-          <Nav.Link onClick={changeView('Add')}>Add</Nav.Link>
+          {/* <Nav.Link>Add</Nav.Link> */}
         </Nav>
       </Navbar>
     </div>

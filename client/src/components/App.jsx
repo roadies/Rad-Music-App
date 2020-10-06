@@ -10,7 +10,7 @@ class App extends Component {
 
     this.state = {
       view: 'Home',
-      isLoggedIn: true,
+      isLoggedIn: false,
     };
 
     this.changeView = this.changeView.bind(this);
