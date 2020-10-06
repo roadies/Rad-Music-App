@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import profilepic from './sample_data/profilepic.jpg';
+import Photos from './Photos';
 
 class Profile extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class Profile extends Component {
           <Col md={6}>
             <input type="text" style={{ width: '100%' }} />
             <button className="status_button" type="submit"> Update Status </button>
+            <Photos />
           </Col>
           <Col sm={3}>
             Navbar goes here
