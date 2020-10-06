@@ -57,31 +57,6 @@ const Add = () => (
         </Col>
         <Col md="auto" />
         <Col xs md={2}>
-          <div
-            className="app-page-nav"
-            style={{
-              backgroundColor: '#313840', height: '100%', display: 'flex', marginTop: '0px', textAlign: 'center',
-            }}
-          >
-            <div as={Container} className="add-nav" style={{ marginTop: '100px', textAlign: 'center' }}>
-              <Col>
-                <Navbar variant="dark">
-                  <Nav defaultActiveKey="/home" className="flex-column">
-                    <div className="navbar-info" style={{ textAlign: 'center' }}>
-                      <img src="https://i.imgur.com/xRAaYI3.jpg" alt="profile pic" style={{ height: '100px', width: '100px', borderRadius: '10px' }} />
-                      <div style={{ fontSize: '10pt', color: '#d2d2d2' }}>
-                        Larry Schwall
-                      </div>
-                    </div>
-                    <Nav.Link href="#">Add an Event</Nav.Link>
-                    <Nav.Link eventKey="link-1">Search</Nav.Link>
-                    <Nav.Link eventKey="link-2">Profile</Nav.Link>
-                    <Nav.Link>Logout</Nav.Link>
-                  </Nav>
-                </Navbar>
-              </Col>
-            </div>
-          </div>
         </Col>
       </Row>
     </div>
