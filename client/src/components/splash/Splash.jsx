@@ -1,13 +1,14 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 
-const Splash = () => (
+const Splash = ({ changeView }) => (
   <div className="splash-container">
     <div className="splash-page-navbar">
       <Navbar bg="dark" variant="dark" className="justify-content-end">
         <Nav className="mr-auto" className="justify-content-end">
           <Nav.Link href="#signUp">Sign Up</Nav.Link>
           <Nav.Link href="#Login">Login</Nav.Link>
+          <Nav.Link onClick={changeView('Add')}>Add</Nav.Link>
         </Nav>
       </Navbar>
     </div>
