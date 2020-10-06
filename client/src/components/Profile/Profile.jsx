@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import profilepic from './sample_data/profilepic.jpg';
-import Photos from './Photos';
+import PhotoCarousel from './PhotoCarousel';
 
 const Profile = () => {
   const [bio, setBio] = useState('');
@@ -100,7 +100,7 @@ const Profile = () => {
           >
             Update Status
           </Button>
-          <Photos />
+          <PhotoCarousel />
         </Col>
         {/* <Col sm={3}>
           Navbar goes here
