@@ -8,6 +8,7 @@ import {
 import Add from './Add/Add';
 import Landing from './Landing/Landing';
 import Profile from './Profile/Profile';
+import Search from './search/Search';
 import Splash from './splash/Splash';
 
 class App extends Component {
@@ -42,7 +43,7 @@ class App extends Component {
     } if (view === 'Add') {
       return <Add />;
     } if (view === 'Search') {
-      return (<div>This is Search Page</div>);
+      return <Search />;
     } if (view === 'Profile') {
       return <Profile />;
     }
@@ -54,7 +55,7 @@ class App extends Component {
     if (!isLoggedIn) {
       return (
         <div>
-          <Profile />
+          <Splash />
         </div>
       );
     }

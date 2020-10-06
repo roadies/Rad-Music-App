@@ -27,7 +27,8 @@ CREATE TABLE `user` (
   `id` int primary key not null AUTO_INCREMENT,
   `user_name` varchar(255),
   `genre` int,
-  `pictures` varchar(255)
+  `pictures` varchar(255),
+  `profile_pic` varchar(255)
 );
 
 CREATE TABLE `shows_bands_join` (
