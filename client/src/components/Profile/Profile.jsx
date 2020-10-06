@@ -12,7 +12,6 @@ const Profile = () => {
   const [status, setStatus] = useState('');
   const [displayBio, setDisplayBio] = useState('');
   const [displayStatus, setDisplayStatus] = useState('');
-
   const imgStyle = {
     height: 150,
     width: 150,
