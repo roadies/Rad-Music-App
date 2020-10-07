@@ -103,8 +103,8 @@ class App extends Component {
                     <Nav.Link onClick={() => { this.changeView('Add'); }}>Add</Nav.Link>
                     <Nav.Link onClick={() => { this.changeView('Search'); }}>Search</Nav.Link>
                     <Nav.Link onClick={() => { this.changeView('Profile'); }}>Profile</Nav.Link>
-                    <Nav.Link eventKey="disabled" disabled>
-                      Disabled
+                    <Nav.Link onClick={() => { this.changeView('Home'); }}>
+                      Logout
                     </Nav.Link>
                   </Nav>
                 </Navbar>
