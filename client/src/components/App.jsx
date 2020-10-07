@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import {
-  Container, Row, Col, Nav, Form, Navbar,
+  Container, Row, Col, Nav, Navbar,
 } from 'react-bootstrap';
 import Add from './Add/Add';
 import Landing from './Landing/Landing';
@@ -26,7 +26,7 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({
-      isLoggedIn: true,
+      isLoggedIn: false,
     });
   }
 
@@ -51,7 +51,7 @@ class App extends Component {
   }
 
   render() {
-    const { isLoggedIn, view } = this.state;
+    const { isLoggedIn } = this.state;
     if (!isLoggedIn) {
       return (
         <div>
@@ -88,11 +88,11 @@ class App extends Component {
                 style={{
                   // border: 'solid blue 2px',
                   height: '90vh',
+                  backgroundColor: '#313840',
                 }}
               >
-                <Navbar bg='dark' variant='dark' >
+                <Navbar variant="dark">
                   <Nav defaultActiveKey="/home" className="flex-column">
-                    {/* <Nav.Link onClick={() => { console.log('This HAS BEEN CLICKED') }}>Add</Nav.Link> */}
                     <Nav.Link onClick={() => { this.changeView('Add'); }}>Add</Nav.Link>
                     <Nav.Link onClick={() => { this.changeView('Search'); }}>Search</Nav.Link>
                     <Nav.Link onClick={() => { this.changeView('Profile'); }}>Profile</Nav.Link>
