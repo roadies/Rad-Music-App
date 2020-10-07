@@ -75,7 +75,7 @@ const Search = () => {
                 title="map"
               />
             </div>
-          </Col>   
+          </Col>
         </Row>
       </Container>
     </div>
