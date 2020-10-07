@@ -100,6 +100,7 @@ class App extends Component {
               >
                 <Navbar variant="dark">
                   <Nav defaultActiveKey="/home" className="flex-column">
+                    <Nav.Item style={{ color: '#d2d2d2' }}>Insert Profile Name</Nav.Item>
                     <Nav.Link onClick={() => { this.changeView('Add'); }}>Add</Nav.Link>
                     <Nav.Link onClick={() => { this.changeView('Search'); }}>Search</Nav.Link>
                     <Nav.Link onClick={() => { this.changeView('Profile'); }}>Profile</Nav.Link>
