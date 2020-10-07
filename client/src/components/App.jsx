@@ -24,7 +24,6 @@ class App extends Component {
 
     this.changeView = this.changeView.bind(this);
     this.renderView = this.renderView.bind(this);
-    this.userLoggedIn = this.userLoggedIn.bind(this);
   }
 
   componentDidMount() {
