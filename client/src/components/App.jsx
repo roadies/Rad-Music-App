@@ -26,7 +26,7 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({
-      isLoggedIn: false,
+      isLoggedIn: true,
     });
   }
 
