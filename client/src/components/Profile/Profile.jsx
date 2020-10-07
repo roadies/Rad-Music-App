@@ -34,7 +34,7 @@ const Profile = () => {
 
     <div as={Container}>
       <Row>
-        <Col sm={3}>
+        <Col sm={4}>
           <img src={profilepic} alt="cat in vest" style={imgStyle} />
           <div
             className="bio"
@@ -67,7 +67,7 @@ const Profile = () => {
           </Button>
           <div className="calendar" style={calStyle}> Calendar </div>
         </Col>
-        <Col md={6}>
+        <Col md={8}>
           <div
             className="status"
             style={{
