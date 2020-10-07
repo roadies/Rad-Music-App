@@ -22,11 +22,18 @@ class App extends Component {
 
     this.changeView = this.changeView.bind(this);
     this.renderView = this.renderView.bind(this);
+    this.userLoggedIn = this.userLoggedIn.bind(this);
   }
 
   componentDidMount() {
     this.setState({
-      isLoggedIn: false,
+      isLoggedIn: true,
+    });
+  }
+
+  userLoggedIn() {
+    this.setState({
+      isLoggedIn: true,
     });
   }
 
@@ -47,7 +54,7 @@ class App extends Component {
     } if (view === 'Profile') {
       return <Profile />;
     }
-    return <Splash />;
+    return <Splash userLoggedIn={this.userLoggedIn} />;
   }
 
   render() {
