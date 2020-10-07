@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import axios from 'axios';
 import profilepic from './sample_data/profilepic.jpg';
 import PhotoCarousel from './PhotoCarousel';
 
@@ -12,6 +13,16 @@ const Profile = () => {
   const [status, setStatus] = useState('');
   const [displayBio, setDisplayBio] = useState('');
   const [displayStatus, setDisplayStatus] = useState('');
+
+  // need a function to grab saved bio and status from database when page loads
+  useEffect(() => {
+    axios.get('/bio')
+  }, []);
+
+  // need a function to save/update bio and status to database
+
+
+
   const imgStyle = {
     height: 150,
     width: 150,
@@ -21,6 +32,7 @@ const Profile = () => {
     marginTop: '30px',
     marginBottom: '20px',
   };
+
   const calStyle = {
     height: 250,
     width: 250,
@@ -30,6 +42,7 @@ const Profile = () => {
     marginLeft: 'auto',
     marginRight: 'auto',
   };
+
   return (
 
     <div as={Container}>
@@ -101,9 +114,6 @@ const Profile = () => {
           </Button>
           <PhotoCarousel />
         </Col>
-        {/* <Col sm={3}>
-          Navbar goes here
-        </Col> */}
       </Row>
     </div>
 
