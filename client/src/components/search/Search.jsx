@@ -75,64 +75,7 @@ const Search = () => {
                 title="map"
               />
             </div>
-          </Col>
-          <Col lg="auto" style={{ }}>
-            <div>
-              <Form>
-                <Form.Group as={Row} controlId="formBand">
-                  <Form.Label column sm={2}>
-                    Band:
-                  </Form.Label>
-                  <Col sm={10}>
-                    <Form.Control
-                      type="text"
-                      placeholder="band name"
-                      value={band}
-                      onChange={(e) => setBand(e.target.value)}
-                    />
-                  </Col>
-                </Form.Group>
-                <Form.Group as={Row} controlId="formDate">
-                  <Form.Label column sm={2}>
-                    Date:
-                  </Form.Label>
-                  <Col sm={10}>
-                    <Form.Control
-                      type="date"
-                      value={date}
-                      onChange={(e) => setDate(e.target.value)}
-                    />
-                  </Col>
-                </Form.Group>
-                <Form.Group as={Row} controlId="formVenue">
-                  <Form.Label column sm={2}>
-                    Venue:
-                  </Form.Label>
-                  <Col sm={10}>
-                    <Form.Control
-                      type="text"
-                      placeholder="Venue name"
-                      value={venue}
-                      onChange={(e) => setVenue(e.target.value)}
-                    />
-                  </Col>
-                </Form.Group>
-                <Form.Group as={Row} controlId="formGenre">
-                  <Form.Label column sm={2}>
-                    Genre:
-                  </Form.Label>
-                  <Col sm={10}>
-                    <Form.Control
-                      type="text"
-                      placeholder="Genre name"
-                      value={genre}
-                      onChange={(e) => setGenre(e.target.value)}
-                    />
-                  </Col>
-                </Form.Group>
-              </Form>
-            </div>
-          </Col>
+          </Col>   
         </Row>
       </Container>
     </div>
