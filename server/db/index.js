@@ -83,11 +83,14 @@ db.authenticate()
     console.log(error, 'not connected');
   });
 
-const authFunc = (profile) => User.findOne({
-  where: {
-    googleId: profile.id,
-  },
-});
+const authFunc = (profile) => {
+  console.log(profile, 'profile');
+  return User.findOne({
+    where: {
+      googleId: profile.id,
+    },
+  });
+};
 
 module.exports = {
   db,
