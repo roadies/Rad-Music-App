@@ -29,7 +29,13 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({
-      isLoggedIn: false,
+      isLoggedIn: true,
+    });
+  }
+
+  userLoggedIn() {
+    this.setState({
+      isLoggedIn: true,
     });
   }
 
