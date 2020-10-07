@@ -7,6 +7,7 @@ import {
 } from 'react-bootstrap';
 import Add from './Add/Add';
 import Landing from './Landing/Landing';
+import Map from './test/TestMap';
 import Profile from './Profile/Profile';
 import Search from './search/Search';
 import Splash from './splash/Splash';
@@ -53,6 +54,8 @@ class App extends Component {
       return <Search />;
     } if (view === 'Profile') {
       return <Profile />;
+    } if (view === 'Map') {
+      return <Map />;
     }
     return <Splash userLoggedIn={this.userLoggedIn} />;
   }
@@ -104,7 +107,7 @@ class App extends Component {
                     <Nav.Link onClick={() => { this.changeView('Add'); }}>Add</Nav.Link>
                     <Nav.Link onClick={() => { this.changeView('Search'); }}>Search</Nav.Link>
                     <Nav.Link onClick={() => { this.changeView('Profile'); }}>Profile</Nav.Link>
-                    <Nav.Link onClick={() => { this.changeView('Home'); }}>
+                    <Nav.Link onClick={() => { this.changeView('Map'); }}>
                       Logout
                     </Nav.Link>
                   </Nav>
