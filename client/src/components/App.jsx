@@ -7,7 +7,7 @@ import {
 } from 'react-bootstrap';
 import Add from './Add/Add';
 import Landing from './Landing/Landing';
-import Map from './test/TestMap';
+// import Map from './test/TestMap';
 import Profile from './Profile/Profile';
 import Search from './search/Search';
 import Splash from './splash/Splash';

@@ -1,6 +1,7 @@
-const { GOOGLEMAPS_KEY, IMGUR_KEY } = process.env;
+const { GM_KEY, GM_SECRET, G_CLIENT_KEY } = process.env;
 
 module.exports = {
-  GOOGLEMAPS_KEY,
-  IMGUR_KEY,
+  GM_KEY,
+  GM_SECRET,
+  G_CLIENT_KEY,
 };
