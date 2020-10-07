@@ -3,14 +3,16 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import {
-  Container, Row, Col, Nav, Form, Navbar,
+  Container, Row, Col, Nav, Navbar,
 } from 'react-bootstrap';
 import Add from './Add/Add';
 import Landing from './Landing/Landing';
+import Map from './test/TestMap';
 import Profile from './Profile/Profile';
 import Search from './search/Search';
 import Splash from './splash/Splash';
 
+//COMMENT TEST
 class App extends Component {
   constructor(props) {
     super(props);
@@ -46,12 +48,14 @@ class App extends Component {
       return <Search />;
     } if (view === 'Profile') {
       return <Profile />;
+    } if (view === 'Map') {
+      return <Map />;
     }
-    return <Splash />;
+    return <Splash userLoggedIn={this.userLoggedIn} />;
   }
 
   render() {
-    const { isLoggedIn, view } = this.state;
+    const { isLoggedIn } = this.state;
     if (!isLoggedIn) {
       return (
         <div>
@@ -88,17 +92,17 @@ class App extends Component {
                 style={{
                   // border: 'solid blue 2px',
                   height: '90vh',
-                  backgroundColor: '#c4c4c4',
+                  backgroundColor: '#313840',
                 }}
               >
-                <Navbar>
+                <Navbar variant="dark">
                   <Nav defaultActiveKey="/home" className="flex-column">
-                    {/* <Nav.Link onClick={() => { console.log('This HAS BEEN CLICKED') }}>Add</Nav.Link> */}
+                    <Nav.Item style={{ color: '#d2d2d2' }}>Insert Profile Name</Nav.Item>
                     <Nav.Link onClick={() => { this.changeView('Add'); }}>Add</Nav.Link>
                     <Nav.Link onClick={() => { this.changeView('Search'); }}>Search</Nav.Link>
                     <Nav.Link onClick={() => { this.changeView('Profile'); }}>Profile</Nav.Link>
-                    <Nav.Link eventKey="disabled" disabled>
-                      Disabled
+                    <Nav.Link onClick={() => { this.changeView('Map'); }}>
+                      Logout
                     </Nav.Link>
                   </Nav>
                 </Navbar>
