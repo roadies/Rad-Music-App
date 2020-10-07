@@ -2,4 +2,3 @@ node_modules
 .env
 client/dist/main.js
 key.txt
-client/src/components/test/TestMap.jsx

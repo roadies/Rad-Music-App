@@ -69,7 +69,7 @@ const Search = () => {
             <div style={{ display: 'block', height: '90vh', width: '50vw' }}>
               <iframe
                 style={{ height: '90vh', width: '40vw' }}
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC5Ik6djb4DtWRTRdQGyBCYWnk0gtXWL_w
+                src="https://www.google.com/maps/embed/v1/place?key=
     &q=NewOrleans+LA"
                 allowFullScreen
                 title="map"
