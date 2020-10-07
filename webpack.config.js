@@ -1,12 +1,14 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
+const SRC_DIR = path.join(__dirname, '/client/src');
+
 const htmlPlugin = new HtmlWebPackPlugin({
   template: './client/src/index.html',
   filename: './index.html',
 });
 module.exports = {
-  entry: './client/src/index.js',
+  entry: `${SRC_DIR}/index.js`,
   output: {
     path: path.join(__dirname, '/client/dist'),
     filename: '[name].js',
