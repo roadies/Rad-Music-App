@@ -18,7 +18,7 @@ const isLoggedIn = (req, res, next) => {
 Oauth.get('/', (req, res) => res.send("you aren't logged in"));
 
 Oauth.get('/google',
-  passport.authenticate('google', { scope: ['profile', 'email', 'https://www.googleapis.com/auth/photoslibrary'] }));
+  passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 Oauth.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/failed' }),
