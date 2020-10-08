@@ -18,7 +18,7 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    setIsLoggedIn(false);
+    setIsLoggedIn(true);
   }, []);
 
   const loginRedir = () => {
