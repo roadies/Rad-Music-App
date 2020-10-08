@@ -33,6 +33,7 @@ Oauth.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/failed' }),
   (req, res) => {
     // Successful authentication, redirect home.
+    console.log('never get here');
     res.redirect('/api/oauth/good');
   });
 
