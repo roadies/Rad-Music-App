@@ -39,7 +39,7 @@ Oauth.get('/google/callback',
   });
 
 Oauth.get('/failed', (req, res) => res.send('login failure'));
-Oauth.get('/good', isLoggedIn, (req, res) => res.redirect('http://localhost:3000/client/src/components/Landing/Landing.jsx'));
+Oauth.get('/good', isLoggedIn, (req, res) => res.redirect('http://localhost:3000/'));
 
 Oauth.get('/logout', (req, res) => {
   req.session = null;
