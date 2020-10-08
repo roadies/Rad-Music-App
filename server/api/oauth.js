@@ -26,7 +26,7 @@ Oauth.get('/', (req, res) => {
   console.log(req.headers, 'here');
   // res.send("you aren't logged in");
   // res.writeHead(200, headers);
-  res.redirect('https://www.petsmart.com');
+  res.redirect('/api/oauth/google');
 });
 
 Oauth.get('/google',

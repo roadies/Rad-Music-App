@@ -26,7 +26,7 @@ class App extends Component {
 
     this.changeView = this.changeView.bind(this);
     this.renderView = this.renderView.bind(this);
-    this.loginRedir = this.loginRedir.bind(this);
+    // this.loginRedir = this.loginRedir.bind(this);
   }
 
   componentDidMount() {
@@ -41,11 +41,10 @@ class App extends Component {
     });
   }
 
-  loginRedir(something) {
-    const { wtf } = this.state;
-    Axios.get('/api/oauth', { something });
-    this.setState({ wtf: !wtf });
-    console.log(wtf);
+
+  loginRedir() {
+    // TODO: fix this with react router
+    window.location = 'http://localhost:3000/api/oauth/google';
   }
 
   renderView() {
