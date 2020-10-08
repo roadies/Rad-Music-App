@@ -2,7 +2,7 @@ import Axios from 'axios';
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container, Row, Col, Nav, Navbar,
 } from 'react-bootstrap';
@@ -13,42 +13,20 @@ import Profile from './Profile/Profile';
 import Search from './search/Search';
 import Splash from './splash/Splash';
 
-//COMMENT TEST
-class App extends Component {
-  constructor(props) {
-    super(props);
+const App = () => {
+  const [view, setView] = useState('Home');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    this.state = {
-      view: 'Home',
-      isLoggedIn: false,
-      wtf: false,
-    };
+  useEffect(() => {
+    setIsLoggedIn(true);
+  }, []);
 
-    this.changeView = this.changeView.bind(this);
-    this.renderView = this.renderView.bind(this);
-    // this.loginRedir = this.loginRedir.bind(this);
-  }
-
-  componentDidMount() {
-    this.setState({
-      isLoggedIn: false,
-    });
-  }
-
-  changeView(option) {
-    this.setState({
-      view: option,
-    });
-  }
-
-
-  loginRedir() {
+  const loginRedir = () => {
     // TODO: fix this with react router
     window.location = 'http://localhost:3000/api/oauth/google';
-  }
+  };
 
-  renderView() {
-    const { view } = this.state;
+  const renderView = () => {
     if (view === 'Home') {
       return <Landing />;
     } if (view === 'Add') {
@@ -60,69 +38,66 @@ class App extends Component {
     } if (view === 'Map') {
       return <Map />;
     }
-    return <Splash userLoggedIn={this.userLoggedIn} clicky={this.loginRedir} />;
-  }
+    return <Splash />;
+  };
 
-  render() {
-    const { isLoggedIn } = this.state;
-    if (!isLoggedIn) {
-      return (
-        <div>
-          <Splash loginRedir={this.loginRedir} />
-        </div>
-      );
-    }
+  if (!isLoggedIn) {
     return (
-      <div className="Page-JSX-View-Container">
-        <div
-          as={Container}
-          style={{
-            // border: 'solid red 2px',
-          }}
-        >
-          <Row>
-            <Col xs={10}>
-              {/* This is view */}
-              <div
-                as={Container}
-                style={{
-                  // border: 'solid blue 2px',
-                  margin: '0 0 auto',
-                  height: '100%',
-                }}
-              >
-                {this.renderView()}
-              </div>
-            </Col>
-            <Col xs={2}>
-              {/* This is the nav */}
-              <div
-                as={Container}
-                style={{
-                  // border: 'solid blue 2px',
-                  height: '90vh',
-                  backgroundColor: '#313840',
-                }}
-              >
-                <Navbar variant="dark">
-                  <Nav defaultActiveKey="/home" className="flex-column">
-                    <Nav.Item style={{ color: '#d2d2d2' }}>Insert Profile Name</Nav.Item>
-                    <Nav.Link onClick={() => { this.changeView('Add'); }}>Add</Nav.Link>
-                    <Nav.Link onClick={() => { this.changeView('Search'); }}>Search</Nav.Link>
-                    <Nav.Link onClick={() => { this.changeView('Profile'); }}>Profile</Nav.Link>
-                    <Nav.Link onClick={() => { this.changeView('Map'); }}>
-                      Logout
-                    </Nav.Link>
-                  </Nav>
-                </Navbar>
-              </div>
-            </Col>
-          </Row>
-        </div>
+      <div>
+        <Splash loginRedir={loginRedir} />
       </div>
     );
   }
-}
-// whatever
+
+  return (
+    <div className="Page-JSX-View-Container">
+      <div
+        as={Container}
+        style={{
+          // border: 'solid red 2px',
+        }}
+      >
+        <Row>
+          <Col xs={10}>
+            {/* This is view */}
+            <div
+              as={Container}
+              style={{
+                // border: 'solid blue 2px',
+                margin: '0 0 auto',
+                height: '100%',
+              }}
+            >
+              {renderView()}
+            </div>
+          </Col>
+          <Col xs={2}>
+            {/* This is the nav */}
+            <div
+              as={Container}
+              style={{
+                // border: 'solid blue 2px',
+                height: '90vh',
+                backgroundColor: '#313840',
+              }}
+            >
+              <Navbar variant="dark">
+                <Nav defaultActiveKey="/home" className="flex-column">
+                  <Nav.Item style={{ color: '#d2d2d2' }}>Insert Profile Name</Nav.Item>
+                  <Nav.Link onClick={() => { setView('Add'); }}>Add</Nav.Link>
+                  <Nav.Link onClick={() => { setView('Search'); }}>Search</Nav.Link>
+                  <Nav.Link onClick={() => { setView('Profile'); }}>Profile</Nav.Link>
+                  <Nav.Link onClick={() => { setView('Map'); }}>
+                    Logout
+                  </Nav.Link>
+                </Nav>
+              </Navbar>
+            </div>
+          </Col>
+        </Row>
+      </div>
+    </div>
+  );
+};
 
 export default App;
