@@ -31,6 +31,7 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "css-loader": "^4.3.0",
     "eslint": "^7.10.0",
     "eslint-config-airbnb": "^18.2.0",
@@ -48,12 +49,17 @@
   },
   "homepage": "https://github.com/Team-Schrodingers-Cats/Rad-Music-App#readme",
   "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.11.5",
     "@popperjs/core": "^2.5.3",
+    "@reach/combobox": "^0.11.2",
+    "@react-google-maps/api": "^1.10.1",
     "antd": "^4.6.6",
     "axios": "^0.20.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.2",
     "cookie-session": "^1.4.0",
+    "cors": "^2.8.5",
+    "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jquery": "^3.5.1",
@@ -61,11 +67,13 @@
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "popper.js": "^1.16.1",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.3.0",
     "react-dom": "^16.13.1",
     "react-geocode": "^0.2.2",
     "react-google-maps": "^9.4.5",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "use-places-autocomplete": "^1.5.2"
   }
 }

@@ -1,6 +1,7 @@
 const passport = require('passport');
 const { User, authFunc } = require('./db/index')
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const { G_CLIENT_KEY, GM_SECRET } = require('./config');
 
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -10,8 +11,8 @@ passport.deserializeUser((user, done) => done(null, user));
 
 passport.use(new GoogleStrategy(
   {
-    clientID: '159222256966-1ev6ou4jkndrcgk6mgjn721245jnitc0.apps.googleusercontent.com',
-    clientSecret: 'WFTAQtWV64Qs6msmz-VkFA9r',
+    clientID: `${G_CLIENT_KEY}`,
+    clientSecret: `${GM_SECRET}`,
     callbackURL: 'http://localhost:3000/api/oauth/google/callback',
   },
   // use the profile info to check if the user is registered in your db

@@ -1,4 +1,9 @@
 node_modules
 .env
 client/dist/main.js
+<<<<<<< HEAD
 key.txt
+=======
+key.txt
+client/src/components/test
+>>>>>>> feat/map
