@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
 const cors = require('cors');
+require('dotenv').config();
 require('./passport-setup');
 
 const app = express();
