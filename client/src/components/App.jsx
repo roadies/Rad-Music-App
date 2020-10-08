@@ -1,3 +1,4 @@
+import Axios from 'axios';
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -20,15 +21,17 @@ class App extends Component {
     this.state = {
       view: 'Home',
       isLoggedIn: false,
+      wtf: false,
     };
 
     this.changeView = this.changeView.bind(this);
     this.renderView = this.renderView.bind(this);
+    this.loginRedir = this.loginRedir.bind(this);
   }
 
   componentDidMount() {
     this.setState({
-      isLoggedIn: true,
+      isLoggedIn: false,
     });
   }
 
@@ -36,6 +39,13 @@ class App extends Component {
     this.setState({
       view: option,
     });
+  }
+
+  loginRedir(something) {
+    const { wtf } = this.state;
+    Axios.get('/api/oauth', { something });
+    this.setState({ wtf: !wtf });
+    console.log(wtf);
   }
 
   renderView() {
@@ -51,7 +61,7 @@ class App extends Component {
     } if (view === 'Map') {
       return <Map />;
     }
-    return <Splash userLoggedIn={this.userLoggedIn} />;
+    return <Splash userLoggedIn={this.userLoggedIn} clicky={this.loginRedir} />;
   }
 
   render() {
@@ -59,7 +69,7 @@ class App extends Component {
     if (!isLoggedIn) {
       return (
         <div>
-          <Splash />
+          <Splash loginRedir={this.loginRedir} />
         </div>
       );
     }
