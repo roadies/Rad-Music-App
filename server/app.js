@@ -3,11 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
-<<<<<<< HEAD
 const cors = require('cors');
-=======
 require('dotenv').config();
->>>>>>> 308fbc8... (update) working on map files
 require('./passport-setup');
 
 const app = express();

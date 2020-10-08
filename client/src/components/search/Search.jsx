@@ -68,14 +68,8 @@ const Search = () => {
           <Col style={{ padding: '5px' }} lg={10}>
             <div style={{ display: 'block', height: '90vh', width: '50vw' }}>
               <iframe
-<<<<<<< HEAD
                 style={{ height: '90vh', width: '40vw' }}
                 src=""
-=======
-                style={{ height: '90vh', width: '60vw' }}
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAs8CFJJP5bgcxYTtXjOer-aCG686_-37U
-    &q=NewOrleans+LA"
->>>>>>> 308fbc8... (update) working on map files
                 allowFullScreen
                 title="map"
               />

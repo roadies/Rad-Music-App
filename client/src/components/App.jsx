@@ -8,24 +8,17 @@ import {
 } from 'react-bootstrap';
 import Add from './Add/Add';
 import Landing from './Landing/Landing';
-// import Map from './test/TestMap';
+import Map from './test/TestMap';
 import Profile from './Profile/Profile';
 import Search from './search/Search';
 import Splash from './splash/Splash';
 
-<<<<<<< HEAD
 const App = () => {
   const [view, setView] = useState('Home');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-=======
-// COMMENT TEST
-class App extends Component {
-  constructor(props) {
-    super(props);
->>>>>>> 308fbc8... (update) working on map files
 
   useEffect(() => {
-    setIsLoggedIn(true);
+    setIsLoggedIn(false);
   }, []);
 
   const loginRedir = () => {
@@ -50,58 +43,8 @@ class App extends Component {
 
   if (!isLoggedIn) {
     return (
-<<<<<<< HEAD
       <div>
         <Splash loginRedir={loginRedir} />
-=======
-      <div className="Page-JSX-View-Container">
-        <div
-          as={Container}
-          style={{
-            // border: 'solid red 2px',
-          }}
-        >
-          <Row>
-            <Col xs={10}>
-              {/* This is view */}
-              <div
-                as={Container}
-                style={{
-                  // border: 'solid blue 2px',
-                  margin: '0 0 auto',
-                  height: '100%',
-                }}
-              >
-                {this.renderView()}
-              </div>
-            </Col>
-            <Col xs={2}>
-              {/* This is the nav */}
-              <div
-                as={Container}
-                style={{
-                  // border: 'solid blue 2px',
-                  width: '20vw', 
-                  height: '100vh',
-                  backgroundColor: '#313840',
-                }}
-              >
-                <Navbar variant="dark">
-                  <Nav defaultActiveKey="/home" className="flex-column">
-                    <Nav.Item style={{ color: '#d2d2d2' }}>Insert Profile Name</Nav.Item>
-                    <Nav.Link onClick={() => { this.changeView('Add'); }}>Add</Nav.Link>
-                    <Nav.Link onClick={() => { this.changeView('Search'); }}>Search</Nav.Link>
-                    <Nav.Link onClick={() => { this.changeView('Profile'); }}>Profile</Nav.Link>
-                    <Nav.Link onClick={() => { this.changeView('Map'); }}>
-                      Logout
-                    </Nav.Link>
-                  </Nav>
-                </Navbar>
-              </div>
-            </Col>
-          </Row>
-        </div>
->>>>>>> 308fbc8... (update) working on map files
       </div>
     );
   }
