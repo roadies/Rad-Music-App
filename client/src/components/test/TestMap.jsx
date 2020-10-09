@@ -12,6 +12,7 @@ import {
 import { formatRelative } from 'date-fns';
 import SearchLocation from './SearchLocation';
 import mapStyles from './styles';
+import InputForm from './BandForm';
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -28,70 +29,70 @@ const options = {
   zoomControl: true,
 };
 
-export default function Map() {
+const Map = () => {
+  // -------------------Initial Load---------------------//
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyDiEtAGLNuZ2_Y7NfNr5p3iLSTJzQGkagw',
+    googleMapsApiKey: 'AIzaSyDHphKFwqqmNW6rkUr2svI3Jb90KRCuV-I',
     libraries,
   });
+  // -------------------END INITIAL LOAD---------------------//
 
+  // -------------------State---------------------//
   const [markers, setMarkers] = useState([]);
   const [selectMarker, setSelectedMarker] = useState(null);
+  const [markerTitle, setTitle] = useState('');
+  const [showDate, setDate] = useState('');
+  const [testLat, setLat] = useState();
+  const [testLng, setLng] = useState();
+  const [testLats, setLats] = useState();
+  const [testLngs, setLngs] = useState();
+  // -------------------END STATE---------------------//
 
-  const onMapClick = useCallback((event) => {
-    setMarkers((current) => [...current, {
-      lat: event.latLng.lat(),
-      lng: event.latLng.lng(),
-      time: new Date(),
-    }]);
-    console.log('lat', event.latLng.lat());
-    console.log('lng', event.latLng.lng());
-  }, []);
+  // -------------------Helpers---------------------//
 
   const mapReference = useRef();
   const onMapLoad = useCallback((map) => {
     mapReference.current = map;
   }, []);
 
+  // -------------------END HELPERS---------------------//
+
+  // -------------------LOAD CHECKER---------------------//
   if (loadError) return 'ERROR LOADING MAPS';
   if (!isLoaded) return 'LOADING MAPS';
+  // -------------------END LOAD CHECKER---------------------//
 
+  // -------------------RENDER AREA---------------------//
   return (
     <div>
-
-      <SearchLocation />
-
+      {/* INSERT INFO FORM HERE  */}
+      <InputForm testLat={testLat} testLng={testLng} setLats={setLats} setLngs={setLngs} setLat={setLat} setLng={setLng} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={12}
         center={center}
         options={options}
-        onClick={onMapClick}
         onLoad={onMapLoad}
       >
-        {markers.map((marker) => (
-          <Marker
-            key={marker.time.toISOString()}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            icon={{
-              url: 'https://i.imgur.com/zSMeNvZ.png',
-              scaledSize: new window.google.maps.Size(40, 40),
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(20, 20),
-            }}
-            onClick={() => {
-              setSelectedMarker(marker);
-            }}
-          />
-        ))}
+        <Marker
+        // this will eventually become the date entered in
+          position={{ lat: testLats, lng: testLngs }} // positions will change -> lat,lng address
+          icon={{
+            url: 'https://i.imgur.com/zSMeNvZ.png',
+            scaledSize: new window.google.maps.Size(40, 40),
+            origin: new window.google.maps.Point(0, 0),
+            anchor: new window.google.maps.Point(20, 20),
+          }}
+        />
+        {/* toggles select marker info */}
         {selectMarker ? (
           <InfoWindow position={{ lat: selectMarker.lat, lng: selectMarker.lng }} onCloseClick={() => { setSelectedMarker(null); }}>
             <div>
               <h1>
-                Show added
+                {markerTitle}
               </h1>
               <p>
                 Time of Show:
-                {' '}
                 {formatRelative(selectMarker.time, new Date())}
               </p>
             </div>
@@ -100,4 +101,6 @@ export default function Map() {
       </GoogleMap>
     </div>
   );
-}
+};
+
+export default Map;

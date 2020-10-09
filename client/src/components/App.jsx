@@ -56,7 +56,7 @@ const App = () => {
     } if (view === 'Profile') {
       return <Profile />;
     } if (view === 'Map') {
-      return <SetupProfile />;
+      return <Map />;
     } if (view === 'Setup') {
       return <SetupProfile setView={setView} setUser={setUser} user={user} setGenre={setGenre} />;
     }
