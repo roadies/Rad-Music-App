@@ -3,7 +3,7 @@ const headers = {
   'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS',
   'access-control-allow-headers': 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With, x-parse-application-id, x-parse-rest-api-key',
   'access-control-max-age': 10, // Seconds.
-  'Content-Type': 'text/plain',
+  'Content-Type': 'text/plain'
 };
 const { Router } = require('express');
 const passport = require('passport');
