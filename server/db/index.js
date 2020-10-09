@@ -28,6 +28,15 @@ const Genre = db.define('genres', {
   genreName: Sequelize.STRING,
 });
 
+// populate genres table
+const genres = ['rock', 'rap', 'punk', 'country', 'scandinavian folk metal'];
+genres.forEach(async (genre) => {
+  const newGenre = Genre.build({
+    genreName: genre,
+  });
+  await newGenre.save();
+});
+
 const Band = db.define('bands', {
   id: {
     type: Sequelize.INTEGER,
@@ -49,6 +58,7 @@ const User = db.define('user', {
   profilePic: Sequelize.STRING,
   googleId: Sequelize.STRING,
   genreId: Sequelize.INTEGER,
+  profilePrompt: Sequelize.BOOLEAN,
 });
 
 const ShowsBands = db.define('shows_bands', {
@@ -86,7 +96,7 @@ db.authenticate()
   });
 
 const authFunc = (profile) => {
-  console.log(profile, 'profile');
+  // console.log(profile, 'profile');
   return User.findOne({
     where: {
       googleId: profile.id,

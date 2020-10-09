@@ -2,10 +2,15 @@ import Axios from 'axios';
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
+
 import React, { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router, Switch, Route, Link,
+} from 'react-router-dom';
 import {
   Container, Row, Col, Nav, Navbar,
 } from 'react-bootstrap';
+import { useCookies } from 'react-cookie';
 import Add from './Add/Add';
 import Landing from './Landing/Landing';
 import Map from './test/TestMap';
@@ -17,9 +22,17 @@ import Splash from './splash/Splash';
 const App = () => {
   const [view, setView] = useState('Home');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState('');
+  const [genre, setGenre] = useState('');
+  const [cookies, setCookie, removeCookie] = useCookies(['testCookie']);
 
   useEffect(() => {
-    setIsLoggedIn(true);
+    if (cookies.testCookie) {
+      setIsLoggedIn(cookies.testCookie.loggedIn);
+      setUser(cookies.testCookie.userName);
+      setGenre(cookies.testCookie.genreId);
+    }
+    // const cookie = Cookies.get('testCookie') || {};
   }, []);
 
   const loginRedir = () => {
@@ -29,7 +42,7 @@ const App = () => {
 
   const renderView = () => {
     if (view === 'Home') {
-      return <Landing />;
+      return <Landing user={user} genre={genre} />;
     } if (view === 'Add') {
       return <Add />;
     } if (view === 'Search') {
