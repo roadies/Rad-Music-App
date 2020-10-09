@@ -3,7 +3,7 @@ const { SEQUEL_PASS } = require('../config')
 
 const db = new Sequelize('radma', 'root', '', {
   host: 'localhost',
-  password: `${SEQUEL_PASS}`,
+  // password: SEQUEL_PASS,
   dialect: 'mysql',
 });
 

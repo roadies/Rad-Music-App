@@ -10,6 +10,7 @@ import Add from './Add/Add';
 import Landing from './Landing/Landing';
 import Map from './test/TestMap';
 import Profile from './Profile/Profile';
+import SetupProfile from './ProfileSetup/Setup';
 import Search from './search/Search';
 import Splash from './splash/Splash';
 
@@ -36,7 +37,7 @@ const App = () => {
     } if (view === 'Profile') {
       return <Profile />;
     } if (view === 'Map') {
-      return <Map />;
+      return <SetupProfile />;
     }
     return <Splash />;
   };
