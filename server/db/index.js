@@ -79,6 +79,7 @@ ShowsBands.sync();
 
 db.authenticate()
   .then(() => {
+    // console.log(SEQUEL_PASS, 'PASS')
     console.log('connected');
   })
   .catch((error) => {
