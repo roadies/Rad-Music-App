@@ -11,9 +11,8 @@ import {
   Container, Row, Col, Nav, Navbar,
 } from 'react-bootstrap';
 import { useCookies } from 'react-cookie';
-import Add from './Add/Add';
+import Map from './Add/TestMap';
 import Landing from './Landing/Landing';
-import Map from './test/TestMap';
 // import Profile from './Profile/Profile';
 import SetupProfile from './ProfileSetup/Setup';
 import Search from './search/Search';
@@ -50,7 +49,7 @@ const App = () => {
     if (view === 'Home') {
       return <Landing user={user} genre={genre} />;
     } if (view === 'Add') {
-      return <Add />;
+      return <Map />;
     } if (view === 'Search') {
       return <Search />;
     } if (view === 'Profile') {
@@ -105,13 +104,11 @@ const App = () => {
             >
               <Navbar variant="dark">
                 <Nav defaultActiveKey="/home" className="flex-column">
-                  <Nav.Item style={{ color: '#d2d2d2' }}>{user}</Nav.Item>
+                  {view !== 'Setup' && <Nav.Item style={{ color: '#d2d2d2' }}>{user}</Nav.Item>}
                   <Nav.Link onClick={() => { setView('Add'); }}>Add</Nav.Link>
                   <Nav.Link onClick={() => { setView('Search'); }}>Search</Nav.Link>
                   <Nav.Link onClick={() => { setView('Profile'); }}>Gallery</Nav.Link>
-                  <Nav.Link onClick={() => { setView('Map'); }}>
-                    Logout
-                  </Nav.Link>
+                  <Nav.Link>Logout</Nav.Link>
                 </Nav>
               </Navbar>
             </div>
