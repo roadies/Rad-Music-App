@@ -2,23 +2,42 @@ import Axios from 'axios';
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
+
 import React, { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router, Switch, Route, Link,
+} from 'react-router-dom';
 import {
   Container, Row, Col, Nav, Navbar,
 } from 'react-bootstrap';
-import Add from './Add/Add';
+import { useCookies } from 'react-cookie';
+import Map from './Add/TestMap';
 import Landing from './Landing/Landing';
-import Map from './test/TestMap';
-import Profile from './Profile/Profile';
+// import Profile from './Profile/Profile';
+import SetupProfile from './ProfileSetup/Setup';
 import Search from './search/Search';
 import Splash from './splash/Splash';
 
 const App = () => {
   const [view, setView] = useState('Home');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState('');
+  const [genre, setGenre] = useState(null);
+  const [cookies, setCookie, removeCookie] = useCookies(['testCookie']);
 
   useEffect(() => {
-    setIsLoggedIn(true);
+    if (cookies.testCookie) {
+      setUser(cookies.testCookie.userName);
+      if (cookies.testCookie.genreId.length > 0) {
+        console.log(genre);
+        setGenre(cookies.testCookie.genreId);
+      }
+      if (!cookies.testCookie.profilePrompt) {
+        console.log('false Cookie!');
+        setView('Setup');
+      }
+      setIsLoggedIn(cookies.testCookie.loggedIn);
+    }
   }, []);
 
   const loginRedir = () => {
@@ -28,20 +47,22 @@ const App = () => {
 
   const renderView = () => {
     if (view === 'Home') {
-      return <Landing />;
+      return <Landing user={user} genre={genre} />;
     } if (view === 'Add') {
-      return <Add />;
+      return <Map />;
     } if (view === 'Search') {
       return <Search />;
     } if (view === 'Profile') {
-      return <Profile />;
+      return (<div>TESTING PROFILE</div>);
     } if (view === 'Map') {
       return <Map />;
+    } if (view === 'Setup') {
+      return <SetupProfile setView={setView} setUser={setUser} user={user} setGenre={setGenre} />;
     }
     return <Splash />;
   };
 
-  if (!isLoggedIn) {
+  if (!user) {
     return (
       <div>
         <Splash loginRedir={loginRedir} />
@@ -83,13 +104,11 @@ const App = () => {
             >
               <Navbar variant="dark">
                 <Nav defaultActiveKey="/home" className="flex-column">
-                  <Nav.Item style={{ color: '#d2d2d2' }}>Insert Profile Name</Nav.Item>
+                  {view !== 'Setup' && <Nav.Item style={{ color: '#d2d2d2' }}>{user}</Nav.Item>}
                   <Nav.Link onClick={() => { setView('Add'); }}>Add</Nav.Link>
                   <Nav.Link onClick={() => { setView('Search'); }}>Search</Nav.Link>
-                  <Nav.Link onClick={() => { setView('Profile'); }}>Profile</Nav.Link>
-                  <Nav.Link onClick={() => { setView('Map'); }}>
-                    Logout
-                  </Nav.Link>
+                  <Nav.Link onClick={() => { setView('Profile'); }}>Gallery</Nav.Link>
+                  <Nav.Link>Logout</Nav.Link>
                 </Nav>
               </Navbar>
             </div>
