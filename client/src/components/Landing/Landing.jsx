@@ -1,12 +1,13 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
-const Landing = () => (
+const Landing = ({ user, genre }) => (
   <div className="container-fluid" style={{ margin: 'auto' }}>
     <Container>
       <Row style={{ alignSelf: 'center' }}>
         <div style={{ padding: '5px' }}>
-          These *genre* shows were found nearby!
+          Welcome, {user}! <br />
+          These {genre} shows were found nearby!
         </div>
       </Row>
       <Row style={{ marginRight: '0px', marginLeft: '0px' }}>
