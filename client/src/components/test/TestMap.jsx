@@ -52,13 +52,13 @@ const Map = () => {
   // -------------------END INITIAL LOAD---------------------//
 
   // -------------------State---------------------//
-  const [bandName, setName] = useState('Nickelback');
-  const [date, setDate] = useState('2020-11-12');
-  const [details, setDetails] = useState('18+');
-  const [genre, setGenre] = useState('Easy Listening');
-  const [submittedLat, setSubmittedLat] = useState(100);
+  const [bandName, setName] = useState('');
+  const [date, setDate] = useState('');
+  const [details, setDetails] = useState('');
+  const [genre, setGenre] = useState('');
+  const [submittedLat, setSubmittedLat] = useState(null);
   const [testLat, setLat] = useState(null);
-  const [submittedLng, setSubmittedLng] = useState(100);
+  const [submittedLng, setSubmittedLng] = useState(null);
   const [testLng, setLng] = useState(null);
   const [venue, setVenue] = useState('');
 
