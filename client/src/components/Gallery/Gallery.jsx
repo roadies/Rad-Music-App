@@ -1,14 +1,16 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
+import {} from 'react-bootstrap';
+import GalleryList from './GalleryList';
+import ImageLoader from './ImageLoader';
 
-const Gallery = () => {
-  const test = {};
-
-  return (
-    <div>
-      testing gallery
+const Gallery = () => (
+  <div>
+    <div className="Gallery-Image-Upload">
+      <ImageLoader />
     </div>
+  </div>
 
-  );
-};
+);
 
 export default Gallery;
