@@ -10,7 +10,7 @@ import {
   InfoWindow,
 } from '@react-google-maps/api';
 import { formatRelative } from 'date-fns';
-import SearchLocation from './SearchLocation';
+import { FormLabel, Form } from 'react-bootstrap';
 import mapStyles from './styles';
 import InputForm from './BandForm';
 
@@ -32,20 +32,22 @@ const options = {
 const Map = () => {
   // -------------------Initial Load---------------------//
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyDHphKFwqqmNW6rkUr2svI3Jb90KRCuV-I',
+    googleMapsApiKey:'',
     libraries,
   });
   // -------------------END INITIAL LOAD---------------------//
 
   // -------------------State---------------------//
-  const [markers, setMarkers] = useState([]);
-  const [selectMarker, setSelectedMarker] = useState(null);
-  const [markerTitle, setTitle] = useState('');
-  const [showDate, setDate] = useState('');
-  const [testLat, setLat] = useState();
-  const [testLng, setLng] = useState();
-  const [testLats, setLats] = useState();
-  const [testLngs, setLngs] = useState();
+  const [bandName, setName] = useState('');
+  const [date, setDate] = useState();
+  const [details, setDetails] = useState();
+  const [genre, setGenre] = useState();
+  const [submittedLat, setSubmittedLat] = useState(null);
+  const [testLat, setLat] = useState(null);
+  const [submittedLng, setSubmittedLng] = useState(null);
+  const [testLng, setLng] = useState(null);
+  const [venue, setVenue] = useState();
+
   // -------------------END STATE---------------------//
 
   // -------------------Helpers---------------------//
@@ -66,7 +68,43 @@ const Map = () => {
   return (
     <div>
       {/* INSERT INFO FORM HERE  */}
-      <InputForm testLat={testLat} testLng={testLng} setLats={setLats} setLngs={setLngs} setLat={setLat} setLng={setLng} />
+      <InputForm
+        bandName={bandName}
+        date={date}
+        details={details}
+        genre={genre}
+        testLat={testLat}
+        testLng={testLng}
+        venue={venue}
+        venue={venue}
+        setSubmittedLat={setSubmittedLat}
+        setSubmittedLng={setSubmittedLng}
+        setLat={setLat}
+        setLng={setLng}
+        setName={setName}
+        setDate={setDate}
+        setVenue={setVenue}
+        setDetails={setDetails}
+        setGenre={setGenre}
+      />
+      <div className="preview for band input" style={{ border: 'solid green 1px', padding: '10px' }}>
+        <h1>
+          THIS IS THE BAND INFORMATION
+        </h1>
+        <Form.Group>
+          <FormLabel size="sm">Band Name</FormLabel>
+          <Form.Text className="text-muted">{bandName}</Form.Text>
+          <FormLabel size="sm">Genre</FormLabel>
+          <Form.Text className="text-muted">{genre}</Form.Text>
+          <FormLabel size="sm">Date</FormLabel>
+          <Form.Text className="text-muted">{date}</Form.Text>
+          <FormLabel size="sm">Venue</FormLabel>
+          <Form.Text className="text-muted">{venue}</Form.Text>
+          <FormLabel size="sm">Details</FormLabel>
+          <Form.Text className="text-muted">{details}</Form.Text>
+        </Form.Group>
+      </div>
+
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={12}
@@ -75,29 +113,18 @@ const Map = () => {
         onLoad={onMapLoad}
       >
         <Marker
-        // this will eventually become the date entered in
-          position={{ lat: testLats, lng: testLngs }} // positions will change -> lat,lng address
+          position={{ lat: submittedLat, lng: submittedLng }} // positions will change -> lat,lng address
           icon={{
-            url: 'https://i.imgur.com/zSMeNvZ.png',
+            url: 'https://i.imgur.com/zSMeNvZ.png', // grabs an image from imgur and sets it as marker
             scaledSize: new window.google.maps.Size(40, 40),
             origin: new window.google.maps.Point(0, 0),
             anchor: new window.google.maps.Point(20, 20),
           }}
+          onClick={() => {
+            console.log('clicked on thing');
+            // must select on info window here
+          }}
         />
-        {/* toggles select marker info */}
-        {selectMarker ? (
-          <InfoWindow position={{ lat: selectMarker.lat, lng: selectMarker.lng }} onCloseClick={() => { setSelectedMarker(null); }}>
-            <div>
-              <h1>
-                {markerTitle}
-              </h1>
-              <p>
-                Time of Show:
-                {formatRelative(selectMarker.time, new Date())}
-              </p>
-            </div>
-          </InfoWindow>
-        ) : null }
       </GoogleMap>
     </div>
   );

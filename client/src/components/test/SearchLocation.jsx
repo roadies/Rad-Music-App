@@ -13,9 +13,9 @@ import {
 } from '@reach/combobox';
 import '@reach/combobox/styles.css';
 
-const SearchLocation = ({ setLat, setLng }) => {
+const SearchLocation = ({ setLat, setLng, setVenue, venue }) => {
   const {
-    ready, value, suggestions: { status, data }, setValue,
+    ready, value, suggestions: { status, data }, setValue, clearSuggestions,
   } = usePlacesAutocomplete({
     requestOptions: {
       location: { lat: () => 30, lng: () => -90 }, // this prefers users location here
@@ -32,6 +32,9 @@ const SearchLocation = ({ setLat, setLng }) => {
         const addressDesc = address;
         setLat(addressLat);
         setLng(addressLng);
+        setVenue(address);
+        setValue(address);
+        clearSuggestions();
         // console.log('coords', 'lat', addressLat, 'lng', addressLng, 'address', addressDesc);
       } catch (err) {
         console.log('ERROR');
