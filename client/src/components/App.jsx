@@ -12,8 +12,8 @@ import {
 } from 'react-bootstrap';
 import { useCookies } from 'react-cookie';
 import Map from './Add/TestMap';
+import Gallery from './Gallery/Gallery';
 import Landing from './Landing/Landing';
-// import Profile from './Profile/Profile';
 import SetupProfile from './ProfileSetup/Setup';
 import Search from './search/Search';
 import Splash from './splash/Splash';
@@ -52,8 +52,8 @@ const App = () => {
       return <Map />;
     } if (view === 'Search') {
       return <Search />;
-    } if (view === 'Profile') {
-      return (<div>TESTING PROFILE</div>);
+    } if (view === 'Gallery') {
+      return <Gallery />;
     } if (view === 'Map') {
       return <Map />;
     } if (view === 'Setup') {
@@ -107,7 +107,7 @@ const App = () => {
                   {view !== 'Setup' && <Nav.Item style={{ color: '#d2d2d2' }}>{user}</Nav.Item>}
                   <Nav.Link onClick={() => { setView('Add'); }}>Add</Nav.Link>
                   <Nav.Link onClick={() => { setView('Search'); }}>Search</Nav.Link>
-                  <Nav.Link onClick={() => { setView('Profile'); }}>Gallery</Nav.Link>
+                  <Nav.Link onClick={() => { setView('Gallery'); }}>Gallery</Nav.Link>
                   <Nav.Link>Logout</Nav.Link>
                 </Nav>
               </Navbar>
