@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+// const { now } = require('sequelize/types/lib/utils');
 const { SEQUEL_PASS } = require('../config')
 
 const db = new Sequelize('radma', 'root', '', {
@@ -29,12 +30,16 @@ const Genre = db.define('genres', {
 });
 
 // populate genres table
-const genres = ['rock', 'rap', 'punk', 'country', 'scandinavian folk metal'];
-genres.forEach(async (genre) => {
-  const newGenre = Genre.build({
-    genreName: genre,
-  });
-  await newGenre.save();
+const genres = ['Alternative', 'Blues', 'Classical', 'Easy Listening', 'Electronic', 'Hip-Hop/Rap', 'K-Pop', 'Pop', 'R&B/Soul'];
+genres.forEach((genre) => {
+  Genre.findOne({ where: { genreName: genre } })
+    .then(async (result) => {
+      if (!result) {
+        await Genre.create({
+          genreName: genre,
+        });
+      }
+    });
 });
 
 const Band = db.define('bands', {
@@ -54,7 +59,7 @@ const User = db.define('user', {
     primaryKey: true,
   },
   userName: Sequelize.STRING,
-  pictures: Sequelize.DATE,
+  pictures: Sequelize.STRING,
   profilePic: Sequelize.STRING,
   googleId: Sequelize.STRING,
   genreId: Sequelize.INTEGER,
@@ -77,9 +82,103 @@ Band.belongsTo(Genre);
 // add genreID to user
 User.belongsTo(Genre);
 
-// populate shows bands join table
+// create shows bands join table
 Band.belongsToMany(Show, { through: ShowsBands });
 Show.belongsToMany(Band, { through: ShowsBands });
+
+// populate show table with fake data
+Show.findOne({ where: { id: 1 } })
+  .then((result) => {
+    if (!result) {
+      Show.create({
+        address: '225 Decatur St, New Orleans, LA 20130',
+        date: new Date(),
+        venue: 'House of Blues New Orleans',
+        details: '18+',
+      });
+    }
+  });
+
+Show.findOne({ where: { id: 2 } })
+  .then((result) => {
+    if (!result) {
+      Show.create({
+        address: '726 St Peter, New Orleans, LA 70116',
+        date: new Date(),
+        venue: 'Preservation Hall',
+        details: '$5 cover',
+      });
+    }
+  });
+
+// populate Band table with  fake data
+Band.findOne({ where: { id: 1 } })
+  .then((result) => {
+    if (!result) {
+      Band.create({
+        bandName: 'Nickelback',
+        genreId: 1,
+      });
+    }
+  });
+
+Band.findOne({ where: { id: 2 } })
+  .then((result) => {
+    if (!result) {
+      Band.create({
+        bandName: 'Rick Astley',
+        genreId: 6,
+      });
+    }
+  });
+
+// populate User table with  fake data
+User.findOne({ where: { id: 1 } })
+  .then((result) => {
+    if (!result) {
+      User.create({
+        userName: 'MachoManRandySavage',
+        profilePic: 'https://411mania.com/wp-content/uploads/2019/04/Randy-Savage-3-6-1989-1-645x370.png',
+        googleId: '12345google',
+        genreId: 5,
+        profilePrompt: true,
+      });
+    }
+  });
+
+User.findOne({ where: { id: 2 } })
+  .then((result) => {
+    if (!result) {
+      User.create({
+        userName: 'music_luvr_4',
+        profilePic: 'https://vignette.wikia.nocookie.net/southpark/images/e/e2/Professor-chaos-hooded.png/revision/latest?cb=20171003212334',
+        googleId: 'asldfjoelskjdafase3234232434234',
+        genreId: 2,
+        profilePrompt: true,
+      });
+    }
+  });
+
+// populate showsbands table with  fake data
+ShowsBands.findOne({ where: { id: 1 } })
+  .then((result) => {
+    if (!result) {
+      ShowsBands.create({
+        bandId: 1,
+        showId: 2,
+      });
+    }
+  });
+
+ShowsBands.findOne({ where: { id: 2 } })
+  .then((result) => {
+    if (!result) {
+      ShowsBands.create({
+        bandId: 2,
+        showId: 1,
+      });
+    }
+  });
 
 Show.sync();
 Genre.sync();
@@ -95,14 +194,11 @@ db.authenticate()
     console.log(error, 'not connected');
   });
 
-const authFunc = (profile) => {
-  // console.log(profile, 'profile');
-  return User.findOne({
-    where: {
-      googleId: profile.id,
-    },
-  });
-};
+const authFunc = (profile) => User.findOne({
+  where: {
+    googleId: profile.id,
+  },
+});
 
 module.exports = {
   db,
@@ -112,18 +208,3 @@ module.exports = {
   ShowsBands,
   authFunc,
 };
-
-// const dbConnection = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'root',
-//   password: '',
-//   database: 'radma',
-// });
-
-// db.connect((error) => {
-//   if (error) {
-//     console.log(error, 'Not  quite there yet, partner');
-//   } else {
-//     console.log('Yayyyyy database is connected!');
-//   }
-// });

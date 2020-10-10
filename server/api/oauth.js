@@ -8,6 +8,7 @@
 const { Router } = require('express');
 const passport = require('passport');
 require('../passport-setup');
+const { Genre } = require('../db/index');
 
 const Oauth = Router();
 
@@ -32,18 +33,26 @@ Oauth.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/failed' }),
   (req, res) => {
     // Successful authentication, redirect home.
-    console.log('never get here');
     res.redirect('/api/oauth/good');
   });
 
 Oauth.get('/failed', (req, res) => res.send('login failure'));
 
-// on successful authentication, get info from session, place in cookie, and redirect to main page
+// on successful authentication, get info from session, place in cookie, and  redirect to main page
 Oauth.get('/good', isLoggedIn, (req, res) => {
   // TODO: if conditional that checks req.session.passport.user.profile prompt
   // if false, redirect to "fill in profile" page. if true, redirect to main page
-  const { profilePrompt, userName, genreId } = req.session.passport.user;
-  res.cookie('testCookie', { loggedIn: true, userName, genreId }, { maxAge: 10000 }).redirect('http://localhost:3000/');
+  const { profilePrompt, userName } = req.session.passport.user;
+  Genre.findOne({ where: { id: req.session.passport.user.genreId } })
+    .then((genre) => {
+      const genreId = genre.dataValues.genreName;
+      console.log(genreId);
+      res.cookie('testCookie', { loggedIn: true, userName, genreId, profilePrompt }, { maxAge: 10000 }).redirect('http://localhost:3000/');
+    })
+    .catch(() => {
+      res.cookie('testCookie', { loggedIn: true, userName, genreId: '', profilePrompt }, { maxAge: 10000 }).redirect('http://localhost:3000/');
+    });
+  // console.log(profilePrompt, userName, genreId, 'cookieInfo');
 });
 
 Oauth.get('/logout', (req, res) => {

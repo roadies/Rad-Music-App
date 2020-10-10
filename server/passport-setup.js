@@ -24,12 +24,11 @@ passport.use(new GoogleStrategy(
         if (currentUser) {
           done(null, currentUser);
         } else {
-          // const newUser = User.build({ googleId: profile.id, profilePrompt: false });
+          // const newUser  = User.build({ googleId: profile.id, profilePrompt: false });
           const newUser = User.build({
             googleId: profile.id,
             profilePrompt: false,
-            userName: 'Mike',
-            genreId: 5,
+            userName: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
           });
           await newUser.save()
             .then((user) => {

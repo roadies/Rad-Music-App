@@ -1,7 +1,15 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 const path = require('path');
+const dotenv = require('dotenv');
 
 const SRC_DIR = path.join(__dirname, '/client/src');
+
+const env = dotenv.config().parsed;
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 
 const htmlPlugin = new HtmlWebPackPlugin({
   template: './client/src/index.html',
@@ -13,7 +21,10 @@ module.exports = {
     path: path.join(__dirname, '/client/dist'),
     filename: '[name].js',
   },
-  plugins: [htmlPlugin],
+  plugins: [
+    htmlPlugin,
+    new webpack.DefinePlugin(envKeys),
+  ],
   module: {
     rules: [
       {

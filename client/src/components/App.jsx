@@ -23,16 +23,22 @@ const App = () => {
   const [view, setView] = useState('Home');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState('');
-  const [genre, setGenre] = useState('');
+  const [genre, setGenre] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(['testCookie']);
 
   useEffect(() => {
     if (cookies.testCookie) {
-      setIsLoggedIn(cookies.testCookie.loggedIn);
       setUser(cookies.testCookie.userName);
-      setGenre(cookies.testCookie.genreId);
+      if (cookies.testCookie.genreId.length > 0) {
+        console.log(genre);
+        setGenre(cookies.testCookie.genreId);
+      }
+      if (!cookies.testCookie.profilePrompt) {
+        console.log('false Cookie!');
+        setView('Setup');
+      }
+      setIsLoggedIn(cookies.testCookie.loggedIn);
     }
-    // const cookie = Cookies.get('testCookie') || {};
   }, []);
 
   const loginRedir = () => {
@@ -51,11 +57,13 @@ const App = () => {
       return <Profile />;
     } if (view === 'Map') {
       return <SetupProfile />;
+    } if (view === 'Setup') {
+      return <SetupProfile setView={setView} setUser={setUser} user={user} setGenre={setGenre} />;
     }
     return <Splash />;
   };
 
-  if (!isLoggedIn) {
+  if (!user) {
     return (
       <div>
         <Splash loginRedir={loginRedir} />
@@ -97,7 +105,7 @@ const App = () => {
             >
               <Navbar variant="dark">
                 <Nav defaultActiveKey="/home" className="flex-column">
-                  <Nav.Item style={{ color: '#d2d2d2' }}>Insert Profile Name</Nav.Item>
+                  <Nav.Item style={{ color: '#d2d2d2' }}>{user}</Nav.Item>
                   <Nav.Link onClick={() => { setView('Add'); }}>Add</Nav.Link>
                   <Nav.Link onClick={() => { setView('Search'); }}>Search</Nav.Link>
                   <Nav.Link onClick={() => { setView('Profile'); }}>Profile</Nav.Link>

@@ -39,7 +39,7 @@ const Add = () => (
           <div style={{ display: 'block', height: '90vh', width: '50vw' }}>
             <iframe
               style={{ height: '90vh', width: '60vw' }}
-              src=""
+              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&q=NewOrleans+LA`}
               allowFullScreen
               title="map"
             />
