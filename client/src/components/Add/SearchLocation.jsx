@@ -19,7 +19,7 @@ const SearchLocation = ({ setLat, setLng, setVenue, venue }) => {
   } = usePlacesAutocomplete({
     requestOptions: {
       location: { lat: () => 30, lng: () => -90 }, // this prefers users location here
-      radius: 5 * 1069,
+      radius: 10 * 1069,
     },
   });
 
@@ -36,6 +36,7 @@ const SearchLocation = ({ setLat, setLng, setVenue, venue }) => {
         setValue(address);
         clearSuggestions();
         // console.log('coords', 'lat', addressLat, 'lng', addressLng, 'address', addressDesc);
+        console.log(address);
       } catch (err) {
         console.log('ERROR');
       }

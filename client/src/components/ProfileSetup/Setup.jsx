@@ -45,8 +45,6 @@ const SetupProfile = ({ view, setView, setUser, user, setGenre }) => {
           <div>
             <Form>
               <Form.Group>
-                <FormLabel column="lg">Choose your Profile Pic Here</FormLabel>
-                <Form.File id="exampleFormControlFile1" />
                 <div>
                   <FormLabel column="lg">Choose your username!</FormLabel>
                   <InputGroup>
@@ -79,21 +77,8 @@ const SetupProfile = ({ view, setView, setUser, user, setGenre }) => {
                   </InputGroup>
                 </div>
                 <div>
-                  <FormLabel column="lg">
-                    Tell us about yourself!
-                    <Form.Control as="textarea" rows={3} placeholder="Enter Bio information here!" />
-                  </FormLabel>
-                </div>
-                <div>
-                  <FormLabel column="lg">
-                    Set your first status!
-                    <Form.Control as="textarea" rows={3} placeholder="Enter Status here!" />
-                  </FormLabel>
-                </div>
-                <div>
                   <ButtonGroup>
                     <Button variant="success" type="submit" onClick={() => submit()}>Register</Button>
-                    <Button variant="link" onClick={() => submit()}>Skip for now</Button>
                   </ButtonGroup>
                 </div>
               </Form.Group>
