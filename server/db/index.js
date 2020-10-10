@@ -194,10 +194,10 @@ ShowsBands.sync();
 
 db.authenticate()
   .then(() => {
-    console.log('connected');
+    console.log('connected to database');
   })
   .catch((error) => {
-    console.log(error, 'not connected');
+    console.log(error, 'not connected to database');
   });
 
 const authFunc = (profile) => User.findOne({
