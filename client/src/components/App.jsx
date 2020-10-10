@@ -108,7 +108,7 @@ const App = () => {
                   <Nav.Item style={{ color: '#d2d2d2' }}>{user}</Nav.Item>
                   <Nav.Link onClick={() => { setView('Add'); }}>Add</Nav.Link>
                   <Nav.Link onClick={() => { setView('Search'); }}>Search</Nav.Link>
-                  <Nav.Link onClick={() => { setView('Profile'); }}>Profile</Nav.Link>
+                  <Nav.Link onClick={() => { setView('Profile'); }}>Gallery</Nav.Link>
                   <Nav.Link onClick={() => { setView('Map'); }}>
                     Logout
                   </Nav.Link>
