@@ -36,7 +36,7 @@ const SetupProfile = ({ view, setView, setUser, user, setGenre }) => {
     <div
       as={Container}
       style={{
-        // border: 'solid 2px black',
+      // border: 'solid 2px black',
         padding: '20px',
       }}
     >

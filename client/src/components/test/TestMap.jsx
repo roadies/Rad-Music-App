@@ -10,8 +10,9 @@ import {
   InfoWindow,
 } from '@react-google-maps/api';
 import { formatRelative } from 'date-fns';
-import SearchLocation from './SearchLocation';
+import { FormLabel, Form } from 'react-bootstrap';
 import mapStyles from './styles';
+import InputForm from './BandForm';
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -28,76 +29,105 @@ const options = {
   zoomControl: true,
 };
 
-export default function Map() {
+const Map = () => {
+  // -------------------Initial Load---------------------//
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyDiEtAGLNuZ2_Y7NfNr5p3iLSTJzQGkagw',
+    googleMapsApiKey:'',
     libraries,
   });
+  // -------------------END INITIAL LOAD---------------------//
 
-  const [markers, setMarkers] = useState([]);
-  const [selectMarker, setSelectedMarker] = useState(null);
+  // -------------------State---------------------//
+  const [bandName, setName] = useState('');
+  const [date, setDate] = useState();
+  const [details, setDetails] = useState();
+  const [genre, setGenre] = useState();
+  const [submittedLat, setSubmittedLat] = useState(null);
+  const [testLat, setLat] = useState(null);
+  const [submittedLng, setSubmittedLng] = useState(null);
+  const [testLng, setLng] = useState(null);
+  const [venue, setVenue] = useState();
 
-  const onMapClick = useCallback((event) => {
-    setMarkers((current) => [...current, {
-      lat: event.latLng.lat(),
-      lng: event.latLng.lng(),
-      time: new Date(),
-    }]);
-    console.log('lat', event.latLng.lat());
-    console.log('lng', event.latLng.lng());
-  }, []);
+  // -------------------END STATE---------------------//
+
+  // -------------------Helpers---------------------//
 
   const mapReference = useRef();
   const onMapLoad = useCallback((map) => {
     mapReference.current = map;
   }, []);
 
+  // -------------------END HELPERS---------------------//
+
+  // -------------------LOAD CHECKER---------------------//
   if (loadError) return 'ERROR LOADING MAPS';
   if (!isLoaded) return 'LOADING MAPS';
+  // -------------------END LOAD CHECKER---------------------//
 
+  // -------------------RENDER AREA---------------------//
   return (
     <div>
-
-      <SearchLocation />
+      {/* INSERT INFO FORM HERE  */}
+      <InputForm
+        bandName={bandName}
+        date={date}
+        details={details}
+        genre={genre}
+        testLat={testLat}
+        testLng={testLng}
+        venue={venue}
+        venue={venue}
+        setSubmittedLat={setSubmittedLat}
+        setSubmittedLng={setSubmittedLng}
+        setLat={setLat}
+        setLng={setLng}
+        setName={setName}
+        setDate={setDate}
+        setVenue={setVenue}
+        setDetails={setDetails}
+        setGenre={setGenre}
+      />
+      <div className="preview for band input" style={{ border: 'solid green 1px', padding: '10px' }}>
+        <h1>
+          THIS IS THE BAND INFORMATION
+        </h1>
+        <Form.Group>
+          <FormLabel size="sm">Band Name</FormLabel>
+          <Form.Text className="text-muted">{bandName}</Form.Text>
+          <FormLabel size="sm">Genre</FormLabel>
+          <Form.Text className="text-muted">{genre}</Form.Text>
+          <FormLabel size="sm">Date</FormLabel>
+          <Form.Text className="text-muted">{date}</Form.Text>
+          <FormLabel size="sm">Venue</FormLabel>
+          <Form.Text className="text-muted">{venue}</Form.Text>
+          <FormLabel size="sm">Details</FormLabel>
+          <Form.Text className="text-muted">{details}</Form.Text>
+        </Form.Group>
+      </div>
 
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={12}
         center={center}
         options={options}
-        onClick={onMapClick}
         onLoad={onMapLoad}
       >
-        {markers.map((marker) => (
-          <Marker
-            key={marker.time.toISOString()}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            icon={{
-              url: 'https://i.imgur.com/zSMeNvZ.png',
-              scaledSize: new window.google.maps.Size(40, 40),
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(20, 20),
-            }}
-            onClick={() => {
-              setSelectedMarker(marker);
-            }}
-          />
-        ))}
-        {selectMarker ? (
-          <InfoWindow position={{ lat: selectMarker.lat, lng: selectMarker.lng }} onCloseClick={() => { setSelectedMarker(null); }}>
-            <div>
-              <h1>
-                Show added
-              </h1>
-              <p>
-                Time of Show:
-                {' '}
-                {formatRelative(selectMarker.time, new Date())}
-              </p>
-            </div>
-          </InfoWindow>
-        ) : null }
+        <Marker
+          position={{ lat: submittedLat, lng: submittedLng }} // positions will change -> lat,lng address
+          icon={{
+            url: 'https://i.imgur.com/zSMeNvZ.png', // grabs an image from imgur and sets it as marker
+            scaledSize: new window.google.maps.Size(40, 40),
+            origin: new window.google.maps.Point(0, 0),
+            anchor: new window.google.maps.Point(20, 20),
+          }}
+          onClick={() => {
+            console.log('clicked on thing');
+            // must select on info window here
+          }}
+        />
       </GoogleMap>
     </div>
   );
-}
+};
+
+export default Map;

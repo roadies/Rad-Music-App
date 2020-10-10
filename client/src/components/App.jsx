@@ -14,7 +14,7 @@ import { useCookies } from 'react-cookie';
 import Add from './Add/Add';
 import Landing from './Landing/Landing';
 import Map from './test/TestMap';
-import Profile from './Profile/Profile';
+// import Profile from './Profile/Profile';
 import SetupProfile from './ProfileSetup/Setup';
 import Search from './search/Search';
 import Splash from './splash/Splash';
@@ -54,9 +54,9 @@ const App = () => {
     } if (view === 'Search') {
       return <Search />;
     } if (view === 'Profile') {
-      return <Profile />;
+      return (<div>TESTING PROFILE</div>);
     } if (view === 'Map') {
-      return <SetupProfile />;
+      return <Map />;
     } if (view === 'Setup') {
       return <SetupProfile setView={setView} setUser={setUser} user={user} setGenre={setGenre} />;
     }
@@ -108,7 +108,7 @@ const App = () => {
                   <Nav.Item style={{ color: '#d2d2d2' }}>{user}</Nav.Item>
                   <Nav.Link onClick={() => { setView('Add'); }}>Add</Nav.Link>
                   <Nav.Link onClick={() => { setView('Search'); }}>Search</Nav.Link>
-                  <Nav.Link onClick={() => { setView('Profile'); }}>Profile</Nav.Link>
+                  <Nav.Link onClick={() => { setView('Profile'); }}>Gallery</Nav.Link>
                   <Nav.Link onClick={() => { setView('Map'); }}>
                     Logout
                   </Nav.Link>
