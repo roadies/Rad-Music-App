@@ -53,9 +53,10 @@ const Map = () => {
 
   // -------------------State---------------------//
   const [bandName, setName] = useState('');
-  const [date, setDate] = useState('');
-  const [details, setDetails] = useState('');
-  const [genre, setGenre] = useState('');
+  const [date, setDate] = useState();
+  const [details, setDetails] = useState();
+  const [genre, setGenre] = useState();
+  const [selectedMarker, setSelectedMarker] = useState(null);
   const [submittedLat, setSubmittedLat] = useState(null);
   const [testLat, setLat] = useState(null);
   const [submittedLng, setSubmittedLng] = useState(null);
@@ -71,7 +72,7 @@ const Map = () => {
     mapReference.current = map;
   }, []);
 
-  // -------------------END HELPERS---------------------//
+   // -------------------END HELPERS---------------------//
 
   // -------------------LOAD CHECKER---------------------//
   if (loadError) return 'ERROR LOADING MAPS';
@@ -133,10 +134,6 @@ const Map = () => {
             scaledSize: new window.google.maps.Size(40, 40),
             origin: new window.google.maps.Point(0, 0),
             anchor: new window.google.maps.Point(20, 20),
-          }}
-          onClick={() => {
-            console.log('clicked on thing');
-            // must select on info window here
           }}
         />
       </GoogleMap>

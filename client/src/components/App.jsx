@@ -11,10 +11,14 @@ import {
   Container, Row, Col, Nav, Navbar,
 } from 'react-bootstrap';
 import { useCookies } from 'react-cookie';
-import Add from './Add/Add';
+import Map from './Add/TestMap';
+<<<<<<< HEAD
 import Landing from './Landing/Landing';
-import Map from './test/TestMap';
 // import Profile from './Profile/Profile';
+=======
+import Gallery from './Gallery/Gallery';
+import Landing from './Landing/Landing';
+>>>>>>> feat/gallery
 import SetupProfile from './ProfileSetup/Setup';
 import Search from './search/Search';
 import Splash from './splash/Splash';
@@ -50,11 +54,11 @@ const App = () => {
     if (view === 'Home') {
       return <Landing user={user} genre={genre} />;
     } if (view === 'Add') {
-      return <Add />;
+      return <Map />;
     } if (view === 'Search') {
       return <Search />;
-    } if (view === 'Profile') {
-      return (<div>TESTING PROFILE</div>);
+    } if (view === 'Gallery') {
+      return <Gallery />;
     } if (view === 'Map') {
       return <Map />;
     } if (view === 'Setup') {
@@ -105,13 +109,15 @@ const App = () => {
             >
               <Navbar variant="dark">
                 <Nav defaultActiveKey="/home" className="flex-column">
-                  <Nav.Item style={{ color: '#d2d2d2' }}>{user}</Nav.Item>
+                  {view !== 'Setup' && <Nav.Item style={{ color: '#d2d2d2' }}>{user}</Nav.Item>}
                   <Nav.Link onClick={() => { setView('Add'); }}>Add</Nav.Link>
                   <Nav.Link onClick={() => { setView('Search'); }}>Search</Nav.Link>
+<<<<<<< HEAD
                   <Nav.Link onClick={() => { setView('Profile'); }}>Gallery</Nav.Link>
-                  <Nav.Link onClick={() => { setView('Map'); }}>
-                    Logout
-                  </Nav.Link>
+=======
+                  <Nav.Link onClick={() => { setView('Gallery'); }}>Gallery</Nav.Link>
+>>>>>>> feat/gallery
+                  <Nav.Link>Logout</Nav.Link>
                 </Nav>
               </Navbar>
             </div>
