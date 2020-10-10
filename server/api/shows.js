@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 /* eslint-disable no-await-in-loop */
 const { Router } = require('express');
 const { Show, Band, ShowsBands, Genre } = require('../db/index');
@@ -5,14 +6,15 @@ const { Show, Band, ShowsBands, Genre } = require('../db/index');
 const Shows = Router();
 
 Shows.get('/band', async (req, res) => {
-  const { query, type } = req.query;
-  const resp = { bandInfo: { bandName: query }, bandShows: [] };
+  const { query } = req.query;
+  let genreId;
+  const resp = [];
   const bandId = await Band.findOne({
-    where: resp.bandInfo,
+    where: { bandName: query },
   })
     .then((band) => {
       if (band) {
-        resp.bandInfo.genreId = band.dataValues.genreId;
+        genreId = band.dataValues.genreId;
         return band.dataValues.id;
       }
       throw band;
@@ -31,19 +33,21 @@ Shows.get('/band', async (req, res) => {
           },
         })
           .then((something) => ({
+            bandName: query,
+            genreId,
             date: something.dataValues.date,
             venue: something.dataValues.venue,
             lat: something.dataValues.lat,
             lng: something.dataValues.lng,
             details: something.dataValues.details,
           }));
-        resp.bandShows.push(showInfoMaybe);
+        resp.push(showInfoMaybe);
       }
     });
   res.send(resp);
 });
 
-Shows.get('/', async (req, res) => {
+Shows.get('/venue', async (req, res) => {
   const { query, type } = req.query;
   const resp = { bandInfo: { bandName: query }, bandShows: [] };
   const bandId = await Band.findOne({

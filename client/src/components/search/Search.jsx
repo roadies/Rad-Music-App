@@ -18,7 +18,10 @@ const Search = () => {
           console.log(response);
         });
     } else if (type === 'venue') {
-      // TODO: add dis
+      Axios.get('/api/shows/venue', { params })
+        .then((response) => {
+          console.log(response);
+        });
     } else if (type === 'genre') {
       // TODO: add dis
     } else if (type === 'date') {
