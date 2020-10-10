@@ -33,7 +33,6 @@ Oauth.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/failed' }),
   (req, res) => {
     // Successful authentication, redirect home.
-    console.log('never get here');
     res.redirect('/api/oauth/good');
   });
 
@@ -47,7 +46,6 @@ Oauth.get('/good', isLoggedIn, (req, res) => {
   Genre.findOne({ where: { id: req.session.passport.user.genreId } })
     .then((genre) => {
       const genreId = genre.dataValues.genreName;
-      console.log(genreId);
       res.cookie('testCookie', { loggedIn: true, userName, genreId, profilePrompt }, { maxAge: 10000 }).redirect('http://localhost:3000/');
     })
     .catch(() => {

@@ -6,6 +6,7 @@ import {
 import SearchLocation from './SearchLocation';
 
 const InputForm = ({
+  addShow,
   bandName,
   date,
   details,
@@ -22,8 +23,40 @@ const InputForm = ({
   setDetails,
   setGenre,
   venue,
+}) => {
+  const onSubmit = () => {
+    if (venue && bandName && date && genre) {
+      setSubmittedLat(testLat);
+      setSubmittedLng(testLng);
+      setVenue(venue);
+      setName(bandName);
+      setDate(date);
+      setDetails(details);
+      setGenre(genre);
+      addShow({
+        bandName,
+        date,
+        details,
+        genre,
+        venue,
+        lat: testLat,
+        lng: testLng,
+      });
+      setTimeout(() => {
+        setSubmittedLat();
+        setSubmittedLng();
+        setVenue();
+        setName();
+        setDate();
+        setDetails();
+        setGenre();
+      }, 100);
+    } else {
+      window.alert('Must include venue, date, band name, and genre!');
+    }
+  };
 
-}) => (
+  return (
   <div>
     <Form>
       <Form.Group>
@@ -53,9 +86,9 @@ const InputForm = ({
             <Dropdown.Item value="easy listening" onSelect={() => { setGenre('easy listening'); }}>Easy Listening</Dropdown.Item>
             <Dropdown.Item value="electronic" onSelect={() => { setGenre('electronic'); }}>Electronic</Dropdown.Item>
             <Dropdown.Item value="hip-hop/rap" onSelect={() => { setGenre('Hip-Hop/Rap'); }}>Hip-Hop/Rap</Dropdown.Item>
-            <Dropdown.Item value="k-pop" onSelect={() => { setGenre('alternative'); }}>K-Pop</Dropdown.Item>
-            <Dropdown.Item value="pop" onSelect={() => { setGenre('alternative'); }}>Pop</Dropdown.Item>
-            <Dropdown.Item value="r&b/soul" onSelect={() => { setGenre('alternative'); }}>R&B/Soul</Dropdown.Item>
+            <Dropdown.Item value="k-pop" onSelect={() => { setGenre('K-Pop'); }}>K-Pop</Dropdown.Item>
+            <Dropdown.Item value="pop" onSelect={() => { setGenre('Pop'); }}>Pop</Dropdown.Item>
+            <Dropdown.Item value="r&b/soul" onSelect={() => { setGenre('R&B/Soul'); }}>R&B/Soul</Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item href="https://i.imgur.com/7JQkwUo.png" target="_blank">Click Here to check where you fall under</Dropdown.Item>
           </DropdownButton>
@@ -81,30 +114,13 @@ const InputForm = ({
         </Form.Group>
         <Button
           type="reset"
-          onClick={() => {
-            setSubmittedLat(testLat);
-            setSubmittedLng(testLng);
-            setVenue(venue);
-            setName(bandName);
-            setDate(date);
-            setDetails(details);
-            setGenre(genre);
-            setTimeout(() => {
-              setSubmittedLat();
-              setSubmittedLng();
-              setVenue();
-              setName();
-              setDate();
-              setDetails();
-              setGenre();
-            }, 100);
-          }}
+          onClick={() => onSubmit()}
         >
           Submit
         </Button>
       </Form.Group>
     </Form>
   </div>
-);
+)};
 
 export default InputForm;

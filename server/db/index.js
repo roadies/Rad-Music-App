@@ -6,6 +6,7 @@ const db = new Sequelize('radma', 'root', '', {
   host: 'localhost',
   // password: SEQUEL_PASS,
   dialect: 'mysql',
+  logging: false,
 });
 
 const Show = db.define('shows', {
@@ -15,8 +16,9 @@ const Show = db.define('shows', {
     primaryKey: true,
   },
   venue: Sequelize.STRING,
-  date: Sequelize.DATE,
-  address: Sequelize.STRING,
+  date: Sequelize.STRING,
+  lat: Sequelize.STRING,
+  lng: Sequelize.STRING,
   details: Sequelize.STRING,
 });
 
@@ -52,7 +54,7 @@ const Band = db.define('bands', {
   genreId: Sequelize.INTEGER,
 });
 
-const User = db.define('user', {
+const User = db.define('users', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -92,9 +94,11 @@ Show.findOne({ where: { id: 1 } })
     if (!result) {
       Show.create({
         address: '225 Decatur St, New Orleans, LA 20130',
-        date: new Date(),
+        date: '2020-11-12',
         venue: 'House of Blues New Orleans',
         details: '18+',
+        lat: '29.9532033',
+        lng: '-90.0660795',
       });
     }
   });
@@ -104,9 +108,11 @@ Show.findOne({ where: { id: 2 } })
     if (!result) {
       Show.create({
         address: '726 St Peter, New Orleans, LA 70116',
-        date: new Date(),
+        date: '2020-11-13',
         venue: 'Preservation Hall',
         details: '$5 cover',
+        lat: '29.958316',
+        lng: '-90.0653949',
       });
     }
   });
@@ -206,5 +212,6 @@ module.exports = {
   Genre,
   User,
   ShowsBands,
+  Band,
   authFunc,
 };
