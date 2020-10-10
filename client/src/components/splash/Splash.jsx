@@ -25,7 +25,8 @@ const Splash = ({ userLoggedIn, loginRedir }) => (
         display: 'flex', justifyContent: 'center', fontSize: '24pt',
       }}
     >
-      Add Shows. Find Shows. Save Shows.
+      Totally Radically Live Music Assistant
+      {/* THIS IS TO CHANGE OVER SHUFFLED ARRAY */}
     </div>
   </div>
 );
