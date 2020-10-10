@@ -17,10 +17,8 @@ passport.use(new GoogleStrategy(
   },
   // use the profile info to check if the user is registered in  your db
   ((accessToken, refreshToken, profile, done) => {
-    console.log(accessToken, "accessToken Here");
     authFunc(profile)
       .then(async (currentUser) => {
-        console.log(currentUser, 'current user');
         if (currentUser) {
           done(null, currentUser);
         } else {
@@ -32,7 +30,6 @@ passport.use(new GoogleStrategy(
           });
           await newUser.save()
             .then((user) => {
-              console.log('registered new user');
               done(null, user);
             });
         }
