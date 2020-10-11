@@ -27,7 +27,7 @@ const App = () => {
 
   useEffect(() => {
     console.log('load');
-    if (cookies.testCookie.loggedIn) {
+    if (cookies.testCookie && cookies.testCookie.loggedIn) {
       setUser(cookies.testCookie.userName);
       if (cookies.testCookie.genreId.length > 0) {
         console.log(genre);
