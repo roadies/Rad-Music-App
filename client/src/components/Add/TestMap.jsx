@@ -11,6 +11,7 @@ import {
 } from '@react-google-maps/api';
 import { formatRelative } from 'date-fns';
 import { FormLabel, Form } from 'react-bootstrap';
+import Axios from 'axios';
 import mapStyles from './styles';
 import InputForm from './BandForm';
 
@@ -29,8 +30,23 @@ const options = {
   zoomControl: true,
 };
 
+const addShow = (data) => {
+  const {
+    bandName, date, details, genre, venue, lat, lng,
+  } = data;
+  Axios.post('/api/shows/', {
+    bandName,
+    date,
+    details,
+    genre,
+    venue,
+    lat,
+    lng,
+  });
+};
+
+// -------------------Initial Load--------------------- //
 const Map = () => {
-  // -------------------Initial Load---------------------//
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -47,7 +63,7 @@ const Map = () => {
   const [testLat, setLat] = useState(null);
   const [submittedLng, setSubmittedLng] = useState(null);
   const [testLng, setLng] = useState(null);
-  const [venue, setVenue] = useState();
+  const [venue, setVenue] = useState('');
 
   // -------------------END STATE---------------------//
 
@@ -58,7 +74,7 @@ const Map = () => {
     mapReference.current = map;
   }, []);
 
-   // -------------------END HELPERS---------------------//
+  // -------------------END HELPERS---------------------//
 
   // -------------------LOAD CHECKER---------------------//
   if (loadError) return 'ERROR LOADING MAPS';
@@ -86,6 +102,7 @@ const Map = () => {
         setVenue={setVenue}
         setDetails={setDetails}
         setGenre={setGenre}
+        addShow={addShow}
       />
       <div className="preview for band input" style={{ border: 'solid green 1px', padding: '10px' }}>
         <h1>

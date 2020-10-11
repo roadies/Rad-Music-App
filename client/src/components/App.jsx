@@ -70,6 +70,13 @@ const App = () => {
     );
   }
 
+  if (view === 'Setup') {
+    return (
+      <div className="Page-JSX-View-Container">
+        {renderView()}
+      </div>
+    );
+  }
   return (
     <div className="Page-JSX-View-Container">
       <div
@@ -98,13 +105,14 @@ const App = () => {
               as={Container}
               style={{
                 // border: 'solid blue 2px',
-                height: '90vh',
+                height: '80vh',
                 backgroundColor: '#313840',
               }}
             >
               <Navbar variant="dark">
                 <Nav defaultActiveKey="/home" className="flex-column">
                   {view !== 'Setup' && <Nav.Item style={{ color: '#d2d2d2' }}>{user}</Nav.Item>}
+                  <Nav.Link onClick={() => { setView('Home'); }}>Home</Nav.Link>
                   <Nav.Link onClick={() => { setView('Add'); }}>Add</Nav.Link>
                   <Nav.Link onClick={() => { setView('Search'); }}>Search</Nav.Link>
                   <Nav.Link onClick={() => { setView('Gallery'); }}>Gallery</Nav.Link>
@@ -116,6 +124,7 @@ const App = () => {
         </Row>
       </div>
     </div>
+
   );
 };
 
