@@ -2,9 +2,13 @@ const Sequelize = require('sequelize');
 // const { now } = require('sequelize/types/lib/utils');
 const { SEQUEL_PASS } = require('../config')
 
-const db = new Sequelize('radma', 'root', '', {
+const db = process.env.ENVIRON === 'dev' ? new Sequelize('radma', 'root', '', {
   host: 'localhost',
-  // password: SEQUEL_PASS,
+  dialect: 'mysql',
+  logging: false,
+}) : new Sequelize('radma', 'root', '', {
+  host: 'localhost',
+  password: SEQUEL_PASS,
   dialect: 'mysql',
   logging: false,
 });

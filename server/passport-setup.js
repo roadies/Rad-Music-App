@@ -13,7 +13,7 @@ passport.use(new GoogleStrategy(
   {
     clientID: `${G_CLIENT_KEY}`,
     clientSecret: `${GM_SECRET}`,
-    callbackURL: 'http://localhost:3000/api/oauth/google/callback',
+    callbackURL: `${process.env.REDIRECT}api/oauth/google/callback`,
   },
   // use the profile info to check if the user is registered in  your db
   ((accessToken, refreshToken, profile, done) => {

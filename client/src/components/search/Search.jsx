@@ -39,7 +39,25 @@ const Search = ({ user, genre }) => {
   const onMapLoad = useCallback((map) => {
     mapReference.current = map;
   }, []);
-
+  const getShows = (query, type) => {
+    const params = { query, type };
+    if (type === 'band') {
+      Axios.get('/api/shows/band', { params })
+        .then((response) => {
+          console.log(response);
+        });
+    } else if (type === 'venue') {
+      Axios.get('/api/shows/venue', { params })
+        .then((response) => {
+          console.log(response);
+        });
+    } else if (type === 'date') {
+      Axios.get('/api/shows/date', { params })
+        .then((response) => {
+          console.log(response);
+        });
+    }
+  };
   if (loadError) return 'ERROR LOADING MAPS';
   if (!isLoaded) return 'LOADING MAPS';
 

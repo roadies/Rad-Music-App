@@ -42,7 +42,11 @@ const App = () => {
 
   const loginRedir = () => {
     // TODO: fix this with react router
-    window.location = 'http://localhost:3000/api/oauth/google';
+    window.location = `${process.env.REDIRECT}api/oauth/google`;
+  };
+
+  const logout = () => {
+    Axios.get('/api/oauth/logout');
   };
 
   const renderView = () => {
@@ -112,11 +116,11 @@ const App = () => {
               <Navbar variant="dark">
                 <Nav defaultActiveKey="/home" className="flex-column">
                   {view !== 'Setup' && <Nav.Item style={{ color: '#d2d2d2' }}>{user}</Nav.Item>}
-                  <Nav.Link onClick={() => { setView('Home'); }}>Home</Nav.Link>
-                  <Nav.Link onClick={() => { setView('Add'); }}>Add</Nav.Link>
-                  <Nav.Link onClick={() => { setView('Search'); }}>Search</Nav.Link>
-                  <Nav.Link onClick={() => { setView('Gallery'); }}>Gallery</Nav.Link>
-                  <Nav.Link>Logout</Nav.Link>
+                  <Nav.Link onClick={() => setView('Home')}>Home</Nav.Link>
+                  <Nav.Link onClick={() => setView('Add')}>Add</Nav.Link>
+                  <Nav.Link onClick={() => setView('Search')}>Search</Nav.Link>
+                  <Nav.Link onClick={() => setView('Gallery')}>Gallery</Nav.Link>
+                  <Nav.Link onClick={() => logout()}>Logout</Nav.Link>
                 </Nav>
               </Navbar>
             </div>
