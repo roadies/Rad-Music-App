@@ -46,10 +46,10 @@ Oauth.get('/good', isLoggedIn, (req, res) => {
   Genre.findOne({ where: { id: req.session.passport.user.genreId } })
     .then((genre) => {
       const genreId = genre.dataValues.genreName;
-      res.cookie('testCookie', { loggedIn: true, userName, genreId, profilePrompt }, { maxAge: 10000 }).redirect('http://localhost:3000/');
+      res.cookie('testCookie', { loggedIn: true, userName, genreId, profilePrompt }, { maxAge: 10000 }).redirect(`${process.env.REDIRECT}`);
     })
     .catch(() => {
-      res.cookie('testCookie', { loggedIn: true, userName, genreId: '', profilePrompt }, { maxAge: 600000 }).redirect('http://localhost:3000/');
+      res.cookie('testCookie', { loggedIn: true, userName, genreId: '', profilePrompt }, { maxAge: 600000 }).redirect(`${process.env.REDIRECT}`);
     });
   // console.log(profilePrompt, userName, genreId, 'cookieInfo');
 });

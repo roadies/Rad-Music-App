@@ -42,7 +42,7 @@ const App = () => {
 
   const loginRedir = () => {
     // TODO: fix this with react router
-    window.location = 'http://localhost:3000/api/oauth/google';
+    window.location = `${process.env.REDIRECT}api/oauth/google`;
   };
 
   const renderView = () => {
