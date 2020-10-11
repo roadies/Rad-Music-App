@@ -38,7 +38,19 @@ const Genre = db.define('genres', {
   genreName: Sequelize.STRING,
 });
 
-// define band table
+// populate genres table
+const genres = ['Alternative', 'Blues', 'Classical', 'Easy Listening', 'Electronic', 'Hip-Hop/Rap', 'K-Pop', 'Pop', 'Rock', 'R&B/Soul'];
+genres.forEach((genre) => {
+  Genre.findOne({ where: { genreName: genre } })
+    .then(async (result) => {
+      if (!result) {
+        await Genre.create({
+          genreName: genre,
+        });
+      }
+    });
+});
+
 const Band = db.define('bands', {
   id: {
     type: Sequelize.INTEGER,

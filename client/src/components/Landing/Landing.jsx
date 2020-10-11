@@ -35,14 +35,6 @@ const Landing = ({ user, genre }) => {
     libraries,
   });
 
-  useEffect(() => {
-    const params = { genre };
-    Axios.get('/api/shows/genre', { params })
-      .then(({ data }) => {
-        console.log(data, 'data');
-      });
-  });
-
   const mapReference = useRef();
   const onMapLoad = useCallback((map) => {
     mapReference.current = map;
@@ -51,14 +43,18 @@ const Landing = ({ user, genre }) => {
   const [favoriteGenre, setFavoriteGenre] = useState([]);
   const [selected, setSelected] = useState(null);
 
-  useEffect(() => {
-    Axios.get('/api/shows/genre')
+  const getGenres = () => {
+    const params = { genre };
+    Axios.get('/api/shows/genre', { params })
       .then(({ data }) => {
         console.log(data);
-        test.push({ genre: data.genre });
+        data.forEach((entry) => {
+          console.log(entry.genre);
+          test.push({ lat: Number(entry.lat), lng: Number(entry.lng), genre: entry.genre });
+        });
+        setFavoriteGenre(test);
       });
-    setFavoriteGenre(test);
-  });
+  };
 
   if (loadError) return 'ERROR LOADING MAPS';
   if (!isLoaded) return 'LOADING MAPS';
@@ -84,6 +80,11 @@ const Landing = ({ user, genre }) => {
             {' '}
           </h6>
           shows nearby!
+        </div>
+        <div>
+          <button onClick={() => getGenres()}>
+            Search for shows
+          </button>
         </div>
       </div>
       <GoogleMap
