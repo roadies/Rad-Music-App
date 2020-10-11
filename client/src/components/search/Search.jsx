@@ -10,6 +10,7 @@ import {
   InfoWindow,
 } from '@react-google-maps/api';
 import Axios from 'axios';
+import { Form, Col, Button } from 'react-bootstrap';
 import mapStyles from '../Add/styles';
 
 const libraries = ['places'];
@@ -44,25 +45,31 @@ const Search = ({ user, genre }) => {
   return (
     <div>
       <div style={{ border: 'solid green 1px', padding: '10px' }}>
-        <div>
-          <h5>
-            Welcome to your radically awesome music assistant,
-          </h5>
-          <h4>
-            {' '}
-            {user}
-            !
-          </h4>
-        </div>
-        <div>
-          Please have a look at the map below to see
-          <h6>
-            {' '}
-            {genre}
-            {' '}
-          </h6>
-          shows nearby!
-        </div>
+        <Form>
+          <Form.Row>
+            <Form.Group as={Col} controlId="formGridEmail">
+              <Form.Label>Band Name</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" />
+            </Form.Group>
+          </Form.Row>
+
+          <Form.Group controlId="formDate">
+            <Form.Label>Date</Form.Label>
+            <Form.Control
+              type="date"
+              placeholder="mm/dd/yyy"
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formGridAddress2">
+            <Form.Label>Venue</Form.Label>
+            <Form.Control placeholder="Apartment, studio, or floor" />
+          </Form.Group>
+
+          <Button variant="primary">
+            Search
+          </Button>
+        </Form>
       </div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
