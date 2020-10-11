@@ -47,9 +47,9 @@ const Landing = ({ user, genre }) => {
     const params = { genre };
     Axios.get('/api/shows/genre', { params })
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         data.forEach((entry) => {
-          console.log(entry.genre);
+          // console.log(entry.genre);
           test.push({ lat: Number(entry.lat), lng: Number(entry.lng), genre: entry.genre });
         });
         setFavoriteGenre(test);

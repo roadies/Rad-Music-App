@@ -39,7 +39,7 @@ const SearchLocation = ({
         clearSuggestions();
         // console.log('coords', 'lat', addressLat, 'lng', addressLng, 'address', addressDesc);
       } catch (err) {
-        console.log('ERROR');
+        console.error(err);
       }
       // console.log(address);
     }}

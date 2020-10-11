@@ -9,7 +9,7 @@ const GalleryList = ({ setPreviewSource }) => {
     try {
       const res = await fetch('/api/pictures/');
       const data = await res.json();
-      console.log('IMAGE ID ', data);
+      // console.log('IMAGE ID ', data);
       setImageIds(data);
     } catch (error) {
       console.error(error);

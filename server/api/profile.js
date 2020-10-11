@@ -31,6 +31,7 @@ Profile.post('/create', (req, res) => {
     })
     // if username has already been used, send failure message
     .catch((error) => {
+      console.error(error);
       res.status(400).send('failure');
     });
 });
