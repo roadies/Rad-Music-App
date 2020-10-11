@@ -11,6 +11,7 @@ import {
 } from '@react-google-maps/api';
 import Axios from 'axios';
 import { Form, Col, Button } from 'react-bootstrap';
+import SearchTab from './SearchTab';
 import mapStyles from '../Add/styles';
 
 const libraries = ['places'];
@@ -45,31 +46,8 @@ const Search = ({ user, genre }) => {
   return (
     <div>
       <div style={{ border: 'solid green 1px', padding: '10px' }}>
-        <Form>
-          <Form.Row>
-            <Form.Group as={Col} controlId="formGridEmail">
-              <Form.Label>Band Name</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-            </Form.Group>
-          </Form.Row>
-
-          <Form.Group controlId="formDate">
-            <Form.Label>Date</Form.Label>
-            <Form.Control
-              type="date"
-              placeholder="mm/dd/yyy"
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formGridAddress2">
-            <Form.Label>Venue</Form.Label>
-            <Form.Control placeholder="Apartment, studio, or floor" />
-          </Form.Group>
-
-          <Button variant="primary">
-            Search
-          </Button>
-        </Form>
+        {/* add in views here with tabs */}
+        <SearchTab />
       </div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
