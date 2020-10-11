@@ -17,8 +17,8 @@ import InputForm from './BandForm';
 
 const libraries = ['places'];
 const mapContainerStyle = {
-  width: '100vw',
-  height: '100vh',
+  width: '100%',
+  height: '80vh',
 };
 const center = {
   lat: 30,
