@@ -38,9 +38,6 @@ const Genre = db.define('genres', {
   genreName: Sequelize.STRING,
 });
 
-<<<<<<< HEAD
-// define band table
-=======
 // populate genres table
 const genres = ['Alternative', 'Blues', 'Classical', 'Easy Listening', 'Electronic', 'Hip-Hop/Rap', 'K-Pop', 'Pop', 'Rock', 'R&B/Soul'];
 genres.forEach((genre) => {
@@ -54,7 +51,6 @@ genres.forEach((genre) => {
     });
 });
 
->>>>>>> 196a577... (update) FULL FUNCTIONALITY
 const Band = db.define('bands', {
   id: {
     type: Sequelize.INTEGER,
