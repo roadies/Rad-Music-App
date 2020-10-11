@@ -14,6 +14,7 @@ import { Form, Col, Button } from 'react-bootstrap';
 import { formatRelative } from 'date-fns';
 import { set } from 'js-cookie';
 import SearchTab from './SearchTab';
+import { SearchInfo } from './SearchInfo';
 import mapStyles from '../Add/styles';
 
 const libraries = ['places'];
@@ -34,7 +35,6 @@ const options = {
 const Search = ({ user, genre }) => {
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
-  const [infoWindowBand, setInfoWindowBand] = useState();
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -46,13 +46,6 @@ const Search = ({ user, genre }) => {
     mapReference.current = map;
   }, []);
   const test = [];
-  const bandNames = [];
-
-  const titleLoop = () => {
-    for (let i = 0; i < infoWindowBand.length; i++) {
-      return infoWindowBand[i];
-    }
-  };
 
   const getShows = (query, type) => {
     const params = { query, type };
@@ -60,29 +53,31 @@ const Search = ({ user, genre }) => {
       Axios.get('/api/shows/band', { params })
         .then(({ data }) => {
           data.forEach((coords) => {
-            test.push({ lat: Number(coords.lat), lng: Number(coords.lng) });
+            test.push({
+              lat: Number(coords.lat), lng: Number(coords.lng), bandName: coords.bandName, venue: coords.venue,
+            });
           });
           setMarkers(test);
-          setName(data.bandName);
         });
     } else if (type === 'venue') {
       Axios.get('/api/shows/venue', { params })
         .then(({ data }) => {
           data.forEach((coords) => {
-            test.push({ lat: Number(coords.lat), lng: Number(coords.lng) });
+            test.push({
+              lat: Number(coords.lat), lng: Number(coords.lng), bandName: coords.bandName, venue: coords.venue,
+            });
           });
           setMarkers(test);
-          setName(data.bandName);
         });
     } else if (type === 'date') {
       Axios.get('/api/shows/date', { params })
         .then(({ data }) => {
           data.forEach((coords) => {
-            test.push({ lat: Number(coords.lat), lng: Number(coords.lng) });
-            bandNames.push(coords.bandName);
+            test.push({
+              lat: Number(coords.lat), lng: Number(coords.lng), bandName: coords.bandName, venue: coords.venue,
+            });
           });
           setMarkers(test);
-          setInfoWindowBand(bandNames);
         });
     }
   };
@@ -119,9 +114,6 @@ const Search = ({ user, genre }) => {
             }}
           />
         ))}
-        {/* <Marker
-          position={{ lat: 29.9495, lng: -90.1294 }}
-        /> */}
         {selected ? (
           <InfoWindow
             position={{ lat: selected.lat, lng: selected.lng }}
@@ -132,10 +124,10 @@ const Search = ({ user, genre }) => {
             <div>
               <h2>
                 {/* how to get these thing by themselves */}
-                bandName
+                <SearchInfo selected={selected} />
               </h2>
               <p>
-                venue, date, details
+                {/* <SearchInfoVenue selected={selected} /> */}
               </p>
             </div>
           </InfoWindow>
