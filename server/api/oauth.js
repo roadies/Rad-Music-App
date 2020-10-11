@@ -1,10 +1,3 @@
-// const headers = {
-//   'access-control-allow-origin': '*',
-//   'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS',
-//   'access-control-allow-headers': 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With, x-parse-application-id, x-parse-rest-api-key',
-//   'access-control-max-age': 10, // Seconds.
-//   'Content-Type': 'text/plain',
-// };
 const { Router } = require('express');
 const passport = require('passport');
 require('../passport-setup');
@@ -55,10 +48,9 @@ Oauth.get('/good', isLoggedIn, (req, res) => {
 });
 
 Oauth.get('/logout', (req, res) => {
-  // TODO: link to logout link on main page
   req.session = null;
   req.logout();
-  res.redirect('/');
+  res.cookie('testCookie', { loggedIn: false }).redirect(`${process.env.REDIRECT}`);
 });
 
 module.exports = {
