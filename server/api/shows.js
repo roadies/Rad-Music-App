@@ -91,6 +91,13 @@ Shows.get('/venue', async (req, res) => {
   res.send(resp);
 });
 
+Shows.get('/date', async (req, res) => {
+  const { query } = req.query;
+  console.log('date');
+  const resp = [];
+  res.send(resp);
+});
+
 Shows.post('/', async (req, res) => {
   // get variables from req
   const {
