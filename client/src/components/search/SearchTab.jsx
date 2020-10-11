@@ -9,6 +9,7 @@ import MusicVideoOutlinedIcon from '@material-ui/icons/MusicVideoOutlined';
 import {
   Form, Button,
 } from 'react-bootstrap';
+import SearchVenueLocation from './SearchVenue';
 
 const useStyles = makeStyles({
   root: {
@@ -17,9 +18,11 @@ const useStyles = makeStyles({
   },
 });
 
-const SearchTab = () => {
+const SearchTab = ({ getShows }) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [data, setData] = useState();
+  const [field, setField] = useState('');
   const [searchView, setSearchView] = useState('');
 
   const handleChange = (event, newValue) => {
@@ -34,8 +37,17 @@ const SearchTab = () => {
             <Form.Label>Input Date Below</Form.Label>
             <Form.Control
               type="date"
+              onChange={(e) => {
+                setData(e.target.value);
+              }}
             />
-            <Button size="sm" onClick={() => setSearchView('')}>
+            <Button
+              size="sm"
+              onClick={() => {
+                getShows(data, field);
+                setSearchView('');
+              }}
+            >
               Search
             </Button>
           </Form.Group>
@@ -47,21 +59,37 @@ const SearchTab = () => {
         <div>
           <Form.Group>
             <Form.Label>Input Venue Below</Form.Label>
-            <Form.Control />
-            <Button size="sm" onClick={() => setSearchView('')}>
+            <SearchVenueLocation setData={setData} />
+            <Button
+              size="sm"
+              onClick={() => {
+                getShows(data, field);
+                setSearchView('');
+              }}
+            >
               Search
             </Button>
           </Form.Group>
         </div>
       );
     }
-    if (searchView === 'name') {
+    if (searchView === 'band') {
       return (
         <div>
           <Form.Group>
             <Form.Label>Input Band Below</Form.Label>
-            <Form.Control />
-            <Button size="sm" onClick={() => setSearchView('')}>
+            <Form.Control onChange={(e) => {
+              setData(e.target.value);
+            }}
+            />
+            <Button
+              size="sm"
+              type="submit"
+              onClick={() => {
+                getShows(data, field);
+                setSearchView('');
+              }}
+            >
               Search
             </Button>
           </Form.Group>
@@ -89,9 +117,30 @@ const SearchTab = () => {
             textColor="primary"
             aria-label="icon tabs example"
           >
-            <Tab icon={<CalendarTodayIconOutlined />} aria-label="calendar" onClick={() => setSearchView('date')} />
-            <Tab icon={<MusicVideoOutlinedIcon />} aria-label="music" onClick={() => setSearchView('name')} />
-            <Tab icon={<RoomOutlinedIcon />} aria-label="room" onClick={() => setSearchView('venue')} />
+            <Tab
+              icon={<CalendarTodayIconOutlined />}
+              aria-label="calendar"
+              onClick={() => {
+                setSearchView('date');
+                setField('date');
+              }}
+            />
+            <Tab
+              icon={<MusicVideoOutlinedIcon />}
+              aria-label="music"
+              onClick={() => {
+                setSearchView('band');
+                setField('band');
+              }}
+            />
+            <Tab
+              icon={<RoomOutlinedIcon />}
+              aria-label="room"
+              onClick={() => {
+                setSearchView('venue');
+                setField('venue');
+              }}
+            />
           </Tabs>
         </Paper>
       </div>

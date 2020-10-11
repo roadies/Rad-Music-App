@@ -13,15 +13,15 @@ import {
 } from '@reach/combobox';
 import '@reach/combobox/styles.css';
 
-const SearchLocation = ({
-  setLat, setLng, setVenue, venue,
+const SearchVenueLocation = ({
+  setData,
 }) => {
   const {
     ready, value, suggestions: { status, data }, setValue, clearSuggestions,
   } = usePlacesAutocomplete({
     requestOptions: {
       location: { lat: () => 30, lng: () => -90 }, // this prefers users location here
-      radius: 5 * 1069,
+      radius: 10 * 1069,
     },
   });
 
@@ -32,12 +32,12 @@ const SearchLocation = ({
         const addressLat = results[0].geometry.location.lat();
         const addressLng = results[0].geometry.location.lng();
         const addressDesc = address;
-        setLat(addressLat);
-        setLng(addressLng);
-        setVenue(address);
+        console.log(address, 'address'); // => address components
         setValue(address);
+        setData(address);
         clearSuggestions();
         // console.log('coords', 'lat', addressLat, 'lng', addressLng, 'address', addressDesc);
+        console.log(address);
       } catch (err) {
         console.log('ERROR');
       }
@@ -48,6 +48,7 @@ const SearchLocation = ({
         value={value}
         onChange={(e) => {
           setValue(e.target.value);
+          // setData(e.target.value);
         }}
         disabled={!ready}
         placeholder="enter an address"
@@ -61,4 +62,4 @@ const SearchLocation = ({
   );
 };
 
-export default SearchLocation;
+export default SearchVenueLocation;
