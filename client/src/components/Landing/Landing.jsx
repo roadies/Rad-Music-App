@@ -13,6 +13,7 @@ import {
 } from '@react-google-maps/api';
 import Axios from 'axios';
 import mapStyles from '../Add/styles';
+import { LandingInfo, LandingVenue } from './LandingInfo';
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -47,10 +48,12 @@ const Landing = ({ user, genre }) => {
     const params = { genre };
     Axios.get('/api/shows/genre', { params })
       .then(({ data }) => {
-        // console.log(data);
+        console.log(data);
         data.forEach((entry) => {
-          // console.log(entry.genre);
-          test.push({ lat: Number(entry.lat), lng: Number(entry.lng), genre: entry.genre });
+          // console.log(entry);
+          test.push({
+            lat: Number(entry.lat), lng: Number(entry.lng), bandName: entry.bandName, venue: entry.venue, genre: entry.genre, details: entry.details, date: entry.date,
+          });
         });
         setFavoriteGenre(test);
       });
@@ -119,10 +122,10 @@ const Landing = ({ user, genre }) => {
             <div>
               <h2>
                 {/* how to get these thing by themselves */}
-                TEST
+                <LandingInfo selected={selected} />
               </h2>
               <p>
-                TEST
+                <LandingVenue selected={selected} />
               </p>
             </div>
           </InfoWindow>
