@@ -2,7 +2,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
-import React, { useState, useCallback, useRef } from 'react';
+import React, {
+  useState, useCallback, useRef, useEffect,
+} from 'react';
 import {
   GoogleMap,
   useLoadScript,
@@ -31,6 +33,13 @@ const Landing = ({ user, genre }) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
+  });
+
+  useEffect(() => {
+    Axios.get('/api/shows/band')
+      .then(({ data }) => {
+        console.log(data.genreId, 'RES');
+      });
   });
 
   const mapReference = useRef();
