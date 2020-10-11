@@ -7,7 +7,7 @@
     "start": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" ",
     "dev": "webpack --mode development --watch",
-    "build": "webpack --mode production --config webpack.config.js --watch",
+    "build": "webpack --mode production --config webpack.config.js",
     "lint": "eslint --fix"
   },
   "husky": {
