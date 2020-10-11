@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import { Form } from 'react-bootstrap';
 
 export const SearchInfo = ({ selected }) => {
   const empty = {};
@@ -9,15 +10,30 @@ export const SearchInfo = ({ selected }) => {
   return (
     <div>
       {selected.bandName}
-      <p>
-        {selected.venue}
-      </p>
     </div>
   );
 };
 
-// export const SearchInfoVenue = ({ selected }) => (
-//   <div>
-//     {selected.venue}
-//   </div>
-// );
+export const SearchInfoVenue = ({ selected }) => (
+  <div>
+    <ul>
+      <li>
+        <b>Date:</b>
+        <br />
+        {selected.date}
+      </li>
+      <li>
+        <b>Location:</b>
+        {' '}
+        <br />
+        {selected.venue}
+      </li>
+      <li>
+        <b>Date:</b>
+        {' '}
+        <br />
+        {selected.details}
+      </li>
+    </ul>
+  </div>
+);

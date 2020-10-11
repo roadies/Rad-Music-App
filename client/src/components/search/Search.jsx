@@ -14,7 +14,7 @@ import { Form, Col, Button } from 'react-bootstrap';
 import { formatRelative } from 'date-fns';
 import { set } from 'js-cookie';
 import SearchTab from './SearchTab';
-import { SearchInfo } from './SearchInfo';
+import { SearchInfo, SearchInfoVenue } from './SearchInfo';
 import mapStyles from '../Add/styles';
 
 const libraries = ['places'];
@@ -54,7 +54,7 @@ const Search = ({ user, genre }) => {
         .then(({ data }) => {
           data.forEach((coords) => {
             test.push({
-              lat: Number(coords.lat), lng: Number(coords.lng), bandName: coords.bandName, venue: coords.venue,
+              lat: Number(coords.lat), lng: Number(coords.lng), bandName: coords.bandName, venue: coords.venue, genre: coords.genreId, details: coords.details, date: coords.date,
             });
           });
           setMarkers(test);
@@ -64,7 +64,7 @@ const Search = ({ user, genre }) => {
         .then(({ data }) => {
           data.forEach((coords) => {
             test.push({
-              lat: Number(coords.lat), lng: Number(coords.lng), bandName: coords.bandName, venue: coords.venue,
+              lat: Number(coords.lat), lng: Number(coords.lng), bandName: coords.bandName, venue: coords.venue, genre: coords.genreId, details: coords.details, date: coords.date,
             });
           });
           setMarkers(test);
@@ -74,7 +74,7 @@ const Search = ({ user, genre }) => {
         .then(({ data }) => {
           data.forEach((coords) => {
             test.push({
-              lat: Number(coords.lat), lng: Number(coords.lng), bandName: coords.bandName, venue: coords.venue,
+              lat: Number(coords.lat), lng: Number(coords.lng), bandName: coords.bandName, venue: coords.venue, genre: coords.genreId, details: coords.details, date: coords.date,
             });
           });
           setMarkers(test);
@@ -127,7 +127,7 @@ const Search = ({ user, genre }) => {
                 <SearchInfo selected={selected} />
               </h2>
               <p>
-                {/* <SearchInfoVenue selected={selected} /> */}
+                <SearchInfoVenue selected={selected} />
               </p>
             </div>
           </InfoWindow>
