@@ -89,7 +89,7 @@ const App = () => {
           // border: 'solid red 2px',
         }}
       >
-        <Row>
+        <Row style={{ margin: '0px' }}>
           <Col xs={10}>
             {/* This is view */}
             <div
@@ -111,6 +111,8 @@ const App = () => {
                 // border: 'solid blue 2px',
                 height: '80vh',
                 backgroundColor: '#313840',
+                position: 'sticky',
+                top: '0',
               }}
             >
               <Navbar variant="dark">
