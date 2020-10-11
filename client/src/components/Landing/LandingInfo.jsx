@@ -1,20 +1,12 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React from 'react';
-import { Form } from 'react-bootstrap';
 
-export const SearchInfo = ({ selected }) => {
-  const empty = {};
+export const LandingInfo = ({ selected }) => (
+  <div>
+    {selected.bandName}
+  </div>
+);
 
-  // console.log(selected);
-  return (
-    <div>
-      {selected.bandName}
-    </div>
-  );
-};
-
-export const SearchInfoVenue = ({ selected }) => (
+export const LandingVenue = ({ selected }) => (
   <div>
     <ul>
       <li>
