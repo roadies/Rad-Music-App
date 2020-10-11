@@ -1,82 +1,86 @@
-import React, { useState } from 'react';
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+/* eslint-disable max-len */
+import React, { useState, useCallback, useRef } from 'react';
 import {
-  Col, Container, Form, Row,
-} from 'react-bootstrap';
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  InfoWindow,
+} from '@react-google-maps/api';
+import Axios from 'axios';
+import mapStyles from '../Add/styles';
 
-const Search = () => {
-  const [band, setBand] = useState('');
-  const [date, setDate] = useState('');
-  const [venue, setVenue] = useState('');
-  const [genre, setGenre] = useState('');
+const libraries = ['places'];
+const mapContainerStyle = {
+  width: '100%',
+  height: '80vh',
+};
+const center = {
+  lat: 30,
+  lng: -90,
+};
+const options = {
+  styles: mapStyles,
+  disableDefaultUI: true,
+  zoomControl: true,
+};
+
+const Search = ({ user, genre }) => {
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    libraries,
+  });
+
+  const mapReference = useRef();
+  const onMapLoad = useCallback((map) => {
+    mapReference.current = map;
+  }, []);
+
+  if (loadError) return 'ERROR LOADING MAPS';
+  if (!isLoaded) return 'LOADING MAPS';
 
   return (
-    <div className="container-fluid" style={{ margin: 'auto' }}>
-      <Container>
-        <Row style={{ marginRight: '0px', marginLeft: '0px' }}>
-          <Col lg={2}>
-            <Row style={{ padding: '10px' }}>
-              <div className="add-page-form">
-                <Form>
-                  <Form.Group as={Row} controlId="formBand">
-                    <Col sm={11}>
-                      <Form.Control
-                        type="text"
-                        placeholder="band name"
-                        value={band}
-                        onChange={(e) => setBand(e.target.value)}
-                      />
-                    </Col>
-                  </Form.Group>
-                  <Form.Group as={Row} controlId="formDate">
-                    <Col sm={11}>
-                      <Form.Control
-                        type="date"
-                        value={date}
-                        onChange={(e) => setDate(e.target.value)}
-                      />
-                    </Col>
-                  </Form.Group>
-                  <Form.Group as={Row} controlId="formVenue">
-                    <Col sm={11}>
-                      <Form.Control
-                        type="text"
-                        placeholder="Venue name"
-                        value={venue}
-                        onChange={(e) => setVenue(e.target.value)}
-                      />
-                    </Col>
-                  </Form.Group>
-                  <Form.Group as={Row} controlId="formGenre">
-                    <Col sm={11}>
-                      <Form.Control
-                        type="text"
-                        placeholder="Genre name"
-                        value={genre}
-                        onChange={(e) => setGenre(e.target.value)}
-                      />
-                    </Col>
-                  </Form.Group>
-                </Form>
-              </div>
-            </Row>
-            <Row>
-              <div style={{ border: 'solid 1px green', padding: '10px' }}>
-                List of Shows goes here
-              </div>
-            </Row>
-          </Col>
-          <Col style={{ padding: '5px' }} lg={10}>
-            <div style={{ display: 'block', height: '90vh', width: '50vw' }}>
-              <iframe
-                style={{ height: '90vh', width: '40vw' }}
-                src=""
-                allowFullScreen
-                title="map"
-              />
-            </div>
-          </Col>
-        </Row>
-      </Container>
+    <div>
+      <div style={{ border: 'solid green 1px', padding: '10px' }}>
+        <div>
+          <h5>
+            Welcome to your radically awesome music assistant,
+          </h5>
+          <h4>
+            {' '}
+            {user}
+            !
+          </h4>
+        </div>
+        <div>
+          Please have a look at the map below to see
+          <h6>
+            {' '}
+            {genre}
+            {' '}
+          </h6>
+          shows nearby!
+        </div>
+      </div>
+      <GoogleMap
+        mapContainerStyle={mapContainerStyle}
+        zoom={12}
+        center={center}
+        options={options}
+        onLoad={onMapLoad}
+      >
+        <Marker
+          position={{ lat: 30, lng: -90 }} // positions will change -> lat,lng address
+          icon={{
+            url: 'https://i.imgur.com/zSMeNvZ.png', // grabs an image from imgur and sets it as marker
+            scaledSize: new window.google.maps.Size(40, 40),
+            origin: new window.google.maps.Point(0, 0),
+            anchor: new window.google.maps.Point(20, 20),
+          }}
+        />
+      </GoogleMap>
     </div>
   );
 };
