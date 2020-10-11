@@ -11,7 +11,7 @@ const ImageLoader = () => {
   const [previewSource, setPreviewSource] = useState();
 
   const handleFileInputChange = (e) => {
-    console.log('submitted');
+    // console.log('submitted');
     const file = e.target.files[0];
     previewFile(file);
   };
@@ -31,7 +31,7 @@ const ImageLoader = () => {
   };
 
   const uploadImage = async (base64EncodedImage) => {
-    console.log(base64EncodedImage);
+    // console.log(base64EncodedImage);
     try {
       await fetch('/api/pictures/', {
         method: 'POST',

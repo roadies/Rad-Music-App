@@ -6,7 +6,7 @@ import { Form } from 'react-bootstrap';
 export const SearchInfo = ({ selected }) => {
   const empty = {};
 
-  console.log(selected);
+  // console.log(selected);
   return (
     <div>
       {selected.bandName}

@@ -32,12 +32,12 @@ const SearchVenueLocation = ({
         const addressLat = results[0].geometry.location.lat();
         const addressLng = results[0].geometry.location.lng();
         const addressDesc = address;
-        console.log(address, 'address'); // => address components
+        // console.log(address, 'address'); // => address components
         setValue(address);
         setData(address);
         clearSuggestions();
         // console.log('coords', 'lat', addressLat, 'lng', addressLng, 'address', addressDesc);
-        console.log(address);
+        // console.log(address);
       } catch (err) {
         console.log('ERROR');
       }

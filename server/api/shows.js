@@ -2,7 +2,9 @@
 /* eslint-disable no-loop-func */
 /* eslint-disable no-await-in-loop */
 const { Router } = require('express');
-const { Show, Band, ShowsBands, Genre } = require('../db/index');
+const {
+  Show, Band, ShowsBands, Genre,
+} = require('../db/index');
 
 const Shows = Router();
 
@@ -63,7 +65,9 @@ Shows.get('/venue', async (req, res) => {
   })
     .then(async (shows) => {
       for (let i = 0; i < shows.length; i++) {
-        const { venue, date, details, lat, lng } = shows[i].dataValues;
+        const {
+          venue, date, details, lat, lng,
+        } = shows[i].dataValues;
         await ShowsBands.findAll({
           where: {
             showId: shows[i].dataValues.id,
@@ -112,7 +116,9 @@ Shows.get('/date', async (req, res) => {
   })
     .then(async (shows) => {
       for (let i = 0; i < shows.length; i++) {
-        const { venue, date, details, lat, lng } = shows[i].dataValues;
+        const {
+          venue, date, details, lat, lng,
+        } = shows[i].dataValues;
         await ShowsBands.findAll({
           where: {
             showId: shows[i].dataValues.id,
@@ -273,9 +279,10 @@ Shows.post('/', async (req, res) => {
           bandId,
           showId,
         });
-        console.log('show created');
+        // console.log('show created');
       } else {
-        console.log('show already exists');
+        // console.log('show already exists');
+        res.status(409).send('ALREADY IN DATABASE');
       }
     });
 });

@@ -35,7 +35,7 @@ Profile.post('/create', (req, res) => {
       }
     })
     .catch((error) => {
-      console.log(error, 'error');
+      console.error(error);
       res.status(400).send('failure');
     });
 });

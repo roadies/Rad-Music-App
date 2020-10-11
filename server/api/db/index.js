@@ -90,7 +90,7 @@ db.authenticate()
     console.log('connected to database');
   })
   .catch((error) => {
-    console.log(error, 'not connected to database');
+    console.error(error, 'not connected to database');
   });
 
 const authFunc = (profile) => User.findOne({
