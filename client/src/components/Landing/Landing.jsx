@@ -35,13 +35,6 @@ const Landing = ({ user, genre }) => {
     libraries,
   });
 
-  useEffect(() => {
-    Axios.get('/api/shows/band')
-      .then(({ data }) => {
-        console.log(data.genreId, 'RES');
-      });
-  });
-
   const mapReference = useRef();
   const onMapLoad = useCallback((map) => {
     mapReference.current = map;
