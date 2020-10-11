@@ -16,8 +16,8 @@ const { Profile } = require('./api/profile');
 const CLIENT_PATH = path.resolve(__dirname, '../client/dist');
 
 app.use(express.static(CLIENT_PATH));
-app.use(bodyParser.json({limit: '50mb', extended: true}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
+app.use(bodyParser.json({ limit: '50mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(cookieSession({
   name: 'radma',
