@@ -47,6 +47,18 @@ const Landing = ({ user, genre }) => {
   const onMapLoad = useCallback((map) => {
     mapReference.current = map;
   }, []);
+  const test = [];
+  const [favoriteGenre, setFavoriteGenre] = useState([]);
+  const [selected, setSelected] = useState(null);
+
+  useEffect(() => {
+    Axios.get('/api/shows/genre')
+      .then(({ data }) => {
+        console.log(data);
+        test.push({ genre: data.genre });
+      });
+    setFavoriteGenre(test);
+  });
 
   if (loadError) return 'ERROR LOADING MAPS';
   if (!isLoaded) return 'LOADING MAPS';
@@ -81,15 +93,39 @@ const Landing = ({ user, genre }) => {
         options={options}
         onLoad={onMapLoad}
       >
-        <Marker
-          position={{ lat: 30, lng: -90 }} // positions will change -> lat,lng address
-          icon={{
-            url: 'https://i.imgur.com/zSMeNvZ.png', // grabs an image from imgur and sets it as marker
-            scaledSize: new window.google.maps.Size(40, 40),
-            origin: new window.google.maps.Point(0, 0),
-            anchor: new window.google.maps.Point(20, 20),
-          }}
-        />
+        {favoriteGenre.map((marker, id) => (
+          <Marker
+            key={id}
+            position={{ lat: marker.lat, lng: marker.lng }}
+            onClick={() => {
+              setSelected(marker);
+            }}
+            icon={{
+              url: 'https://i.imgur.com/2rlRTfY.png',
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(20, 20),
+              scaledSize: new window.google.maps.Size(40, 40),
+            }}
+          />
+        ))}
+        {selected ? (
+          <InfoWindow
+            position={{ lat: selected.lat, lng: selected.lng }}
+            onCloseClick={() => {
+              setSelected(null);
+            }}
+          >
+            <div>
+              <h2>
+                {/* how to get these thing by themselves */}
+                TEST
+              </h2>
+              <p>
+                TEST
+              </p>
+            </div>
+          </InfoWindow>
+        ) : null}
       </GoogleMap>
     </div>
   );
