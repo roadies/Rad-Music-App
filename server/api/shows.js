@@ -93,8 +93,44 @@ Shows.get('/venue', async (req, res) => {
 
 Shows.get('/date', async (req, res) => {
   const { query } = req.query;
-  console.log('date');
   const resp = [];
+  await Show.findAll({
+    where: {
+      date: query,
+    },
+  })
+    .then(async (shows) => {
+      for (let i = 0; i < shows.length; i++) {
+        const { venue, date, details, lat, lng } = shows[i].dataValues;
+        await ShowsBands.findAll({
+          where: {
+            showId: shows[i].dataValues.id,
+          },
+        })
+          .then(async (found) => {
+            for (let j = 0; j < found.length; j++) {
+              const band = await Band.findOne({
+                where: {
+                  id: found[j].dataValues.bandId,
+                },
+              })
+                .then((something) => {
+                  const { bandName, genreId } = something.dataValues;
+                  return ({
+                    bandName,
+                    genreId,
+                    venue,
+                    date,
+                    details,
+                    lat,
+                    lng,
+                  });
+                });
+              resp.push(band);
+            }
+          });
+      }
+    });
   res.send(resp);
 });
 
