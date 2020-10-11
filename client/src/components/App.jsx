@@ -45,6 +45,10 @@ const App = () => {
     window.location = `${process.env.REDIRECT}api/oauth/google`;
   };
 
+  const logout = () => {
+    Axios.get('/api/oauth/logout');
+  };
+
   const renderView = () => {
     if (view === 'Home') {
       return <Landing user={user} genre={genre} />;
@@ -112,11 +116,11 @@ const App = () => {
               <Navbar variant="dark">
                 <Nav defaultActiveKey="/home" className="flex-column">
                   {view !== 'Setup' && <Nav.Item style={{ color: '#d2d2d2' }}>{user}</Nav.Item>}
-                  <Nav.Link onClick={() => { setView('Home'); }}>Home</Nav.Link>
-                  <Nav.Link onClick={() => { setView('Add'); }}>Add</Nav.Link>
-                  <Nav.Link onClick={() => { setView('Search'); }}>Search</Nav.Link>
-                  <Nav.Link onClick={() => { setView('Gallery'); }}>Gallery</Nav.Link>
-                  <Nav.Link>Logout</Nav.Link>
+                  <Nav.Link onClick={() => setView('Home')}>Home</Nav.Link>
+                  <Nav.Link onClick={() => setView('Add')}>Add</Nav.Link>
+                  <Nav.Link onClick={() => setView('Search')}>Search</Nav.Link>
+                  <Nav.Link onClick={() => setView('Gallery')}>Gallery</Nav.Link>
+                  <Nav.Link onClick={() => logout()}>Logout</Nav.Link>
                 </Nav>
               </Navbar>
             </div>
