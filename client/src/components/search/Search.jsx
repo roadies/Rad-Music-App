@@ -34,17 +34,7 @@ const options = {
 const Search = ({ user, genre }) => {
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
-  const [toggle, setToggle] = useState(false);
-  // const test = [];
-
-  // const onMapClick = useCallback((e) => {
-  //   setMarkers((e) => {
-  //     test.forEach(coordSets => {
-
-  //     })
-  //   });
-  //   console.log(markers, '<---');
-  // }, []);
+  const [infoWindowBand, setInfoWindowBand] = useState();
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -56,6 +46,13 @@ const Search = ({ user, genre }) => {
     mapReference.current = map;
   }, []);
   const test = [];
+  const bandNames = [];
+
+  const titleLoop = () => {
+    for (let i = 0; i < infoWindowBand.length; i++) {
+      return infoWindowBand[i];
+    }
+  };
 
   const getShows = (query, type) => {
     const params = { query, type };
@@ -66,6 +63,7 @@ const Search = ({ user, genre }) => {
             test.push({ lat: Number(coords.lat), lng: Number(coords.lng) });
           });
           setMarkers(test);
+          setName(data.bandName);
         });
     } else if (type === 'venue') {
       Axios.get('/api/shows/venue', { params })
@@ -74,14 +72,17 @@ const Search = ({ user, genre }) => {
             test.push({ lat: Number(coords.lat), lng: Number(coords.lng) });
           });
           setMarkers(test);
+          setName(data.bandName);
         });
     } else if (type === 'date') {
       Axios.get('/api/shows/date', { params })
         .then(({ data }) => {
           data.forEach((coords) => {
             test.push({ lat: Number(coords.lat), lng: Number(coords.lng) });
+            bandNames.push(coords.bandName);
           });
           setMarkers(test);
+          setInfoWindowBand(bandNames);
         });
     }
   };
@@ -107,21 +108,21 @@ const Search = ({ user, genre }) => {
           <Marker
             key={id}
             position={{ lat: marker.lat, lng: marker.lng }}
-            //   // onClick={() => {
-            //   //   setSelected(marker);
-            //   // }}
-            // icon={{
-            //   url: 'https://i.imgur.com/xRAaYI3.jpg',
-            //   origin: new window.google.maps.Point(0, 0),
-            //   anchor: new window.google.maps.Point(15, 15),
-            //   scaledSize: new window.google.maps.Size(30, 30),
-            // }}
+            onClick={() => {
+              setSelected(marker);
+            }}
+            icon={{
+              url: 'https://i.imgur.com/2rlRTfY.png',
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(20, 20),
+              scaledSize: new window.google.maps.Size(40, 40),
+            }}
           />
         ))}
         {/* <Marker
           position={{ lat: 29.9495, lng: -90.1294 }}
         /> */}
-        {/* {selected ? (
+        {selected ? (
           <InfoWindow
             position={{ lat: selected.lat, lng: selected.lng }}
             onCloseClick={() => {
@@ -130,20 +131,15 @@ const Search = ({ user, genre }) => {
           >
             <div>
               <h2>
-                <span role="img" aria-label="bear">
-                  🐻
-                </span>
-                {' '}
-                Alert
+                {/* how to get these thing by themselves */}
+                bandName
               </h2>
               <p>
-                Spotted
-                {' '}
-                {formatRelative(selected.time, new Date())}
+                venue, date, details
               </p>
             </div>
           </InfoWindow>
-        ) : null} */}
+        ) : null}
       </GoogleMap>
     </div>
   );
