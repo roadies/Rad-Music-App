@@ -11,14 +11,14 @@ import {
 } from '@react-google-maps/api';
 import { formatRelative } from 'date-fns';
 import { FormLabel, Form } from 'react-bootstrap';
+import Axios from 'axios';
 import mapStyles from './styles';
 import InputForm from './BandForm';
-import Axios from 'axios';
 
 const libraries = ['places'];
 const mapContainerStyle = {
-  width: '100vw',
-  height: '100vh',
+  width: '100%',
+  height: '80vh',
 };
 const center = {
   lat: 30,
@@ -31,7 +31,9 @@ const options = {
 };
 
 const addShow = (data) => {
-  const { bandName, date, details, genre, venue, lat, lng } = data;
+  const {
+    bandName, date, details, genre, venue, lat, lng,
+  } = data;
   Axios.post('/api/shows/', {
     bandName,
     date,
@@ -43,8 +45,8 @@ const addShow = (data) => {
   });
 };
 
+// -------------------Initial Load--------------------- //
 const Map = () => {
-  // -------------------Initial Load--------------------- //
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -72,7 +74,7 @@ const Map = () => {
     mapReference.current = map;
   }, []);
 
-   // -------------------END HELPERS---------------------//
+  // -------------------END HELPERS---------------------//
 
   // -------------------LOAD CHECKER---------------------//
   if (loadError) return 'ERROR LOADING MAPS';
