@@ -79,7 +79,7 @@ const Search = () => {
                   <Button
                     as={Row}
                     type="reset"
-                    onClick={() => getShows(band, 'band')}
+                    onClick={() => getShows(venue, 'venue')}
                   >
                     Submit
                   </Button>

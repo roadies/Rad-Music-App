@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-loop-func */
 /* eslint-disable no-await-in-loop */
 const { Router } = require('express');
@@ -48,39 +49,43 @@ Shows.get('/band', async (req, res) => {
 });
 
 Shows.get('/venue', async (req, res) => {
-  const { query, type } = req.query;
-  const resp = { bandInfo: { bandName: query }, bandShows: [] };
-  const bandId = await Band.findOne({
-    where: resp.bandInfo,
-  })
-    .then((band) => {
-      if (band) {
-        resp.bandInfo.genreId = band.dataValues.genreId;
-        return band.dataValues.id;
-      }
-      throw band;
-    });
-  await ShowsBands.findAll({
+  const { query } = req.query;
+  const resp = [];
+  await Show.findAll({
     where: {
-      bandId,
+      venue: query,
     },
   })
-    .then(async (foundShowsBands) => {
-      for (let i = 0; i < foundShowsBands.length; i++) {
-        const { showId } = foundShowsBands[i].dataValues;
-        const showInfoMaybe = await Show.findOne({
+    .then(async (shows) => {
+      for (let i = 0; i < shows.length; i++) {
+        const { venue, date, details, lat, lng } = shows[i].dataValues;
+        await ShowsBands.findAll({
           where: {
-            id: showId,
+            showId: shows[i].dataValues.id,
           },
         })
-          .then((something) => ({
-            date: something.dataValues.date,
-            venue: something.dataValues.venue,
-            lat: something.dataValues.lat,
-            lng: something.dataValues.lng,
-            details: something.dataValues.details,
-          }));
-        resp.bandShows.push(showInfoMaybe);
+          .then(async (found) => {
+            for (let j = 0; j < found.length; j++) {
+              const band = await Band.findOne({
+                where: {
+                  id: found[j].dataValues.bandId,
+                },
+              })
+                .then((something) => {
+                  const { bandName, genreId } = something.dataValues;
+                  return ({
+                    bandName,
+                    genreId,
+                    venue,
+                    date,
+                    details,
+                    lat,
+                    lng,
+                  });
+                });
+              resp.push(band);
+            }
+          });
       }
     });
   res.send(resp);
