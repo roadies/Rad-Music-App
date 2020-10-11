@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 // const { now } = require('sequelize/types/lib/utils');
-const { SEQUEL_PASS } = require('../config')
+const { SEQUEL_PASS } = require('../config');
 
 const db = process.env.ENVIRON === 'dev' ? new Sequelize('radma', 'root', '', {
   host: 'localhost',
@@ -36,7 +36,7 @@ const Genre = db.define('genres', {
 });
 
 // populate genres table
-const genres = ['Alternative', 'Blues', 'Classical', 'Easy Listening', 'Electronic', 'Hip-Hop/Rap', 'K-Pop', 'Pop', 'R&B/Soul'];
+const genres = ['Alternative', 'Blues', 'Classical', 'Easy Listening', 'Electronic', 'Hip-Hop/Rap', 'K-Pop', 'Pop', 'Rock', 'R&B/Soul'];
 genres.forEach((genre) => {
   Genre.findOne({ where: { genreName: genre } })
     .then(async (result) => {

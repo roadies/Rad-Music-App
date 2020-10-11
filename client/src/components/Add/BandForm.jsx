@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Form, FormLabel, Button, FormControl, Dropdown, DropdownButton, InputGroup,
 } from 'react-bootstrap';
@@ -25,7 +25,7 @@ const InputForm = ({
   venue,
 }) => {
   const onSubmit = () => {
-    if (venue && bandName && date && genre) {
+    if (venue && bandName && date && genre && genre !== 'Select Genre') {
       setSubmittedLat(testLat);
       setSubmittedLng(testLng);
       setVenue(venue);
@@ -55,72 +55,76 @@ const InputForm = ({
       window.alert('Must include venue, date, band name, and genre!');
     }
   };
+  const [setupGenre, setSetupGenre] = useState('Select Genre');
 
   return (
-  <div>
-    <Form>
-      <Form.Group>
-        <FormLabel>
-          <h1>PREVIEW YOUR BAND ADDITION!</h1>
-          <br />
-          <h4>Check the map!</h4>
-        </FormLabel>
-        <InputGroup>
-          <FormControl
-            placeholder="Enter Band Name Here"
-            aria-describedby="basic-addon2"
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
+    <div>
+      <Form>
+        <Form.Group>
+          <FormLabel>
+            <h1>PREVIEW YOUR BAND ADDITION!</h1>
+            <br />
+            <h4>Check the map!</h4>
+          </FormLabel>
+          <InputGroup>
+            <FormControl
+              placeholder="Enter Band Name Here"
+              aria-describedby="basic-addon2"
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
 
-          <DropdownButton
-            as={InputGroup.Append}
-            variant="outline-secondary"
-            title={genre}
-            id="input-group-dropdown-2"
+            <DropdownButton
+              as={InputGroup.Append}
+              variant="outline-secondary"
+              title={setupGenre}
+              id="input-group-dropdown-2"
+              onSelect={(e) => setSetupGenre(e)}
+            >
+              <Dropdown.Item eventKey="Alternative" href="#">Alternative</Dropdown.Item>
+              <Dropdown.Item eventKey="Blues" href="#">Blues</Dropdown.Item>
+              <Dropdown.Item eventKey="Classical" href="#">Classical</Dropdown.Item>
+              <Dropdown.Item eventKey="Easy Listening" href="#">Easy Listening</Dropdown.Item>
+              <Dropdown.Item eventKey="Electronic" href="#">Electronic</Dropdown.Item>
+              <Dropdown.Item eventKey="Hip-Hop/Rap" href="#">Hip-Hop/Rap</Dropdown.Item>
+              <Dropdown.Item eventKey="K-Pop" href="#">K-Pop</Dropdown.Item>
+              <Dropdown.Item eventKey="Pop" href="#">Pop</Dropdown.Item>
+              <Dropdown.Item eventKey="Rock" href="#">Rock</Dropdown.Item>
+              <Dropdown.Item eventKey="R&B/Soul" href="#">R&B/Soul</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item href="https://i.imgur.com/7JQkwUo.png" target="_blank">Click Here to check where you fall under</Dropdown.Item>
+            </DropdownButton>
+          </InputGroup>
+          <Form.Group>
+            <SearchLocation setLat={setLat} setLng={setLng} setVenue={setVenue} venue={venue} />
+          </Form.Group>
+          <Form.Group controlId="formDate">
+            <Form.Control
+              type="date"
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control
+              as="textarea"
+              onChange={(e) => {
+                setDetails(e.target.value);
+              }}
+            />
+          </Form.Group>
+          <Button
+            type="reset"
+            onClick={() => onSubmit()}
           >
-            <Dropdown.Item value="alternative" onSelect={() => { setGenre('alternative'); }}>Alternative</Dropdown.Item>
-            <Dropdown.Item value="blues" onSelect={() => { setGenre('blues'); }}>Blues</Dropdown.Item>
-            <Dropdown.Item value="classical" onSelect={() => { setGenre('classical'); }}>Classical</Dropdown.Item>
-            <Dropdown.Item value="easy listening" onSelect={() => { setGenre('easy listening'); }}>Easy Listening</Dropdown.Item>
-            <Dropdown.Item value="electronic" onSelect={() => { setGenre('electronic'); }}>Electronic</Dropdown.Item>
-            <Dropdown.Item value="hip-hop/rap" onSelect={() => { setGenre('Hip-Hop/Rap'); }}>Hip-Hop/Rap</Dropdown.Item>
-            <Dropdown.Item value="k-pop" onSelect={() => { setGenre('K-Pop'); }}>K-Pop</Dropdown.Item>
-            <Dropdown.Item value="pop" onSelect={() => { setGenre('Pop'); }}>Pop</Dropdown.Item>
-            <Dropdown.Item value="r&b/soul" onSelect={() => { setGenre('R&B/Soul'); }}>R&B/Soul</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item href="https://i.imgur.com/7JQkwUo.png" target="_blank">Click Here to check where you fall under</Dropdown.Item>
-          </DropdownButton>
-        </InputGroup>
-        <Form.Group>
-          <SearchLocation setLat={setLat} setLng={setLng} setVenue={setVenue} venue={venue} />
+            Submit
+          </Button>
         </Form.Group>
-        <Form.Group controlId="formDate">
-          <Form.Control
-            type="date"
-            onChange={(e) => {
-              setDate(e.target.value);
-            }}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Control
-            as="textarea"
-            onChange={(e) => {
-              setDetails(e.target.value);
-            }}
-          />
-        </Form.Group>
-        <Button
-          type="reset"
-          onClick={() => onSubmit()}
-        >
-          Submit
-        </Button>
-      </Form.Group>
-    </Form>
-  </div>
-)};
+      </Form>
+    </div>
+  );
+};
 
 export default InputForm;

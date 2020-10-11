@@ -7,7 +7,9 @@ import {
   FormLabel, Form,
 } from 'react-bootstrap';
 
-const SetupProfile = ({ view, setView, setUser, user, setGenre }) => {
+const SetupProfile = ({
+  view, setView, setUser, user, setGenre,
+}) => {
   const [userName, setUserName] = useState('');
   const [setupGenre, setSetupGenre] = useState('Favorite genre');
   const [profilePic, setProfilePic] = useState('');
@@ -70,6 +72,7 @@ const SetupProfile = ({ view, setView, setUser, user, setGenre }) => {
                       <Dropdown.Item eventKey="Hip-Hop/Rap" href="#">Hip-Hop/Rap</Dropdown.Item>
                       <Dropdown.Item eventKey="K-Pop" href="#">K-Pop</Dropdown.Item>
                       <Dropdown.Item eventKey="Pop" href="#">Pop</Dropdown.Item>
+                      <Dropdown.Item eventKey="Rock" href="#">Rock</Dropdown.Item>
                       <Dropdown.Item eventKey="R&B/Soul" href="#">R&B/Soul</Dropdown.Item>
                       <Dropdown.Divider />
                       <Dropdown.Item href="https://i.imgur.com/7JQkwUo.png" target="_blank">Click Here to check where you fall under</Dropdown.Item>
