@@ -1,10 +1,94 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-loop-func */
+/* eslint-disable no-await-in-loop */
 const { Router } = require('express');
 const { Show, Band, ShowsBands, Genre } = require('../db/index');
 
 const Shows = Router();
 
-Shows.get('/', (req, res) => {
-  res.send('idk man');
+Shows.get('/band', async (req, res) => {
+  const { query } = req.query;
+  let genreId;
+  const resp = [];
+  const bandId = await Band.findOne({
+    where: { bandName: query },
+  })
+    .then((band) => {
+      if (band) {
+        genreId = band.dataValues.genreId;
+        return band.dataValues.id;
+      }
+      throw band;
+    });
+  await ShowsBands.findAll({
+    where: {
+      bandId,
+    },
+  })
+    .then(async (foundShowsBands) => {
+      for (let i = 0; i < foundShowsBands.length; i++) {
+        const { showId } = foundShowsBands[i].dataValues;
+        const showInfoMaybe = await Show.findOne({
+          where: {
+            id: showId,
+          },
+        })
+          .then((something) => ({
+            bandName: query,
+            genreId,
+            date: something.dataValues.date,
+            venue: something.dataValues.venue,
+            lat: something.dataValues.lat,
+            lng: something.dataValues.lng,
+            details: something.dataValues.details,
+          }));
+        resp.push(showInfoMaybe);
+      }
+    });
+  res.send(resp);
+});
+
+Shows.get('/venue', async (req, res) => {
+  const { query } = req.query;
+  const resp = [];
+  await Show.findAll({
+    where: {
+      venue: query,
+    },
+  })
+    .then(async (shows) => {
+      for (let i = 0; i < shows.length; i++) {
+        const { venue, date, details, lat, lng } = shows[i].dataValues;
+        await ShowsBands.findAll({
+          where: {
+            showId: shows[i].dataValues.id,
+          },
+        })
+          .then(async (found) => {
+            for (let j = 0; j < found.length; j++) {
+              const band = await Band.findOne({
+                where: {
+                  id: found[j].dataValues.bandId,
+                },
+              })
+                .then((something) => {
+                  const { bandName, genreId } = something.dataValues;
+                  return ({
+                    bandName,
+                    genreId,
+                    venue,
+                    date,
+                    details,
+                    lat,
+                    lng,
+                  });
+                });
+              resp.push(band);
+            }
+          });
+      }
+    });
+  res.send(resp);
 });
 
 Shows.post('/', async (req, res) => {
