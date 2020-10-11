@@ -39,7 +39,6 @@ const Search = ({ user, genre }) => {
   const onMapLoad = useCallback((map) => {
     mapReference.current = map;
   }, []);
-
   const getShows = (query, type) => {
     const params = { query, type };
     if (type === 'band') {
