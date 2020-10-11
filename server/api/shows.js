@@ -8,14 +8,19 @@ const Shows = Router();
 
 Shows.get('/band', async (req, res) => {
   const { query } = req.query;
-  let genreId;
+  let genre;
   const resp = [];
   const bandId = await Band.findOne({
     where: { bandName: query },
   })
-    .then((band) => {
+    .then(async (band) => {
       if (band) {
-        genreId = band.dataValues.genreId;
+        genre = await Genre.findOne({
+          where: {
+            id: band.dataValues.genreId,
+          },
+        })
+          .then((foundGenre) => foundGenre.dataValues.genreName);
         return band.dataValues.id;
       }
       throw band;
@@ -35,7 +40,7 @@ Shows.get('/band', async (req, res) => {
         })
           .then((something) => ({
             bandName: query,
-            genreId,
+            genre,
             date: something.dataValues.date,
             venue: something.dataValues.venue,
             lat: something.dataValues.lat,
@@ -71,11 +76,17 @@ Shows.get('/venue', async (req, res) => {
                   id: found[j].dataValues.bandId,
                 },
               })
-                .then((something) => {
+                .then(async (something) => {
                   const { bandName, genreId } = something.dataValues;
+                  const genre = await Genre.findOne({
+                    where: {
+                      id: genreId,
+                    },
+                  })
+                    .then((foundGenre) => foundGenre.dataValues.genreName);
                   return ({
                     bandName,
-                    genreId,
+                    genre,
                     venue,
                     date,
                     details,
@@ -114,11 +125,17 @@ Shows.get('/date', async (req, res) => {
                   id: found[j].dataValues.bandId,
                 },
               })
-                .then((something) => {
+                .then(async (something) => {
                   const { bandName, genreId } = something.dataValues;
+                  const genre = await Genre.findOne({
+                    where: {
+                      id: genreId,
+                    },
+                  })
+                    .then((foundGenre) => foundGenre.dataValues.genreName);
                   return ({
                     bandName,
-                    genreId,
+                    genre,
                     venue,
                     date,
                     details,
@@ -130,6 +147,59 @@ Shows.get('/date', async (req, res) => {
             }
           });
       }
+    });
+  res.send(resp);
+});
+
+Shows.get('/genre', async (req, res) => {
+  const { genre } = req.query;
+  let resp = [];
+  const genreId = await Genre.findOne({
+    where: {
+      genreName: genre,
+    },
+  })
+    .then((foundGenre) => foundGenre.dataValues.id);
+  await Band.findAll({
+    where: { genreId },
+  })
+    .then(async (band) => {
+      if (band) {
+        for (let i = 0; i < band.length; i++) {
+          const { bandName } = band[i].dataValues;
+          const bandId = band[i].dataValues.id;
+          await ShowsBands.findAll({
+            where: {
+              bandId,
+            },
+          })
+            .then(async (foundShowsBands) => {
+              for (let i = 0; i < foundShowsBands.length; i++) {
+                const { showId } = foundShowsBands[i].dataValues;
+                const showInfoMaybe = await Show.findOne({
+                  where: {
+                    id: showId,
+                  },
+                })
+                  .then((something) => ({
+                    bandName,
+                    genre,
+                    date: something.dataValues.date,
+                    venue: something.dataValues.venue,
+                    lat: something.dataValues.lat,
+                    lng: something.dataValues.lng,
+                    details: something.dataValues.details,
+                  }));
+                resp.push(showInfoMaybe);
+              }
+            });
+        }
+      } else {
+        throw band;
+      }
+    })
+    .catch((band) => {
+      resp = [];
     });
   res.send(resp);
 });

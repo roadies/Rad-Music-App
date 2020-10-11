@@ -26,7 +26,8 @@ const App = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['testCookie']);
 
   useEffect(() => {
-    if (cookies.testCookie) {
+    console.log('load');
+    if (cookies.testCookie && cookies.testCookie.loggedIn) {
       setUser(cookies.testCookie.userName);
       if (cookies.testCookie.genreId.length > 0) {
         console.log(genre);
@@ -120,7 +121,14 @@ const App = () => {
                   <Nav.Link onClick={() => setView('Add')}>Add</Nav.Link>
                   <Nav.Link onClick={() => setView('Search')}>Search</Nav.Link>
                   <Nav.Link onClick={() => setView('Gallery')}>Gallery</Nav.Link>
-                  <Nav.Link onClick={() => logout()}>Logout</Nav.Link>
+                  <Nav.Link
+                    onClick={() => {
+                      logout();
+                      setUser('');
+                    }}
+                  >
+                    Logout
+                  </Nav.Link>
                 </Nav>
               </Navbar>
             </div>

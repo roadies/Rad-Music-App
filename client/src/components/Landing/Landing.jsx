@@ -35,6 +35,14 @@ const Landing = ({ user, genre }) => {
     libraries,
   });
 
+  useEffect(() => {
+    const params = { genre };
+    Axios.get('/api/shows/genre', { params })
+      .then(({ data }) => {
+        console.log(data, 'data');
+      });
+  });
+
   const mapReference = useRef();
   const onMapLoad = useCallback((map) => {
     mapReference.current = map;
