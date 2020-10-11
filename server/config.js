@@ -1,8 +1,12 @@
-const { GM_KEY, GM_SECRET, G_CLIENT_KEY, SEQUEL_PASS } = process.env;
+const {
+  GM_KEY, GM_SECRET, G_CLIENT_KEY, SEQUEL_PASS, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN,
+} = process.env;
 
 module.exports = {
   GM_KEY,
   GM_SECRET,
   G_CLIENT_KEY,
   SEQUEL_PASS,
+  TWILIO_ACCOUNT_SID,
+  TWILIO_AUTH_TOKEN,
 };
