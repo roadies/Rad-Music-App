@@ -30,7 +30,7 @@ const options = {
   zoomControl: true,
 };
 
-const Search = ({ user, genre }) => {
+const Search = () => {
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
 
@@ -51,9 +51,17 @@ const Search = ({ user, genre }) => {
       Axios.get('/api/shows/band', { params })
         .then(({ data }) => {
           data.forEach((coords) => {
-            console.log(data, 'DATA');
+            const {
+              lat,
+              lng,
+              bandName,
+              venue,
+              genre,
+              details,
+              date,
+            } = coords;
             test.push({
-              lat: Number(coords.lat), lng: Number(coords.lng), bandName: coords.bandName, venue: coords.venue, genre: coords.genreId, details: coords.details, date: coords.date,
+              lat: Number(lat), lng: Number(lng), bandName, venue, genre, details, date,
             });
           });
           setMarkers(test);
@@ -62,8 +70,17 @@ const Search = ({ user, genre }) => {
       Axios.get('/api/shows/venue', { params })
         .then(({ data }) => {
           data.forEach((coords) => {
+            const {
+              lat,
+              lng,
+              bandName,
+              venue,
+              details,
+              date,
+              genre,
+            } = coords;
             test.push({
-              lat: Number(coords.lat), lng: Number(coords.lng), bandName: coords.bandName, venue: coords.venue, genre: coords.genreId, details: coords.details, date: coords.date,
+              lat: Number(lat), lng: Number(lng), bandName, venue, genre, details, date,
             });
           });
           setMarkers(test);
@@ -72,8 +89,17 @@ const Search = ({ user, genre }) => {
       Axios.get('/api/shows/date', { params })
         .then(({ data }) => {
           data.forEach((coords) => {
+            const {
+              lat,
+              lng,
+              bandName,
+              venue,
+              details,
+              date,
+              genre,
+            } = coords;
             test.push({
-              lat: Number(coords.lat), lng: Number(coords.lng), bandName: coords.bandName, venue: coords.venue, genre: coords.genreId, details: coords.details, date: coords.date,
+              lat: Number(lat), lng: Number(lng), bandName, venue, genre, details, date,
             });
           });
           setMarkers(test);

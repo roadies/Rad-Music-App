@@ -26,15 +26,12 @@ const App = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['testCookie']);
 
   useEffect(() => {
-    // console.log('load');
     if (cookies.testCookie && cookies.testCookie.loggedIn) {
       setUser(cookies.testCookie.userName);
       if (cookies.testCookie.genreId.length > 0) {
-        // console.log(genre);
         setGenre(cookies.testCookie.genreId);
       }
       if (!cookies.testCookie.profilePrompt) {
-        // console.log('false Cookie!');
         setView('Setup');
       }
       setIsLoggedIn(cookies.testCookie.loggedIn);
