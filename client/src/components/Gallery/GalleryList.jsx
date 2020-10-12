@@ -22,16 +22,17 @@ const GalleryList = ({ setPreviewSource }) => {
 
   return (
     <div>
-      <Button onClick={() => {
-        loadImages();
-        setTimeout(() => {
-          setPreviewSource();
-        }, 2);
-      }}
-      >
-        Refresh Gallery
-      </Button>
-
+      <div style={{ border: 'solid' }}>
+        <Button onClick={() => {
+          loadImages();
+          setTimeout(() => {
+            setPreviewSource();
+          }, 2);
+        }}
+        >
+          Refresh Gallery
+        </Button>
+      </div>
       <div>
         {imageIds && imageIds.map((imageId, id) => (
           <Image
