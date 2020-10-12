@@ -15,7 +15,6 @@ import Map from './Add/TestMap';
 import Gallery from './Gallery/Gallery';
 import Landing from './Landing/Landing';
 import SetupProfile from './ProfileSetup/Setup';
-import SearchReminder from './search/SearchReminder';
 import Search from './search/Search';
 import Splash from './splash/Splash';
 
@@ -64,8 +63,6 @@ const App = () => {
       return <Map />;
     } if (view === 'Setup') {
       return <SetupProfile setView={setView} setUser={setUser} user={user} setGenre={setGenre} />;
-    } if (view === 'Test') {
-      return <SearchReminder />;
     }
     return <Splash />;
   };
@@ -111,7 +108,6 @@ const App = () => {
             >
               Logout
             </Nav.Link>
-            <Nav.Link className="main-nav-link" onClick={() => setView('Test')}>Test</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
