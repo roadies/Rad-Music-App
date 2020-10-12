@@ -45,14 +45,15 @@ const ImageLoader = () => {
 
   return (
     <div>
-      <h1>Upload</h1>
-      <form onSubmit={handleSubmitFile}>
-        <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState} />
-        <button type="submit">
-          Submit
-        </button>
-      </form>
-      {previewSource && <img src={previewSource} alt="pic" style={{ height: '300px' }} />}
+      <div>
+        <form onSubmit={handleSubmitFile}>
+          <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState} />
+          <button type="submit">
+            Submit
+          </button>
+        </form>
+        {previewSource && <img src={previewSource} alt="pic" style={{ height: '300px' }} />}
+      </div>
       <div>
         <GalleryList setPreviewSource={setPreviewSource} />
       </div>

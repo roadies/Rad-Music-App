@@ -11,8 +11,8 @@ const Splash = ({ userLoggedIn, loginRedir }) => (
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-    <div>
-      <Image src="https://i.imgur.com/ZmhcsP0.png" alt="LOGO" fluid />
+    <div className="splash-div-image">
+      <Image src="https://i.imgur.com/MTnaixW.png" alt="LOGO" fluid className="splash-image" fluid />
     </div>
   </div>
 );
