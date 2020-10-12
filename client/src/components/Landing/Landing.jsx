@@ -12,6 +12,7 @@ import {
   InfoWindow,
 } from '@react-google-maps/api';
 import Axios from 'axios';
+import { Button } from 'react-bootstrap';
 import mapStyles from '../Add/styles';
 import { LandingInfo, LandingVenue } from './LandingInfo';
 
@@ -64,31 +65,35 @@ const Landing = ({ user, genre }) => {
 
   return (
     <div>
-      <div style={{ border: 'solid green 1px', padding: '10px' }}>
-        <div>
-          <h5>
-            Welcome to your radically awesome music assistant,
-          </h5>
-          <h4>
+      <div style={{
+        // border: 'solid green 1px',
+        // padding: '10px',
+      }}
+      >
+        <div style={{
+          // border: 'solid green 1px',
+          float: 'left',
+          padding: '10px',
+        }}
+        >
+          <p>Welcome to your radically awesome Music assistant!</p>
+          <p>By clicking the button below, you can display events with your favorite genre below!</p>
+          <p>
+            It looks like your favorite genre is
             {' '}
-            {user}
-            !
-          </h4>
-        </div>
-        <div>
-          Please have a look at the map below to see
-          <h6>
-            {' '}
-            {genre}
-            {' '}
-          </h6>
-          shows nearby!
-        </div>
-        <div>
-          <button onClick={() => getGenres()}>
+            <h5>{genre}</h5>
+          </p>
+          <p>Feel free to click on the note to get more information about the event!</p>
+          <Button
+            variant="outline-success"
+            onClick={() => {
+              getGenres();
+            }}
+          >
             Search for shows
-          </button>
+          </Button>
         </div>
+
       </div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
@@ -105,7 +110,7 @@ const Landing = ({ user, genre }) => {
               setSelected(marker);
             }}
             icon={{
-              url: 'https://i.imgur.com/2rlRTfY.png',
+              url: 'https://i.imgur.com/h7k1p1I.png',
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(20, 20),
               scaledSize: new window.google.maps.Size(40, 40),
