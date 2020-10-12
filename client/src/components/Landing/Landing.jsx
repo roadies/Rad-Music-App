@@ -49,7 +49,6 @@ const Landing = ({ user, genre }) => {
     const params = { genre };
     Axios.get('/api/shows/genre', { params })
       .then(({ data }) => {
-        console.log(data);
         data.forEach((entry) => {
           const {
             lat,
