@@ -51,6 +51,13 @@ const SearchLocation = ({
         }}
         disabled={!ready}
         placeholder="enter an address"
+        style={{
+          height: '30px',
+          width: '400px',
+          marginTop: '10px',
+          borderRadius: '3px',
+          border: 'solid 1px #dcdee0',
+        }}
       />
       <ComboboxPopover>
         <ComboboxList>
