@@ -6,13 +6,14 @@ const Splash = ({ userLoggedIn, loginRedir }) => (
     <Navbar collapseOnSelect expand="lg" variant="dark" sticky="top" className="main-nav">
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse>
-        <Nav className="justify-content-between" style={{ width: '100%' }}>
+        <Nav style={{ width: '100%' }}>
           <Nav.Link onClick={() => loginRedir()}>Sign Up/Login</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-    <Image src="https://i.imgur.com/ZmhcsP0.png" alt="LOGO" fluid />
+    <div>
+      <Image src="https://i.imgur.com/ZmhcsP0.png" alt="LOGO" fluid />
+    </div>
   </div>
 );
-
 export default Splash;
