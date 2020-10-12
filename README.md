@@ -1,73 +1,39 @@
-# radma
+### Table of Contents
 
-An app to help you find live music near you
+>[About](#about)
+>[Details](#details)
+>[System-Requirements](#system-requirements)
+>[Installation](#installation)
+>[Database](#database)
+>[Tech-Stack](#tech-stack)
 
-## Team
+### About
 
--   **Product Owner**: Larry Schwall 
--   **Scrum Master**: Christine Garaudy
--   **Lead Engineer**: Mike Conner
+> ##### Radma:  `the totally radical music assistant`
 
-## Table of Contents
+### Details: 
+>`Radma is a tool fo those that love music. The grunge heads, the easy listener, the old man down the street! The radically interactive app lets you add your favorite bands that the locals may not know about, search bands that you know of, remind yourself of events with texts and upload your own pics!`
 
-1.  [How it works]
-2.  [App Wireframe]
-3.  [Database]
-4.  [Tech Stack]
-5.  [Development]
-6.  [Installation]
-7.  [Contributing]
+### System-Requirements
+>`Node version >= 8`
+>`npm >= 6`
 
- 
+### Installation
+>Install MySQL 5.7 => ([MySQL 5.7](https://dev.mysql.com/doc/refman/5.7/en/installing.html))
+>Install nodemon using `'npm i -g nodemon'`
+>Connect to mysql with `mysql -uroot`
+>Create a database called `radma`
+>Clone this repo => ([Radma Github](https://github.com/Team-Schrodingers-Cats/Rad-Music-App.git))
+>Change to the directory in which you saved this repository by using `cd _PATH_NAME_`
+>Run `npm install` to install the dependencies needed
+>Bundle your repository using `npm run build`
+>Launch your server using `npm run start`
+>Connect to the site `localhost:3000`
 
-## How it Works
+### Database
+![Database](https://i.imgur.com/erc7LKB.png)
 
-> I want to know what live music is happening near me!
-
-Simply create an account and log in to our app, selecting your favorite genre of music.  The landing page will display nearby shows happening today that match your preferred genre.  
-
-> I wanna find a show at another time or in another place!
-
-Navigate to the 'find a show' page and enter in your desired location and optional filters to see upcoming events matching your specifications.
-
-> I know about a super cool show coming up!
-
-Awesome!  You can add information about future musical spectacles to let all your friends know about it.
-
-## App Wireframe
-
-> Home Page
-
-![Home Page](https://i.imgur.com/BWU2r1z.png)
-
-> Landing Page
-
-![Landing Page](https://i.imgur.com/ugMWnGv.png)
-
-> Add a Show
-
-![add](https://i.imgur.com/QxWx0wW.png)
-
-> Find a Show
-
-![search](https://i.imgur.com/GSRuPwe.png)
-
-> Profile Page
-
-![profile](https://i.imgur.com/0ZCdg2Y.png)
-
-## Database
-
-![enter image description here](https://i.imgur.com/7M4jfTf.png)
-
-## Tech Stack
-
-![enter image description here](https://i.imgur.com/UmkkGG7.png)
-
-## Development
-
-## Installation
-
-## Contributing
+### Tech-Stack
+![enter image description here](https://i.imgur.com/E2jlyZr.jpg)
 
 See [CONTRIBUTING.md](https://github.com/Team-Schrodingers-Cats/Rad-Music-App/blob/main/CONTRIBUTING.md) for contribution guidelines.
