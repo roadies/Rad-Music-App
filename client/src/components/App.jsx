@@ -99,10 +99,10 @@ const App = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="justify-content-between">
-            <Nav.Link classname="main-nav-link" onClick={() => setView('Home')}>Home</Nav.Link>
-            <Nav.Link classname="main-nav-link" onClick={() => setView('Add')}>Add</Nav.Link>
-            <Nav.Link classname="main-nav-link" onClick={() => setView('Search')}>Search</Nav.Link>
-            <Nav.Link classname="main-nav-link" onClick={() => setView('Gallery')}>Gallery</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Home')}>Home</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Add')}>Add</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Search')}>Search</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Gallery')}>Gallery</Nav.Link>
             <Nav.Link
               onClick={() => {
                 logout();
