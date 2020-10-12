@@ -10,6 +10,7 @@ import {
   Form, Button, ButtonGroup,
 } from 'react-bootstrap';
 import SearchVenueLocation from './SearchVenue';
+import SearchMapVenue from './SearchMapVenue';
 
 const useStyles = makeStyles({
   root: {
@@ -18,12 +19,13 @@ const useStyles = makeStyles({
   },
 });
 
-const SearchTab = ({ getShows }) => {
+const SearchTab = ({ getShows, markers }) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
   const [data, setData] = useState();
   const [field, setField] = useState('');
   const [searchView, setSearchView] = useState('');
+  const [listView, setListView] = useState('');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -58,7 +60,7 @@ const SearchTab = ({ getShows }) => {
     }
     if (searchView === 'venue') {
       return (
-        <div>
+        <div style={{ float: 'left' }}>
           <Form.Group>
             <SearchVenueLocation setData={setData} />
             <ButtonGroup style={{ marginTop: '10px' }}>
@@ -78,14 +80,15 @@ const SearchTab = ({ getShows }) => {
                 onClick={() => {
                   getShows(data, field);
                   setSearchView('');
+                  setListView('list');
                 }}
               >
                 List View
               </Button>
             </ButtonGroup>
-
           </Form.Group>
         </div>
+
       );
     }
     if (searchView === 'band') {
@@ -115,6 +118,7 @@ const SearchTab = ({ getShows }) => {
         </div>
       );
     }
+
     return (
       <div style={{ padding: '10px' }}>
         <Form.Text className="text-muted">
@@ -122,6 +126,12 @@ const SearchTab = ({ getShows }) => {
         </Form.Text>
       </div>
     );
+  };
+
+  const mapListView = () => {
+    if (listView === 'list') {
+      return <SearchMapVenue markers={markers} />;
+    }
   };
 
   return (
@@ -158,6 +168,7 @@ const SearchTab = ({ getShows }) => {
               onClick={() => {
                 setSearchView('venue');
                 setField('venue');
+                setListView('');
               }}
             />
           </Tabs>
@@ -165,6 +176,9 @@ const SearchTab = ({ getShows }) => {
       </div>
       <div>
         {renderSearchView()}
+      </div>
+      <div>
+        {mapListView()}
       </div>
     </div>
   );
