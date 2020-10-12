@@ -46,12 +46,20 @@ const SearchVenueLocation = ({
     >
       <ComboboxInput
         value={value}
+        style={{
+          height: '40px',
+          width: '215px',
+          marginTop: '10px',
+          borderRadius: '3px',
+          border: 'solid 1px #dcdee0',
+        }}
         onChange={(e) => {
           setValue(e.target.value);
           // setData(e.target.value);
         }}
         disabled={!ready}
-        placeholder="enter an address"
+        placeholder="Enter Venue Name"
+        className="combobox-input-search-venue"
       />
       <ComboboxPopover>
         <ComboboxList>

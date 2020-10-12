@@ -3,7 +3,7 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 
-export const SearchInfo = ({ selected }) => {
+export const SearchInfo = ({ selected, genre }) => {
   const empty = {};
 
   // console.log(selected);
@@ -27,6 +27,12 @@ export const SearchInfoVenue = ({ selected }) => (
         {' '}
         <br />
         {selected.venue}
+      </li>
+      <li>
+        <b>Genre:</b>
+        {' '}
+        <br />
+        {selected.genreId}
       </li>
       <li>
         <b>Details:</b>
