@@ -9,7 +9,11 @@ const SearchReminder = () => {
 
   const sendText = () => {
     // pass variables to query string for
-    fetch(`/text?recipient=${text.recipient}&textmessage=${text.textmessage}`)
+
+    Axios.post('/api/twilio/text', {
+      recipient: text.recipient,
+      textmessage: text.textmessage,
+    })
       .catch((err) => console.error(err));
   };
 
@@ -31,7 +35,7 @@ const SearchReminder = () => {
           onChange={(e) => { setText({ ...text, textmessage: e.target.value }); }}
         />
       </div>
-      <button onClick={() => sendText()}>
+      <button type="reset" onClick={() => sendText()}>
         send text
       </button>
     </div>
