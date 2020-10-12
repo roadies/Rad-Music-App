@@ -86,7 +86,7 @@ const Search = ({ user, genre }) => {
   return (
     <div>
       <div style={{
-        border: 'solid green 1px',
+        // border: 'solid green 1px',
         float: 'left',
         // marginLeft: '500px',
         padding: '10px',
