@@ -19,16 +19,16 @@
 >`npm >= 6`
 
 ### Installation
->Install MySQL 5.7 => ([MySQL 5.7](https://dev.mysql.com/doc/refman/5.7/en/installing.html))
->Install nodemon using `'npm i -g nodemon'`
->Connect to mysql with `mysql -uroot`
->Create a database called `radma`
->Clone this repo => ([Radma Github](https://github.com/Team-Schrodingers-Cats/Rad-Music-App.git))
->Change to the directory in which you saved this repository by using `cd _PATH_NAME_`
->Run `npm install` to install the dependencies needed
->Bundle your repository using `npm run build`
->Launch your server using `npm run start`
->Connect to the site `localhost:3000`
+> Install MySQL 5.7 => ([MySQL 5.7](https://dev.mysql.com/doc/refman/5.7/en/installing.html))
+> Install nodemon using `'npm i -g nodemon'`
+> Connect to mysql with `mysql -uroot`
+> Create a database called `radma`
+> Clone this repo => ([Radma Github](https://github.com/Team-Schrodingers-Cats/Rad-Music-App.git))
+> Change to the directory in which you saved this repository by using `cd _PATH_NAME_`
+> Run `npm install` to install the dependencies needed
+> Bundle your repository using `npm run build`
+> Launch your server using `npm run start`
+> Connect to the site `localhost:3000`
 
 ### Database
 ![Database](https://i.imgur.com/erc7LKB.png)
