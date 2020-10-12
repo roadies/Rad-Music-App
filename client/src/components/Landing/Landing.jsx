@@ -51,9 +51,16 @@ const Landing = ({ user, genre }) => {
       .then(({ data }) => {
         console.log(data);
         data.forEach((entry) => {
-          // console.log(entry);
+          const {
+            lat,
+            lng,
+            bandName,
+            venue,
+            details,
+            date,
+          } = entry;
           test.push({
-            lat: Number(entry.lat), lng: Number(entry.lng), bandName: entry.bandName, venue: entry.venue, genre: entry.genre, details: entry.details, date: entry.date,
+            lat: Number(lat), lng: Number(lng), bandName, venue, genre, details, date,
           });
         });
         setFavoriteGenre(test);

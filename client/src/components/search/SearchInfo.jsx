@@ -3,43 +3,51 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 
-export const SearchInfo = ({ selected, genre }) => {
-  const empty = {};
+export const SearchInfo = ({ selected }) => {
+  const { bandName } = selected;
 
-  // console.log(selected);
   return (
     <div>
-      {selected.bandName}
+      {bandName}
     </div>
   );
 };
 
-export const SearchInfoVenue = ({ selected }) => (
-  <div>
-    <ul>
-      <li>
-        <b>Date:</b>
-        <br />
-        {selected.date}
-      </li>
-      <li>
-        <b>Location:</b>
-        {' '}
-        <br />
-        {selected.venue}
-      </li>
-      <li>
-        <b>Genre:</b>
-        {' '}
-        <br />
-        {selected.genreId}
-      </li>
-      <li>
-        <b>Details:</b>
-        {' '}
-        <br />
-        {selected.details}
-      </li>
-    </ul>
-  </div>
-);
+export const SearchInfoVenue = ({ selected }) => {
+  const {
+    date,
+    venue,
+    genre,
+    details,
+  } = selected;
+
+  return (
+    <div>
+      <ul>
+        <li>
+          <b>Date:</b>
+          <br />
+          {date}
+        </li>
+        <li>
+          <b>Location:</b>
+          {' '}
+          <br />
+          {venue}
+        </li>
+        <li>
+          <b>Genre:</b>
+          {' '}
+          <br />
+          {genre}
+        </li>
+        <li>
+          <b>Details:</b>
+          {' '}
+          <br />
+          {details}
+        </li>
+      </ul>
+    </div>
+  );
+};
