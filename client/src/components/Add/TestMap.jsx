@@ -58,12 +58,13 @@ const Map = () => {
   const [date, setDate] = useState();
   const [details, setDetails] = useState();
   const [genre, setGenre] = useState();
-  const [selectedMarker, setSelectedMarker] = useState(null);
+  // const [selectedMarker, setSelectedMarker] = useState(null);
   const [submittedLat, setSubmittedLat] = useState(null);
   const [testLat, setLat] = useState(null);
   const [submittedLng, setSubmittedLng] = useState(null);
   const [testLng, setLng] = useState(null);
   const [venue, setVenue] = useState('');
+  const [selected, setSelected] = useState(null);
 
   // -------------------END STATE---------------------//
 
@@ -104,22 +105,36 @@ const Map = () => {
         setGenre={setGenre}
         addShow={addShow}
       />
-      <div className="preview for band input" style={{ border: 'solid green 1px', padding: '10px' }}>
-        <h1>
-          THIS IS THE BAND INFORMATION
-        </h1>
-        <Form.Group>
-          <FormLabel size="sm">Band Name</FormLabel>
-          <Form.Text className="text-muted">{bandName}</Form.Text>
-          <FormLabel size="sm">Genre</FormLabel>
-          <Form.Text className="text-muted">{genre}</Form.Text>
-          <FormLabel size="sm">Date</FormLabel>
-          <Form.Text className="text-muted">{date}</Form.Text>
-          <FormLabel size="sm">Venue</FormLabel>
-          <Form.Text className="text-muted">{venue}</Form.Text>
-          <FormLabel size="sm">Details</FormLabel>
-          <Form.Text className="text-muted">{details}</Form.Text>
-        </Form.Group>
+      <div
+        className="preview for band input"
+        style={{
+          float: 'right',
+          marginRight: '200px',
+          padding: '10px',
+        }}
+      >
+        <div style={{
+          fontSize: '36pt',
+          padding: '10',
+        }}
+        >
+          <p>Submission Preview</p>
+        </div>
+        <div>
+
+          <Form.Group>
+            <FormLabel style={{ marginTop: '10px', fontSize: '24pt' }}>{bandName}</FormLabel>
+            <Form.Text className="text-muted">Band Name</Form.Text>
+            <FormLabel style={{ marginTop: '10px', fontSize: '24pt' }}>{genre}</FormLabel>
+            <Form.Text className="text-muted">Genre</Form.Text>
+            <FormLabel style={{ marginTop: '10px', fontSize: '24pt' }}>{date}</FormLabel>
+            <Form.Text className="text-muted">Date</Form.Text>
+            <FormLabel style={{ marginTop: '10px', fontSize: '24pt' }}>{venue}</FormLabel>
+            <Form.Text className="text-muted">Venue</Form.Text>
+            <FormLabel style={{ marginTop: '10px', fontSize: '24pt' }}>{details}</FormLabel>
+            <Form.Text className="text-muted">Details</Form.Text>
+          </Form.Group>
+        </div>
       </div>
 
       <GoogleMap
@@ -132,12 +147,33 @@ const Map = () => {
         <Marker
           position={{ lat: submittedLat, lng: submittedLng }} // positions will change -> lat,lng address
           icon={{
-            url: 'https://i.imgur.com/zSMeNvZ.png', // grabs an image from imgur and sets it as marker
+            url: 'https://i.imgur.com/h7k1p1I.png', // grabs an image from imgur and sets it as marker
             scaledSize: new window.google.maps.Size(40, 40),
             origin: new window.google.maps.Point(0, 0),
             anchor: new window.google.maps.Point(20, 20),
           }}
+          onClick={() => {
+            setSelected(marker);
+          }}
+
         />
+        {selected ? (
+          <InfoWindow
+            position={{ lat: selected.lat, lng: selected.lng }}
+            onCloseClick={() => {
+              setSelected(null);
+            }}
+          >
+            <div>
+              <h2>
+                test
+              </h2>
+              <p>
+                test
+              </p>
+            </div>
+          </InfoWindow>
+        ) : null}
       </GoogleMap>
     </div>
   );
