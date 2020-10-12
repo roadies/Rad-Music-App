@@ -8,7 +8,7 @@ import {
   BrowserRouter as Router, Switch, Route, Link,
 } from 'react-router-dom';
 import {
-  Container, Row, Col, Nav, Navbar,
+  Container, Row, Col, Nav, Navbar, Tab,
 } from 'react-bootstrap';
 import { useCookies } from 'react-cookie';
 import Map from './Add/TestMap';
@@ -87,59 +87,36 @@ const App = () => {
   }
   return (
     <div className="Page-JSX-View-Container">
-      <div
-        as={Container}
-        style={{
-          // border: 'solid red 2px',
-        }}
-      >
-        <Row style={{ margin: '0px' }}>
-          <Col xs={10}>
-            {/* This is view */}
-            <div
-              as={Container}
-              style={{
-                // border: 'solid blue 2px',
-                margin: '0 0 auto',
-                height: '100%',
+      <Navbar collapseOnSelect expand="lg" variant="dark" sticky="top" className="main-nav">
+        {view !== 'Setup' && (
+        <Navbar.Brand onClick={() => setView('Home')}>
+          Welcome,
+          {' '}
+          {user}
+          !
+        </Navbar.Brand>
+        )}
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="justify-content-between">
+            <Nav.Link classname="main-nav-link" onClick={() => setView('Home')}>Home</Nav.Link>
+            <Nav.Link classname="main-nav-link" onClick={() => setView('Add')}>Add</Nav.Link>
+            <Nav.Link classname="main-nav-link" onClick={() => setView('Search')}>Search</Nav.Link>
+            <Nav.Link classname="main-nav-link" onClick={() => setView('Gallery')}>Gallery</Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                logout();
+                setUser('');
               }}
             >
-              {renderView()}
-            </div>
-          </Col>
-          <Col xs={2}>
-            {/* This is the nav */}
-            <div
-              as={Container}
-              style={{
-                // border: 'solid blue 2px',
-                height: '80vh',
-                backgroundColor: '#313840',
-                position: 'sticky',
-                top: '0',
-              }}
-            >
-              <Navbar variant="dark">
-                <Nav defaultActiveKey="/home" className="flex-column">
-                  {view !== 'Setup' && <Nav.Item style={{ color: '#d2d2d2' }}>{user}</Nav.Item>}
-                  <Nav.Link onClick={() => setView('Home')}>Home</Nav.Link>
-                  <Nav.Link onClick={() => setView('Add')}>Add</Nav.Link>
-                  <Nav.Link onClick={() => setView('Search')}>Search</Nav.Link>
-                  <Nav.Link onClick={() => setView('Gallery')}>Gallery</Nav.Link>
-                  <Nav.Link
-                    onClick={() => {
-                      logout();
-                      setUser('');
-                    }}
-                  >
-                    Logout
-                  </Nav.Link>
-                  <Nav.Link onClick={() => setView('Test')}>Tester</Nav.Link>
-                </Nav>
-              </Navbar>
-            </div>
-          </Col>
-        </Row>
+              Logout
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+
+      <div>
+        {renderView()}
       </div>
     </div>
 
