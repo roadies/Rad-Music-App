@@ -29,6 +29,21 @@
 - [ ] Bundle your repository using `npm run build`
 - [ ] Launch your server using `npm run start`
 - [ ] Connect to the site `localhost:3000`
+- [ ] Add the following to as a `.env` in your root directory
+
+
+>REACT_APP_GOOGLE_MAPS_API_KEY= //google maps api key<br /> 
+>GM_KEY= //google maps key<br />
+>GM_SECRET= //google maps<br />
+>G_CLIENT_KEY= //google client key<br />
+>SEQUEL_PASS= //database password<br />
+>CLOUDINARY_NAME= //cloudinary name<br />
+>CLOUDINARY_API_KEY= //cloudinary api key
+>CLOUDINARY_API_SECRET= //cloudinary api secret<br />
+>REDIRECT=http://localhost:(PORT_NUMBER)/.    <= this should redirect you correctly unless you deploy<br />
+>ENVIRON=dev<br />
+>TWILIO_ACCOUNT_SID= //twilio SID<br />
+>TWILIO_AUTH_TOKEN= //twilio token
 
 ### Database
 ![Database](https://i.imgur.com/erc7LKB.png)
