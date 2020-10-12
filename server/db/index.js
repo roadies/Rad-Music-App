@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize');
 // const { now } = require('sequelize/types/lib/utils');
-const { SEQUEL_PASS } = require('../config')
+const { SEQUEL_PASS } = require('../config');
 
+// creates database. if dev environment, no password
 const db = process.env.ENVIRON === 'dev' ? new Sequelize('radma', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
@@ -13,6 +14,7 @@ const db = process.env.ENVIRON === 'dev' ? new Sequelize('radma', 'root', '', {
   logging: false,
 });
 
+// define show table
 const Show = db.define('shows', {
   id: {
     type: Sequelize.INTEGER,
@@ -26,6 +28,7 @@ const Show = db.define('shows', {
   details: Sequelize.STRING,
 });
 
+// define genre table
 const Genre = db.define('genres', {
   id: {
     type: Sequelize.INTEGER,
@@ -35,19 +38,7 @@ const Genre = db.define('genres', {
   genreName: Sequelize.STRING,
 });
 
-// populate genres table
-const genres = ['Alternative', 'Blues', 'Classical', 'Easy Listening', 'Electronic', 'Hip-Hop/Rap', 'K-Pop', 'Pop', 'R&B/Soul'];
-genres.forEach((genre) => {
-  Genre.findOne({ where: { genreName: genre } })
-    .then(async (result) => {
-      if (!result) {
-        await Genre.create({
-          genreName: genre,
-        });
-      }
-    });
-});
-
+// define band table
 const Band = db.define('bands', {
   id: {
     type: Sequelize.INTEGER,
@@ -58,6 +49,7 @@ const Band = db.define('bands', {
   genreId: Sequelize.INTEGER,
 });
 
+// define user table
 const User = db.define('users', {
   id: {
     type: Sequelize.INTEGER,
@@ -72,6 +64,7 @@ const User = db.define('users', {
   profilePrompt: Sequelize.BOOLEAN,
 });
 
+// define shows/bands join table
 const ShowsBands = db.define('shows_bands', {
   id: {
     type: Sequelize.INTEGER,
@@ -82,120 +75,24 @@ const ShowsBands = db.define('shows_bands', {
   showId: Sequelize.INTEGER,
 });
 
-// adds genreId to band
+// links band and genre table by adding foreign key to band table
 Band.belongsTo(Genre);
 
-// add genreID to user
+// links user and genre table by adding foreign key to user table
 User.belongsTo(Genre);
 
-// create shows bands join table
+// define shows/bands join table
 Band.belongsToMany(Show, { through: ShowsBands });
 Show.belongsToMany(Band, { through: ShowsBands });
 
-// populate show table with fake data
-Show.findOne({ where: { id: 1 } })
-  .then((result) => {
-    if (!result) {
-      Show.create({
-        address: '225 Decatur St, New Orleans, LA 20130',
-        date: '2020-11-12',
-        venue: 'House of Blues New Orleans',
-        details: '18+',
-        lat: '29.9532033',
-        lng: '-90.0660795',
-      });
-    }
-  });
-
-Show.findOne({ where: { id: 2 } })
-  .then((result) => {
-    if (!result) {
-      Show.create({
-        address: '726 St Peter, New Orleans, LA 70116',
-        date: '2020-11-13',
-        venue: 'Preservation Hall',
-        details: '$5 cover',
-        lat: '29.958316',
-        lng: '-90.0653949',
-      });
-    }
-  });
-
-// populate Band table with  fake data
-Band.findOne({ where: { id: 1 } })
-  .then((result) => {
-    if (!result) {
-      Band.create({
-        bandName: 'Nickelback',
-        genreId: 1,
-      });
-    }
-  });
-
-Band.findOne({ where: { id: 2 } })
-  .then((result) => {
-    if (!result) {
-      Band.create({
-        bandName: 'Rick Astley',
-        genreId: 6,
-      });
-    }
-  });
-
-// populate User table with  fake data
-User.findOne({ where: { id: 1 } })
-  .then((result) => {
-    if (!result) {
-      User.create({
-        userName: 'MachoManRandySavage',
-        profilePic: 'https://411mania.com/wp-content/uploads/2019/04/Randy-Savage-3-6-1989-1-645x370.png',
-        googleId: '12345google',
-        genreId: 5,
-        profilePrompt: true,
-      });
-    }
-  });
-
-User.findOne({ where: { id: 2 } })
-  .then((result) => {
-    if (!result) {
-      User.create({
-        userName: 'music_luvr_4',
-        profilePic: 'https://vignette.wikia.nocookie.net/southpark/images/e/e2/Professor-chaos-hooded.png/revision/latest?cb=20171003212334',
-        googleId: 'asldfjoelskjdafase3234232434234',
-        genreId: 2,
-        profilePrompt: true,
-      });
-    }
-  });
-
-// populate showsbands table with  fake data
-ShowsBands.findOne({ where: { id: 1 } })
-  .then((result) => {
-    if (!result) {
-      ShowsBands.create({
-        bandId: 1,
-        showId: 2,
-      });
-    }
-  });
-
-ShowsBands.findOne({ where: { id: 2 } })
-  .then((result) => {
-    if (!result) {
-      ShowsBands.create({
-        bandId: 2,
-        showId: 1,
-      });
-    }
-  });
-
+// create tables if they don't exist, do nothing if they do exist
 Show.sync();
 Genre.sync();
 User.sync();
 Band.sync();
 ShowsBands.sync();
 
+// connect to database
 db.authenticate()
   .then(() => {
     console.log('connected to database');
@@ -204,6 +101,7 @@ db.authenticate()
     console.log(error, 'not connected to database');
   });
 
+// function that authenticates w/ google id
 const authFunc = (profile) => User.findOne({
   where: {
     googleId: profile.id,

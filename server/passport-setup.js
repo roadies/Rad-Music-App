@@ -15,14 +15,15 @@ passport.use(new GoogleStrategy(
     clientSecret: `${GM_SECRET}`,
     callbackURL: `${process.env.REDIRECT}api/oauth/google/callback`,
   },
-  // use the profile info to check if the user is registered in  your db
+  // use the profile info to check if the user is registered in your db
   ((accessToken, refreshToken, profile, done) => {
     authFunc(profile)
       .then(async (currentUser) => {
+        // if user exists, pass them along to the next step in server/api/oauth.js
         if (currentUser) {
           done(null, currentUser);
         } else {
-          // const newUser  = User.build({ googleId: profile.id, profilePrompt: false });
+          // if user doesnt exist, create them with a random temporary username
           const newUser = User.build({
             googleId: profile.id,
             profilePrompt: false,

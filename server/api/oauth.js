@@ -5,7 +5,7 @@ const { Genre } = require('../db/index');
 
 const Oauth = Router();
 
-// will eventually live somewhere else
+// checks if a user is logged in
 const isLoggedIn = (req, res, next) => {
   if (req.session) {
     next();
@@ -15,13 +15,14 @@ const isLoggedIn = (req, res, next) => {
 };
 
 Oauth.get('/', (req, res) => {
-  // console.log(req.headers, 'here');
   res.redirect('/api/oauth/google');
 });
 
+// begins google authentication, passes to server/passport-setup.js
 Oauth.get('/google',
   passport.authenticate('google', { scope: ['profile', 'email'] }));
 
+// after coming back from server/passport-setup.js, redirects if auth went through
 Oauth.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/failed' }),
   (req, res) => {
@@ -29,24 +30,40 @@ Oauth.get('/google/callback',
     res.redirect('/api/oauth/good');
   });
 
+// send failure upon failed authentication
 Oauth.get('/failed', (req, res) => res.send('login failure'));
 
 // on successful authentication, get info from session, place in cookie, and  redirect to main page
 Oauth.get('/good', isLoggedIn, (req, res) => {
-  // TODO: if conditional that checks req.session.passport.user.profile prompt
-  // if false, redirect to "fill in profile" page. if true, redirect to main page
   const { profilePrompt, userName } = req.session.passport.user;
   Genre.findOne({ where: { id: req.session.passport.user.genreId } })
+    // if user already exists:
     .then((genre) => {
       const genreId = genre.dataValues.genreName;
-      res.cookie('testCookie', { loggedIn: true, userName, genreId, profilePrompt }, { maxAge: 600000 }).redirect(`${process.env.REDIRECT}`);
+      // note the 20 in the max age equation corresponds to minutes.
+      // to make a cookie that persists for 30 minutes, change the 20 to 30
+      res.cookie('testCookie', {
+        loggedIn: true,
+        userName,
+        genreId,
+        profilePrompt,
+      }, { maxAge: 1000 * 60 * 20 })
+        .redirect(`${process.env.REDIRECT}`);
     })
+    // if new user:
     .catch(() => {
-      res.cookie('testCookie', { loggedIn: true, userName, genreId: '', profilePrompt }, { maxAge: 600000 }).redirect(`${process.env.REDIRECT}`);
+      res.cookie('testCookie', {
+        loggedIn: true,
+        userName,
+        genreId: '',
+        profilePrompt,
+      }, { maxAge: 1000 * 60 * 20 })
+        .redirect(`${process.env.REDIRECT}`);
     });
   // console.log(profilePrompt, userName, genreId, 'cookieInfo');
 });
 
+// when logging out:
 Oauth.get('/logout', (req, res) => {
   req.session = null;
   req.logout();
