@@ -7,6 +7,7 @@ import ImageLoader from './ImageLoader';
 const Gallery = () => (
   <div>
     <div className="Gallery-Image-Upload">
+      Post your event images here!
       <ImageLoader />
     </div>
   </div>
