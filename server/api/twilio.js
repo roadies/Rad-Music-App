@@ -12,12 +12,14 @@ const client = new twilio(accountSid, autheToken);
 Twilio.post('/text', (req, res) => {
   // Variables passed via query string
   res.send('welcome to twilio');
-  const { recipient, textmessage } = req.body;
+  const {
+    recipient, date, name, venue,
+  } = req.body;
   console.log(req.body);
 
   // send the text
   client.messages.create({
-    body: textmessage,
+    body: `Hello this is your reminder for ${name} on ${date} at ${venue}`,
     from: '+14809330219',
     to: `+1${recipient}`,
   })

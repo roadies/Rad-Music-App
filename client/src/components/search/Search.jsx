@@ -51,12 +51,12 @@ const Search = ({ user, genre }) => {
       Axios.get('/api/shows/band', { params })
         .then(({ data }) => {
           data.forEach((coords) => {
+            console.log(data, 'DATA');
             test.push({
               lat: Number(coords.lat), lng: Number(coords.lng), bandName: coords.bandName, venue: coords.venue, genre: coords.genreId, details: coords.details, date: coords.date,
             });
           });
           setMarkers(test);
-          setMapVenue(test);
         });
     } else if (type === 'venue') {
       Axios.get('/api/shows/venue', { params })
@@ -67,7 +67,6 @@ const Search = ({ user, genre }) => {
             });
           });
           setMarkers(test);
-          setMapVenue(test);
         });
     } else if (type === 'date') {
       Axios.get('/api/shows/date', { params })
@@ -78,7 +77,6 @@ const Search = ({ user, genre }) => {
             });
           });
           setMarkers(test);
-          setMapVenue(test);
         });
     }
   };
@@ -90,12 +88,12 @@ const Search = ({ user, genre }) => {
       <div style={{
         border: 'solid green 1px',
         float: 'left',
-        marginLeft: '500px',
+        // marginLeft: '500px',
         padding: '10px',
       }}
       >
         {/* add in views here with tabs */}
-        <SearchTab getShows={getShows} />
+        <SearchTab getShows={getShows} markers={markers} />
       </div>
       <div className="search-page-map">
         <GoogleMap
