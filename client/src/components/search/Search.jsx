@@ -10,11 +10,9 @@ import {
   InfoWindow,
 } from '@react-google-maps/api';
 import Axios from 'axios';
-import { Form, Col, Button } from 'react-bootstrap';
-import { formatRelative } from 'date-fns';
-import { set } from 'js-cookie';
 import SearchTab from './SearchTab';
 import { SearchInfo, SearchInfoVenue } from './SearchInfo';
+// import SearchMapVenue from './SearchMapVenues';
 import mapStyles from '../Add/styles';
 
 const libraries = ['places'];
@@ -58,6 +56,7 @@ const Search = ({ user, genre }) => {
             });
           });
           setMarkers(test);
+          setMapVenue(test);
         });
     } else if (type === 'venue') {
       Axios.get('/api/shows/venue', { params })
@@ -68,6 +67,7 @@ const Search = ({ user, genre }) => {
             });
           });
           setMarkers(test);
+          setMapVenue(test);
         });
     } else if (type === 'date') {
       Axios.get('/api/shows/date', { params })
@@ -78,6 +78,7 @@ const Search = ({ user, genre }) => {
             });
           });
           setMarkers(test);
+          setMapVenue(test);
         });
     }
   };
@@ -86,53 +87,61 @@ const Search = ({ user, genre }) => {
 
   return (
     <div>
-      <div style={{ border: 'solid green 1px', padding: '10px' }}>
+      <div style={{
+        border: 'solid green 1px',
+        float: 'left',
+        marginLeft: '500px',
+        padding: '10px',
+      }}
+      >
         {/* add in views here with tabs */}
         <SearchTab getShows={getShows} />
       </div>
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={12}
-        center={center}
-        options={options}
+      <div className="search-page-map">
+        <GoogleMap
+          mapContainerStyle={mapContainerStyle}
+          zoom={12}
+          center={center}
+          options={options}
         // onClick={onMapClick}
-        onLoad={onMapLoad}
-      >
+          onLoad={onMapLoad}
+        >
 
-        {markers.map((marker, id) => (
-          <Marker
-            key={id}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            onClick={() => {
-              setSelected(marker);
-            }}
-            icon={{
-              url: 'https://i.imgur.com/2rlRTfY.png',
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(20, 20),
-              scaledSize: new window.google.maps.Size(40, 40),
-            }}
-          />
-        ))}
-        {selected ? (
-          <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
-            onCloseClick={() => {
-              setSelected(null);
-            }}
-          >
-            <div>
-              <h2>
-                {/* how to get these thing by themselves */}
-                <SearchInfo selected={selected} />
-              </h2>
-              <p>
-                <SearchInfoVenue selected={selected} />
-              </p>
-            </div>
-          </InfoWindow>
-        ) : null}
-      </GoogleMap>
+          {markers.map((marker, id) => (
+            <Marker
+              key={id}
+              position={{ lat: marker.lat, lng: marker.lng }}
+              onClick={() => {
+                setSelected(marker);
+              }}
+              icon={{
+                url: 'https://i.imgur.com/h7k1p1I.png',
+                origin: new window.google.maps.Point(0, 0),
+                anchor: new window.google.maps.Point(20, 20),
+                scaledSize: new window.google.maps.Size(40, 40),
+              }}
+            />
+          ))}
+          {selected ? (
+            <InfoWindow
+              position={{ lat: selected.lat, lng: selected.lng }}
+              onCloseClick={() => {
+                setSelected(null);
+              }}
+            >
+              <div>
+                <h2>
+                  {/* how to get these thing by themselves */}
+                  <SearchInfo selected={selected} />
+                </h2>
+                <p>
+                  <SearchInfoVenue selected={selected} />
+                </p>
+              </div>
+            </InfoWindow>
+          ) : null}
+        </GoogleMap>
+      </div>
     </div>
   );
 };

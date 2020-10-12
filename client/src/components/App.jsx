@@ -111,6 +111,7 @@ const App = () => {
             >
               Logout
             </Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Test')}>Test</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
