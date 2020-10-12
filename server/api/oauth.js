@@ -40,25 +40,15 @@ Oauth.get('/good', isLoggedIn, (req, res) => {
     // if user already exists:
     .then((genre) => {
       const genreId = genre.dataValues.genreName;
-      // note the 20 in the max age equation corresponds to minutes.
-      // to make a cookie that persists for 30 minutes, change the 20 to 30
       res.cookie('testCookie', {
-        loggedIn: true,
-        userName,
-        genreId,
-        profilePrompt,
-      }, { maxAge: 1000 * 60 * 20 })
-        .redirect(`${process.env.REDIRECT}`);
+        loggedIn: true, userName, genreId, profilePrompt,
+      }, { maxAge: 600000 }).redirect(`${process.env.REDIRECT}`);
     })
     // if new user:
     .catch(() => {
       res.cookie('testCookie', {
-        loggedIn: true,
-        userName,
-        genreId: '',
-        profilePrompt,
-      }, { maxAge: 1000 * 60 * 20 })
-        .redirect(`${process.env.REDIRECT}`);
+        loggedIn: true, userName, genreId: '', profilePrompt,
+      }, { maxAge: 600000 }).redirect(`${process.env.REDIRECT}`);
     });
   // console.log(profilePrompt, userName, genreId, 'cookieInfo');
 });

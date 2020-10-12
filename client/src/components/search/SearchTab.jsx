@@ -7,9 +7,10 @@ import CalendarTodayIconOutlined from '@material-ui/icons/CalendarTodayOutlined'
 import RoomOutlinedIcon from '@material-ui/icons/RoomOutlined';
 import MusicVideoOutlinedIcon from '@material-ui/icons/MusicVideoOutlined';
 import {
-  Form, Button,
+  Form, Button, ButtonGroup,
 } from 'react-bootstrap';
 import SearchVenueLocation from './SearchVenue';
+import SearchMapVenue from './SearchMapVenue';
 
 const useStyles = makeStyles({
   root: {
@@ -18,12 +19,13 @@ const useStyles = makeStyles({
   },
 });
 
-const SearchTab = ({ getShows }) => {
+const SearchTab = ({ getShows, markers }) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
   const [data, setData] = useState();
   const [field, setField] = useState('');
   const [searchView, setSearchView] = useState('');
+  const [listView, setListView] = useState('');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -34,8 +36,8 @@ const SearchTab = ({ getShows }) => {
       return (
         <div>
           <Form.Group controlId="formDate">
-            <Form.Label>Input Date Below</Form.Label>
             <Form.Control
+              style={{ marginTop: '10px' }}
               type="date"
               onChange={(e) => {
                 setData(e.target.value);
@@ -43,6 +45,8 @@ const SearchTab = ({ getShows }) => {
             />
             <Button
               size="sm"
+              style={{ marginTop: '10px' }}
+              variant="outline-success"
               onClick={() => {
                 getShows(data, field);
                 setSearchView('');
@@ -56,35 +60,53 @@ const SearchTab = ({ getShows }) => {
     }
     if (searchView === 'venue') {
       return (
-        <div>
+        <div style={{ float: 'left' }}>
           <Form.Group>
-            <Form.Label>Input Venue Below</Form.Label>
             <SearchVenueLocation setData={setData} />
-            <Button
-              size="sm"
-              onClick={() => {
-                getShows(data, field);
-                setSearchView('');
-              }}
-            >
-              Search
-            </Button>
+            <ButtonGroup style={{ marginTop: '10px' }}>
+              <Button
+                size="sm"
+                variant="outline-success"
+                onClick={() => {
+                  getShows(data, field);
+                  setSearchView('');
+                }}
+              >
+                Search
+              </Button>
+              <Button
+                size="sm"
+                variant="outline-success"
+                onClick={() => {
+                  getShows(data, field);
+                  setSearchView('');
+                  setListView('list');
+                }}
+              >
+                List View
+              </Button>
+            </ButtonGroup>
           </Form.Group>
         </div>
+
       );
     }
     if (searchView === 'band') {
       return (
         <div>
           <Form.Group>
-            <Form.Label>Input Band Below</Form.Label>
-            <Form.Control onChange={(e) => {
-              setData(e.target.value);
-            }}
+            <Form.Control
+              style={{ marginTop: '10px' }}
+              placeholder="Enter Band Name"
+              onChange={(e) => {
+                setData(e.target.value);
+              }}
             />
             <Button
               size="sm"
               type="submit"
+              style={{ marginTop: '10px' }}
+              variant="outline-success"
               onClick={() => {
                 getShows(data, field);
                 setSearchView('');
@@ -96,6 +118,7 @@ const SearchTab = ({ getShows }) => {
         </div>
       );
     }
+
     return (
       <div style={{ padding: '10px' }}>
         <Form.Text className="text-muted">
@@ -103,6 +126,12 @@ const SearchTab = ({ getShows }) => {
         </Form.Text>
       </div>
     );
+  };
+
+  const mapListView = () => {
+    if (listView === 'list') {
+      return <SearchMapVenue markers={markers} />;
+    }
   };
 
   return (
@@ -139,6 +168,7 @@ const SearchTab = ({ getShows }) => {
               onClick={() => {
                 setSearchView('venue');
                 setField('venue');
+                setListView('');
               }}
             />
           </Tabs>
@@ -146,6 +176,9 @@ const SearchTab = ({ getShows }) => {
       </div>
       <div>
         {renderSearchView()}
+      </div>
+      <div>
+        {mapListView()}
       </div>
     </div>
   );

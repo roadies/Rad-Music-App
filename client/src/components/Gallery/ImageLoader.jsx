@@ -11,7 +11,7 @@ const ImageLoader = () => {
   const [previewSource, setPreviewSource] = useState();
 
   const handleFileInputChange = (e) => {
-    console.log('submitted');
+    // console.log('submitted');
     const file = e.target.files[0];
     previewFile(file);
   };
@@ -31,7 +31,7 @@ const ImageLoader = () => {
   };
 
   const uploadImage = async (base64EncodedImage) => {
-    console.log(base64EncodedImage);
+    // console.log(base64EncodedImage);
     try {
       await fetch('/api/pictures/', {
         method: 'POST',
@@ -45,14 +45,15 @@ const ImageLoader = () => {
 
   return (
     <div>
-      <h1>Upload</h1>
-      <form onSubmit={handleSubmitFile}>
-        <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState} />
-        <button type="submit">
-          Submit
-        </button>
-      </form>
-      {previewSource && <img src={previewSource} alt="pic" style={{ height: '300px' }} />}
+      <div>
+        <form onSubmit={handleSubmitFile}>
+          <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState} />
+          <button type="submit">
+            Submit
+          </button>
+        </form>
+        {previewSource && <img src={previewSource} alt="pic" style={{ height: '300px' }} />}
+      </div>
       <div>
         <GalleryList setPreviewSource={setPreviewSource} />
       </div>

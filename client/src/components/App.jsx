@@ -8,7 +8,7 @@ import {
   BrowserRouter as Router, Switch, Route, Link,
 } from 'react-router-dom';
 import {
-  Container, Row, Col, Nav, Navbar,
+  Container, Row, Col, Nav, Navbar, Tab,
 } from 'react-bootstrap';
 import { useCookies } from 'react-cookie';
 import Map from './Add/TestMap';
@@ -26,15 +26,15 @@ const App = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['testCookie']);
 
   useEffect(() => {
-    console.log('load');
+    // console.log('load');
     if (cookies.testCookie && cookies.testCookie.loggedIn) {
       setUser(cookies.testCookie.userName);
       if (cookies.testCookie.genreId.length > 0) {
-        console.log(genre);
+        // console.log(genre);
         setGenre(cookies.testCookie.genreId);
       }
       if (!cookies.testCookie.profilePrompt) {
-        console.log('false Cookie!');
+        // console.log('false Cookie!');
         setView('Setup');
       }
       setIsLoggedIn(cookies.testCookie.loggedIn);
@@ -84,56 +84,36 @@ const App = () => {
   }
   return (
     <div className="Page-JSX-View-Container">
-      <div
-        as={Container}
-        style={{
-          // border: 'solid red 2px',
-        }}
-      >
-        <Row>
-          <Col xs={10}>
-            {/* This is view */}
-            <div
-              as={Container}
-              style={{
-                // border: 'solid blue 2px',
-                margin: '0 0 auto',
-                height: '100%',
+      <Navbar collapseOnSelect expand="lg" variant="dark" sticky="top" className="main-nav">
+        {view !== 'Setup' && (
+        <Navbar.Brand onClick={() => setView('Home')}>
+          Welcome,
+          {' '}
+          {user}
+          !
+        </Navbar.Brand>
+        )}
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="justify-content-between">
+            <Nav.Link className="main-nav-link" onClick={() => setView('Home')}>Home</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Add')}>Add</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Search')}>Search</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Gallery')}>Gallery</Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                logout();
+                setUser('');
               }}
             >
-              {renderView()}
-            </div>
-          </Col>
-          <Col xs={2}>
-            {/* This is the nav */}
-            <div
-              as={Container}
-              style={{
-                // border: 'solid blue 2px',
-                height: '80vh',
-                backgroundColor: '#313840',
-              }}
-            >
-              <Navbar variant="dark">
-                <Nav defaultActiveKey="/home" className="flex-column">
-                  {view !== 'Setup' && <Nav.Item style={{ color: '#d2d2d2' }}>{user}</Nav.Item>}
-                  <Nav.Link onClick={() => setView('Home')}>Home</Nav.Link>
-                  <Nav.Link onClick={() => setView('Add')}>Add</Nav.Link>
-                  <Nav.Link onClick={() => setView('Search')}>Search</Nav.Link>
-                  <Nav.Link onClick={() => setView('Gallery')}>Gallery</Nav.Link>
-                  <Nav.Link
-                    onClick={() => {
-                      logout();
-                      setUser('');
-                    }}
-                  >
-                    Logout
-                  </Nav.Link>
-                </Nav>
-              </Navbar>
-            </div>
-          </Col>
-        </Row>
+              Logout
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+
+      <div>
+        {renderView()}
       </div>
     </div>
 

@@ -32,12 +32,12 @@ const SearchVenueLocation = ({
         const addressLat = results[0].geometry.location.lat();
         const addressLng = results[0].geometry.location.lng();
         const addressDesc = address;
-        console.log(address, 'address'); // => address components
+        // console.log(address, 'address'); // => address components
         setValue(address);
         setData(address);
         clearSuggestions();
         // console.log('coords', 'lat', addressLat, 'lng', addressLng, 'address', addressDesc);
-        console.log(address);
+        // console.log(address);
       } catch (err) {
         console.log('ERROR');
       }
@@ -46,12 +46,20 @@ const SearchVenueLocation = ({
     >
       <ComboboxInput
         value={value}
+        style={{
+          height: '40px',
+          width: '215px',
+          marginTop: '10px',
+          borderRadius: '3px',
+          border: 'solid 1px #dcdee0',
+        }}
         onChange={(e) => {
           setValue(e.target.value);
           // setData(e.target.value);
         }}
         disabled={!ready}
-        placeholder="enter an address"
+        placeholder="Enter Venue Name"
+        className="combobox-input-search-venue"
       />
       <ComboboxPopover>
         <ComboboxList>

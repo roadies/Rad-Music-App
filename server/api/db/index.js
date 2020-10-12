@@ -2,7 +2,6 @@ const Sequelize = require('sequelize');
 // const { now } = require('sequelize/types/lib/utils');
 const { SEQUEL_PASS } = require('../config');
 
-// creates database. if dev environment, no password
 const db = process.env.ENVIRON === 'dev' ? new Sequelize('radma', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
@@ -14,7 +13,6 @@ const db = process.env.ENVIRON === 'dev' ? new Sequelize('radma', 'root', '', {
   logging: false,
 });
 
-// define show table
 const Show = db.define('shows', {
   id: {
     type: Sequelize.INTEGER,
@@ -28,7 +26,6 @@ const Show = db.define('shows', {
   details: Sequelize.STRING,
 });
 
-// define genre table
 const Genre = db.define('genres', {
   id: {
     type: Sequelize.INTEGER,
@@ -36,19 +33,6 @@ const Genre = db.define('genres', {
     primaryKey: true,
   },
   genreName: Sequelize.STRING,
-});
-
-// populate genres table
-const genres = ['Alternative', 'Blues', 'Classical', 'Easy Listening', 'Electronic', 'Hip-Hop/Rap', 'K-Pop', 'Pop', 'Rock', 'R&B/Soul'];
-genres.forEach((genre) => {
-  Genre.findOne({ where: { genreName: genre } })
-    .then(async (result) => {
-      if (!result) {
-        await Genre.create({
-          genreName: genre,
-        });
-      }
-    });
 });
 
 const Band = db.define('bands', {
@@ -61,7 +45,6 @@ const Band = db.define('bands', {
   genreId: Sequelize.INTEGER,
 });
 
-// define user table
 const User = db.define('users', {
   id: {
     type: Sequelize.INTEGER,
@@ -76,7 +59,6 @@ const User = db.define('users', {
   profilePrompt: Sequelize.BOOLEAN,
 });
 
-// define shows/bands join table
 const ShowsBands = db.define('shows_bands', {
   id: {
     type: Sequelize.INTEGER,
@@ -87,33 +69,30 @@ const ShowsBands = db.define('shows_bands', {
   showId: Sequelize.INTEGER,
 });
 
-// links band and genre table by adding foreign key to band table
+// adds genreId to band
 Band.belongsTo(Genre);
 
-// links user and genre table by adding foreign key to user table
+// add genreID to user
 User.belongsTo(Genre);
 
-// define shows/bands join table
+// create shows bands join table
 Band.belongsToMany(Show, { through: ShowsBands });
 Show.belongsToMany(Band, { through: ShowsBands });
 
-// create tables if they don't exist, do nothing if they do exist
 Show.sync();
 Genre.sync();
 User.sync();
 Band.sync();
 ShowsBands.sync();
 
-// connect to database
 db.authenticate()
   .then(() => {
     console.log('connected to database');
   })
   .catch((error) => {
-    console.log(error, 'not connected to database');
+    console.error(error, 'not connected to database');
   });
 
-// function that authenticates w/ google id
 const authFunc = (profile) => User.findOne({
   where: {
     googleId: profile.id,

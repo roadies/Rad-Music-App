@@ -3,10 +3,10 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 
-export const SearchInfo = ({ selected }) => {
+export const SearchInfo = ({ selected, genre }) => {
   const empty = {};
 
-  console.log(selected);
+  // console.log(selected);
   return (
     <div>
       {selected.bandName}
@@ -29,7 +29,13 @@ export const SearchInfoVenue = ({ selected }) => (
         {selected.venue}
       </li>
       <li>
-        <b>Date:</b>
+        <b>Genre:</b>
+        {' '}
+        <br />
+        {selected.genreId}
+      </li>
+      <li>
+        <b>Details:</b>
         {' '}
         <br />
         {selected.details}

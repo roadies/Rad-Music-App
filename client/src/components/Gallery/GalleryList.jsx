@@ -9,7 +9,7 @@ const GalleryList = ({ setPreviewSource }) => {
     try {
       const res = await fetch('/api/pictures/');
       const data = await res.json();
-      console.log('IMAGE ID ', data);
+      // console.log('IMAGE ID ', data);
       setImageIds(data);
     } catch (error) {
       console.error(error);
@@ -22,17 +22,20 @@ const GalleryList = ({ setPreviewSource }) => {
 
   return (
     <div>
-      <Button onClick={() => {
-        loadImages();
-        setTimeout(() => {
-          setPreviewSource();
-        }, 2);
-      }}
-      >
-        Refresh Gallery
-      </Button>
-
-      <div>
+      <div style={{ padding: '10px', marginTop: '10px' }}>
+        <Button
+          variant="outline-success"
+          onClick={() => {
+            loadImages();
+            setTimeout(() => {
+              setPreviewSource();
+            }, 2);
+          }}
+        >
+          Refresh Gallery
+        </Button>
+      </div>
+      <div style={{ padding: '10px' }}>
         {imageIds && imageIds.map((imageId, id) => (
           <Image
             key={id}
