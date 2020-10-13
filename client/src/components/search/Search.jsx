@@ -32,6 +32,8 @@ const options = {
 
 const Search = () => {
   const [markers, setMarkers] = useState([]);
+
+  console.log(markers);
   const [selected, setSelected] = useState(null);
 
   const { isLoaded, loadError } = useLoadScript({
