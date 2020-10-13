@@ -9,7 +9,7 @@ const db = process.env.ENVIRON === 'dev' ? new Sequelize('radma', 'root', '', {
   logging: false,
 }) : new Sequelize('radma', 'root', '', {
   host: 'localhost',
-  password: SEQUEL_PASS,
+  password: '',
   dialect: 'mysql',
   logging: false,
 });

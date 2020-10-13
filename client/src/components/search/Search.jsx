@@ -39,6 +39,10 @@ const Search = () => {
     libraries,
   });
 
+  const addEvent = () => {
+    console.log(selected, '<===== Here');
+  };
+
   const mapReference = useRef();
   const onMapLoad = useCallback((map) => {
     mapReference.current = map;
@@ -127,7 +131,7 @@ const Search = () => {
           zoom={12}
           center={center}
           options={options}
-        // onClick={onMapClick}
+          // onClick={onMapClick}
           onLoad={onMapLoad}
         >
 
@@ -152,6 +156,7 @@ const Search = () => {
               onCloseClick={() => {
                 setSelected(null);
               }}
+
             >
               <div>
                 <h2>
@@ -161,6 +166,7 @@ const Search = () => {
                 <p>
                   <SearchInfoVenue selected={selected} />
                 </p>
+                <a onClick={addEvent} href='#'>Save to Calendar</a>
               </div>
             </InfoWindow>
           ) : null}
