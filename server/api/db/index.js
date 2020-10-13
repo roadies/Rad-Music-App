@@ -1,3 +1,7 @@
+// DON'T USE THIS MAYBE?
+// IS THIS THE SAME AS SERVER/DB/INDEX.JS?
+// DON'T USE THIS FILE DON'T EDIT IT 
+
 const Sequelize = require('sequelize');
 // const { now } = require('sequelize/types/lib/utils');
 const { SEQUEL_PASS } = require('../config');
