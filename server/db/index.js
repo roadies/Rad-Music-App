@@ -26,6 +26,7 @@ const Show = db.define('shows', {
   lat: Sequelize.STRING,
   lng: Sequelize.STRING,
   details: Sequelize.STRING,
+  userId: Sequelize.INTEGER,
 });
 
 // define genre table
@@ -36,10 +37,26 @@ const Genre = db.define('genres', {
     primaryKey: true,
   },
   genreName: Sequelize.STRING,
+  userId: Sequelize.INTEGER,
 });
 
 // populate genres table
-const genres = ['Alternative', 'Blues', 'Classical', 'Easy Listening', 'Electronic', 'Hip-Hop/Rap', 'K-Pop', 'Pop', 'Rock', 'R&B/Soul'];
+const genres = [
+  'alternative',
+  'blues',
+  'classical',
+  'chill',
+  'country',
+  'electronic',
+  'hip-hop',
+  'jazz',
+  'k-pop',
+  'metal',
+  'pop',
+  'punk',
+  'rock',
+  'r-n-b',
+  'world-music'];
 genres.forEach((genre) => {
   Genre.findOne({ where: { genreName: genre } })
     .then(async (result) => {
@@ -70,11 +87,27 @@ const User = db.define('users', {
   },
   userName: Sequelize.STRING,
   pictures: Sequelize.STRING,
-  profilePic: Sequelize.STRING,
+  // profilePic: Sequelize.STRING,
   googleId: Sequelize.STRING,
-  genreId: Sequelize.INTEGER,
-  profilePrompt: Sequelize.BOOLEAN,
+  // genreId: Sequelize.INTEGER,
+  // profilePrompt: Sequelize.BOOLEAN,
 });
+
+const Event = db.define('events', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  venue: Sequelize.STRING,
+  date: Sequelize.STRING,
+  lat: Sequelize.STRING,
+  lng: Sequelize.STRING,
+  details: Sequelize.STRING,
+  name: Sequelize.STRING,
+  userId: Sequelize.INTEGER,
+
+})
 
 // define shows/bands join table
 const ShowsBands = db.define('shows_bands', {
@@ -90,8 +123,20 @@ const ShowsBands = db.define('shows_bands', {
 // links band and genre table by adding foreign key to band table
 Band.belongsTo(Genre);
 
+// ONE USER HAS MANY GENRES
+Genre.belongsTo(User, {
+  foreignKey: { name: 'userId', allowNull: true},
+  as: '_id',
+});
+
+// ONE USER HAS MANY EVENTS SAVED TO THEIR PROFILE
+Event.belongsTo(User, {
+  foreignKey: { name: 'userId', allowNull: true},
+  as: '_id',
+})
+
 // links user and genre table by adding foreign key to user table
-User.belongsTo(Genre);
+// User.belongsTo(Genre);
 
 // define shows/bands join table
 Band.belongsToMany(Show, { through: ShowsBands });
@@ -102,6 +147,7 @@ Show.sync();
 Genre.sync();
 User.sync();
 Band.sync();
+Event.sync();
 ShowsBands.sync();
 
 // connect to database
@@ -123,6 +169,7 @@ const authFunc = (profile) => User.findOne({
 module.exports = {
   db,
   Show,
+  Event,
   Genre,
   User,
   ShowsBands,
