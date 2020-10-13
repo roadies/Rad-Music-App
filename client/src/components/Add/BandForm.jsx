@@ -87,7 +87,7 @@ const InputForm = ({
                     setSetupGenre('alternative');
                   }}
                 >
-                  Alternative
+                  alternative
                 </Dropdown.Item>
                 <Dropdown.Item
                   value="blues"
@@ -96,27 +96,37 @@ const InputForm = ({
                     setSetupGenre('blues');
                   }}
                 >
-                  Blues
+                  blues
 
                 </Dropdown.Item>
                 <Dropdown.Item
                   value="classical"
                   onSelect={() => {
                     setGenre('classical');
-                    setSetupGenre('classsical');
+                    setSetupGenre('classical');
                   }}
                 >
-                  Classical
+                  classical
 
                 </Dropdown.Item>
                 <Dropdown.Item
-                  value="easy listening"
+                  value="chill"
                   onSelect={() => {
-                    setGenre('easy listening');
-                    setSetupGenre('easy listening');
+                    setGenre('chill');
+                    setSetupGenre('chill');
                   }}
                 >
-                  Easy Listening
+                  chill
+
+                </Dropdown.Item>
+                <Dropdown.Item
+                  value="country"
+                  onSelect={() => {
+                    setGenre('country');
+                    setSetupGenre('country');
+                  }}
+                >
+                  country
 
                 </Dropdown.Item>
                 <Dropdown.Item
@@ -126,61 +136,99 @@ const InputForm = ({
                     setSetupGenre('electronic');
                   }}
                 >
-                  Electronic
+                  electronic
 
                 </Dropdown.Item>
                 <Dropdown.Item
-                  value="hip-hop/rap"
+                  value="hip-hop"
                   onSelect={() => {
-                    setGenre('Hip-Hop/Rap');
-                    setSetupGenre('Hip-Hop/Rap');
+                    setGenre('hip-hop');
+                    setSetupGenre('hip-hop');
                   }}
                 >
-                  Hip-Hop/Rap
+                  hip-hop
+
+                </Dropdown.Item>
+                <Dropdown.Item
+                  value="jazz"
+                  onSelect={() => {
+                    setGenre('jazz');
+                    setSetupGenre('jazz');
+                  }}
+                >
+                  jazz
 
                 </Dropdown.Item>
                 <Dropdown.Item
                   value="k-pop"
                   onSelect={() => {
-                    setGenre('K-Pop');
-                    setSetupGenre('K-Pop');
+                    setGenre('k-pop');
+                    setSetupGenre('k-pop');
                   }}
                 >
-                  K-Pop
+                  k-pop
+
+                </Dropdown.Item>
+                <Dropdown.Item
+                  value="metal"
+                  onSelect={() => {
+                    setGenre('metal');
+                    setSetupGenre('metal');
+                  }}
+                >
+                  metal
 
                 </Dropdown.Item>
                 <Dropdown.Item
                   value="pop"
                   onSelect={() => {
-                    setGenre('Pop');
-                    setSetupGenre('Pop');
+                    setGenre('pop');
+                    setSetupGenre('pop');
                   }}
                 >
-                  Pop
+                  pop
+
+                </Dropdown.Item>
+                <Dropdown.Item
+                  value="punk"
+                  onSelect={() => {
+                    setGenre('punk');
+                    setSetupGenre('punk');
+                  }}
+                >
+                  punk
 
                 </Dropdown.Item>
                 <Dropdown.Item
                   value="rock"
                   onSelect={() => {
-                    setGenre('Rock');
-                    setSetupGenre('Rock');
+                    setGenre('rock');
+                    setSetupGenre('rock');
                   }}
                 >
-                  Rock
+                  rock
 
                 </Dropdown.Item>
                 <Dropdown.Item
-                  value="r&b/soul"
+                  value="r-n-b"
                   onSelect={() => {
-                    setGenre('R&B/Soul');
-                    setSetupGenre('R&B/Soul');
+                    setGenre('r-n-b');
+                    setSetupGenre('r-n-b');
                   }}
                 >
-                  R&B/Soul
+                  r&b
 
                 </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item href="https://i.imgur.com/7JQkwUo.png" target="_blank">Click Here to check where you fall under</Dropdown.Item>
+                <Dropdown.Item
+                  value="world-music"
+                  onSelect={() => {
+                    setGenre('world-music');
+                    setSetupGenre('world-music');
+                  }}
+                >
+                  world music
+
+                </Dropdown.Item>
               </DropdownButton>
             </InputGroup>
             <Form.Group>

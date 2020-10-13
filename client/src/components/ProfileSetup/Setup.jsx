@@ -48,10 +48,10 @@ const SetupProfile = ({
             <Form>
               <Form.Group>
                 <div>
-                  <FormLabel column="lg">Choose your username!</FormLabel>
+                  <FormLabel column="lg">sign up</FormLabel>
                   <InputGroup>
                     <FormControl
-                      placeholder="Enter here!"
+                      placeholder="username"
                       aria-label="Recipient's username"
                       aria-describedby="basic-addon2"
                       onChange={(e) => setUserName(e.target.value)}
@@ -64,18 +64,22 @@ const SetupProfile = ({
                       id="input-group-dropdown-2"
                       onSelect={(e) => setSetupGenre(e)}
                     >
-                      <Dropdown.Item eventKey="Alternative" href="#">Alternative</Dropdown.Item>
-                      <Dropdown.Item eventKey="Blues" href="#">Blues</Dropdown.Item>
-                      <Dropdown.Item eventKey="Classical" href="#">Classical</Dropdown.Item>
-                      <Dropdown.Item eventKey="Easy Listening" href="#">Easy Listening</Dropdown.Item>
-                      <Dropdown.Item eventKey="Electronic" href="#">Electronic</Dropdown.Item>
-                      <Dropdown.Item eventKey="Hip-Hop/Rap" href="#">Hip-Hop/Rap</Dropdown.Item>
-                      <Dropdown.Item eventKey="K-Pop" href="#">K-Pop</Dropdown.Item>
-                      <Dropdown.Item eventKey="Pop" href="#">Pop</Dropdown.Item>
-                      <Dropdown.Item eventKey="Rock" href="#">Rock</Dropdown.Item>
-                      <Dropdown.Item eventKey="R&B/Soul" href="#">R&B/Soul</Dropdown.Item>
+                      <Dropdown.Item eventKey="alternative" href="#">alternative</Dropdown.Item>
+                      <Dropdown.Item eventKey="blues" href="#">blues</Dropdown.Item>
+                      <Dropdown.Item eventKey="classical" href="#">classical</Dropdown.Item>
+                      <Dropdown.Item eventKey="chill" href="#">chill</Dropdown.Item>
+                      <Dropdown.Item eventKey="country" href="#">country</Dropdown.Item>
+                      <Dropdown.Item eventKey="electronic" href="#">electronic</Dropdown.Item>
+                      <Dropdown.Item eventKey="hip-hop" href="#">hip-hop</Dropdown.Item>
+                      <Dropdown.Item eventKey="jazz" href="#">jazz</Dropdown.Item>
+                      <Dropdown.Item eventKey="k-Pop" href="#">k-Pop</Dropdown.Item>
+                      <Dropdown.Item eventKey="metal" href="#">metal</Dropdown.Item>
+                      <Dropdown.Item eventKey="pop" href="#">pop</Dropdown.Item>
+                      <Dropdown.Item eventKey="punk" href="#">punk</Dropdown.Item>
+                      <Dropdown.Item eventKey="rock" href="#">rock</Dropdown.Item>
+                      <Dropdown.Item eventKey="r-n-b" href="#">r&b</Dropdown.Item>
+                      <Dropdown.Item eventKey="world-music" href="#">world music</Dropdown.Item>
                       <Dropdown.Divider />
-                      <Dropdown.Item href="https://i.imgur.com/7JQkwUo.png" target="_blank">Click Here to check where you fall under</Dropdown.Item>
                     </DropdownButton>
                   </InputGroup>
                 </div>
