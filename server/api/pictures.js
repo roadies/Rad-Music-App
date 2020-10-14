@@ -21,7 +21,6 @@ Pictures.post('/', async (req, res) => {
       .upload(fileStr, {
         upload_preset: 'radma',
       });
-    // console.log('PICTURE UPLOAD OBJECT', uploadedRes);
     res.json({ msg: 'UPLOADED' });
   } catch (error) {
     console.error(error);

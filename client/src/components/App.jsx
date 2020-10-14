@@ -11,6 +11,7 @@ import {
   Container, Row, Col, Nav, Navbar, Tab,
 } from 'react-bootstrap';
 import { useCookies } from 'react-cookie';
+import Events from './Events';
 import Map from './Add/TestMap';
 import Gallery from './Gallery/Gallery';
 import Landing from './Landing/Landing';
@@ -24,12 +25,14 @@ const App = () => {
   const [view, setView] = useState('Home');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState('');
+  const [userInfo, setUserInfo] = useState({});
   const [genre, setGenre] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(['testCookie']);
 
   useEffect(() => {
     if (cookies.testCookie && cookies.testCookie.loggedIn) {
       setUser(cookies.testCookie.userName);
+      setUserInfo(cookies.testCookie);
       if (cookies.testCookie.genreId.length > 0) {
         setGenre(cookies.testCookie.genreId);
       }
@@ -55,9 +58,11 @@ const App = () => {
     } if (view === 'Add') {
       return <Map />;
     } if (view === 'Search') {
-      return <Search />;
+      return <Search userInfo={userInfo} />;
     } if (view === 'Gallery') {
       return <Gallery />;
+    } if (view === 'Events') {
+      return <Events user={user} userInfo={userInfo} />;
     } if (view === 'Map') {
       return <Map />;
     } if (view === 'Setup') {
@@ -87,12 +92,12 @@ const App = () => {
     <div className="Page-JSX-View-Container">
       <Navbar collapseOnSelect expand="lg" variant="dark" sticky="top" className="main-nav">
         {view !== 'Setup' && (
-        <Navbar.Brand onClick={() => setView('Home')}>
-          Welcome,
-          {' '}
-          {user}
-          !
-        </Navbar.Brand>
+          <Navbar.Brand onClick={() => setView('Home')}>
+            Welcome,
+            {' '}
+            {user}
+            !
+          </Navbar.Brand>
         )}
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -100,6 +105,7 @@ const App = () => {
             <Nav.Link className="main-nav-link" onClick={() => setView('Home')}>Home</Nav.Link>
             <Nav.Link className="main-nav-link" onClick={() => setView('Add')}>Add</Nav.Link>
             <Nav.Link className="main-nav-link" onClick={() => setView('Search')}>Search</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Events')}>Events</Nav.Link>
             <Nav.Link className="main-nav-link" onClick={() => setView('Gallery')}>Gallery</Nav.Link>
             <Nav.Link className="main-nav-link" onClick={() => setView('Discover')}>Discover</Nav.Link>
             <Nav.Link

@@ -35,22 +35,21 @@ Oauth.get('/failed', (req, res) => res.send('login failure'));
 
 // on successful authentication, get info from session, place in cookie, and  redirect to main page
 Oauth.get('/good', isLoggedIn, (req, res) => {
-  const { profilePrompt, userName } = req.session.passport.user;
+  const { profilePrompt, userName, id } = req.session.passport.user;
   Genre.findOne({ where: { id: req.session.passport.user.genreId } })
     // if user already exists:
     .then((genre) => {
       const genreId = genre.dataValues.genreName;
       res.cookie('testCookie', {
-        loggedIn: true, userName, genreId, profilePrompt,
+        loggedIn: true, userName, genreId, profilePrompt, id,
       }, { maxAge: 600000 }).redirect(`${process.env.REDIRECT}`);
     })
     // if new user:
     .catch(() => {
       res.cookie('testCookie', {
-        loggedIn: true, userName, genreId: '', profilePrompt,
+        loggedIn: true, userName, genreId: '', profilePrompt, id,
       }, { maxAge: 600000 }).redirect(`${process.env.REDIRECT}`);
     });
-  // console.log(profilePrompt, userName, genreId, 'cookieInfo');
 });
 
 // when logging out:

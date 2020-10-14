@@ -103,11 +103,12 @@ const Event = db.define('events', {
   date: Sequelize.STRING,
   lat: Sequelize.STRING,
   lng: Sequelize.STRING,
+  genre: Sequelize.STRING,
   details: Sequelize.STRING,
   name: Sequelize.STRING,
   userId: Sequelize.INTEGER,
 
-})
+});
 
 // define shows/bands join table
 const ShowsBands = db.define('shows_bands', {
@@ -125,13 +126,13 @@ Band.belongsTo(Genre);
 
 // ONE USER HAS MANY GENRES
 Genre.belongsTo(User, {
-  foreignKey: { name: 'userId', allowNull: true},
+  foreignKey: { name: 'userId', allowNull: true },
   as: '_id',
 });
 
 // ONE USER HAS MANY EVENTS SAVED TO THEIR PROFILE
 Event.belongsTo(User, {
-  foreignKey: { name: 'userId', allowNull: true},
+  foreignKey: { name: 'userId', allowNull: true },
   as: '_id',
 })
 

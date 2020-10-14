@@ -1,0 +1,6 @@
+.search_save-calendar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  /* justify-content: flex-start; */
+}
