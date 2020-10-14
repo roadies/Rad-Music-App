@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {} from 'react-bootstrap';
-import lsListItem from './lsListItem.jsx';
+import LsListItem from './lsListItem.jsx';
 const axios = require('axios');
 
 const LsList = () => {
@@ -12,8 +12,9 @@ const LsList = () => {
             .then(streams => {
                 console.log(streams.data.live, 'All live streams data');
                 setStreamObjs(streams.data.live)
-                setLivestreams(Object.keys(streams.data.live));
-                console.log(livestreams, 'Live stream names')
+                let names = Object.keys(streams.data.live)
+                setLivestreams(names);
+                console.log(names, 'Live stream names')
             })
     }, []);
     if (!livestreams) {
@@ -25,7 +26,9 @@ const LsList = () => {
     } else {
         return (
             <div>
-                {livestreams}
+                {livestreams.map((property, index) => {
+                    return <LsListItem stream={streamObjs[property]} key={index} />
+                })}
             </div>
         )
     }

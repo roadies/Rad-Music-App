@@ -18,10 +18,10 @@ import Landing from './Landing/Landing';
 import SetupProfile from './ProfileSetup/Setup';
 import Search from './search/Search';
 import Splash from './splash/Splash';
-import lslist from './livestream/lsList';
+// import lslist from './livestream/lsList.jsx';
 
 import Discover from './Discover/Discover';
-import LsList from './livestream/lsList';
+import LsList from './livestream/lsList.jsx';
 
 const App = () => {
   const [view, setView] = useState('Home');

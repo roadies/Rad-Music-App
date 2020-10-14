@@ -77,10 +77,7 @@
     "js-cookie": "^2.2.1",
     "mysql2": "^2.2.5",
     "node-media-server": "^2.2.4",
-<<<<<<< HEAD
     "nodemon": "^2.0.5",
-=======
->>>>>>> 1e8e3a4b0d6103469be9770c5aa758465c1363cd
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "popper.js": "^1.16.1",

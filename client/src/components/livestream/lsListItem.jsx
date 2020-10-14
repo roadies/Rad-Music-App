@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {} from 'react-bootstrap';
 
-const lsListItem = () => {
-    const [livestreams, setLivestreams] = useState();
+const LsListItem = (props) => {
+    const { stream } = props;
+    const [livestreamObj, setLivestreamObj] = useState();
 
-    const getLiveStreams = async () => {
-        const streams =  await fetch('./api/livestreams')
-        setLivestreams(streams);
-        console.log(streams);
-    };
+
+    useEffect( () => {
+        console.log(props);
+    }, [props.stream]);
     // if (!livestreams) {
     return (
         <div>
-            <H1>...Loading livestreams</H1>
+            <h1>{stream.publisher.stream}</h1>
         </div>
 
     );
 
 };
 
-export default lsListItem;
+export default LsListItem;
