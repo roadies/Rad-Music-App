@@ -18,8 +18,10 @@ import Landing from './Landing/Landing';
 import SetupProfile from './ProfileSetup/Setup';
 import Search from './search/Search';
 import Splash from './splash/Splash';
+import lslist from './livestream/lsList';
 
 import Discover from './Discover/Discover';
+import LsList from './livestream/lsList';
 
 const App = () => {
   const [view, setView] = useState('Home');
@@ -69,6 +71,8 @@ const App = () => {
       return <SetupProfile setView={setView} setUser={setUser} user={user} setGenre={setGenre} />;
     } if (view === 'Discover') {
       return <Discover genre={genre} />;
+    } if (view === 'Livestreams') {
+      return <LsList />
     }
     return <Splash />;
   };
@@ -108,6 +112,7 @@ const App = () => {
             <Nav.Link className="main-nav-link" onClick={() => setView('Events')}>Events</Nav.Link>
             <Nav.Link className="main-nav-link" onClick={() => setView('Gallery')}>Gallery</Nav.Link>
             <Nav.Link className="main-nav-link" onClick={() => setView('Discover')}>Discover</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Livestreams')}>Livestreams</Nav.Link>
             <Nav.Link
               onClick={() => {
                 logout();
