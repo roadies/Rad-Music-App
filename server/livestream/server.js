@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 require('dotenv').config();
 const NodeMediaServer = require('node-media-server');
 
 const { LsAdminName, LsAdminPass } = process.env;
 
+=======
+const NodeMediaServer = require('node-media-server');
+
+>>>>>>> 1e8e3a4b0d6103469be9770c5aa758465c1363cd
 const config = {
   rtmp: {
     port: 1935,
@@ -16,6 +21,21 @@ const config = {
     mediaroot: './media',
     allow_origin: '*'
   },
+<<<<<<< HEAD
+=======
+  trans: {
+    ffmpeg: '/usr/local/bin/ffmpeg',
+    tasks: [
+      {
+        app: 'live',
+        hls: true,
+        hlsFlags: '[hls_time=2:hls_list_size=3:hls_flags=delete_segments]',
+        dash: true,
+        dashFlags: '[f=dash:window_size=3:extra_window_size=5]'
+      }
+    ]
+  }
+>>>>>>> 1e8e3a4b0d6103469be9770c5aa758465c1363cd
 };
 
 var nms = new NodeMediaServer(config)
