@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" ",
     "dev": "webpack --mode development --watch",
     "build": "webpack --mode production --config webpack.config.js",
-    "lint": "eslint --fix"
+    "lint": "eslint --fix",
+    "stream": "node server/livestream/server.js"
   },
   "husky": {
     "hooks": {
@@ -73,6 +74,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "flv.js": "^1.5.0",
     "jquery": "^3.5.1",
     "js-cookie": "^2.2.1",
     "mysql2": "^2.2.5",
