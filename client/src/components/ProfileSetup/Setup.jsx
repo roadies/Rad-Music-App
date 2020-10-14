@@ -48,10 +48,10 @@ const SetupProfile = ({
             <Form>
               <Form.Group>
                 <div>
-                  <FormLabel column="lg">sign up</FormLabel>
+                  <FormLabel column="lg">Choose your username!</FormLabel>
                   <InputGroup>
                     <FormControl
-                      placeholder="username"
+                      placeholder="Enter here!"
                       aria-label="Recipient's username"
                       aria-describedby="basic-addon2"
                       onChange={(e) => setUserName(e.target.value)}
