@@ -14,6 +14,7 @@ import SearchTab from './SearchTab';
 import { SearchInfo, SearchInfoVenue } from './SearchInfo';
 // import SearchMapVenue from './SearchMapVenues';
 import mapStyles from '../Add/styles';
+import './Search.css';
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -30,11 +31,10 @@ const options = {
   zoomControl: true,
 };
 
-const Search = () => {
+const Search = ({ userInfo }) => {
   const [markers, setMarkers] = useState([]);
-
-  console.log(markers);
   const [selected, setSelected] = useState(null);
+  const [saveButton, setSaveButton] = useState(false);
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -42,7 +42,23 @@ const Search = () => {
   });
 
   const addEvent = () => {
-    console.log(selected, '<===== Here');
+    Axios.post(`api/profile/events/${userInfo.id}`, {
+      name: selected.bandName,
+      date: selected.date,
+      details: selected.details,
+      genre: selected.genre,
+      lat: selected.lat,
+      lng: selected.lng,
+      venue: selected.venue,
+    })
+      .then((data) => console.info(data))
+      .catch((err) => console.error(err));
+
+    setSaveButton(true);
+
+    setTimeout(() => {
+      setSaveButton(false);
+    }, 1300);
   };
 
   const mapReference = useRef();
@@ -168,7 +184,11 @@ const Search = () => {
                 <p>
                   <SearchInfoVenue selected={selected} />
                 </p>
-                <a onClick={addEvent} href='#'>Save to Calendar</a>
+                <div class="search_save-calendar">
+                  <a onClick={addEvent} href="#">Save to Calendar</a>
+                  {saveButton ? <p><i>Saved</i></p> : ''}
+                </div>
+
               </div>
             </InfoWindow>
           ) : null}

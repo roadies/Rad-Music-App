@@ -11,7 +11,7 @@ import {
   Container, Row, Col, Nav, Navbar, Tab,
 } from 'react-bootstrap';
 import { useCookies } from 'react-cookie';
-import Profile from './Profile';
+import Events from './Events';
 import Map from './Add/TestMap';
 import Gallery from './Gallery/Gallery';
 import Landing from './Landing/Landing';
@@ -24,9 +24,6 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState('');
   const [userInfo, setUserInfo] = useState({});
-
-  console.log(userInfo, '<===== userInfo');
-
   const [genre, setGenre] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(['testCookie']);
 
@@ -59,11 +56,11 @@ const App = () => {
     } if (view === 'Add') {
       return <Map />;
     } if (view === 'Search') {
-      return <Search />;
+      return <Search userInfo={userInfo} />;
     } if (view === 'Gallery') {
       return <Gallery />;
-    } if (view === 'Profile') {
-      return <Profile user={userInfo} />;
+    } if (view === 'Events') {
+      return <Events user={user} userInfo={userInfo} />;
     } if (view === 'Map') {
       return <Map />;
     } if (view === 'Setup') {
@@ -104,7 +101,7 @@ const App = () => {
             <Nav.Link className="main-nav-link" onClick={() => setView('Home')}>Home</Nav.Link>
             <Nav.Link className="main-nav-link" onClick={() => setView('Add')}>Add</Nav.Link>
             <Nav.Link className="main-nav-link" onClick={() => setView('Search')}>Search</Nav.Link>
-            <Nav.Link className="main-nav-link" onClick={() => setView('Profile')}>Profile</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Events')}>Events</Nav.Link>
             <Nav.Link className="main-nav-link" onClick={() => setView('Gallery')}>Gallery</Nav.Link>
             <Nav.Link
               onClick={() => {

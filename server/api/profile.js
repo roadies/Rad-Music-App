@@ -1,7 +1,33 @@
 const { Router } = require('express');
-const { User, Genre } = require('../db/index');
+const { User, Genre, Event } = require('../db/index');
 
 const Profile = Router();
+
+Profile.get('/events', (req, res) => {
+  Event.findAll().then((data) => res.send(data)).catch((err) => console.error(err));
+});
+
+Profile.get('/events/:userId', (req, res) => {
+  const { userId } = req.params;
+
+  Event.findAll({ where: { userId } })
+    .then((data) => res.send(data))
+    .catch((err) => console.error(err));
+});
+
+Profile.post('/events/:userId', (req, res) => {
+  const { userId } = req.params;
+
+  const {
+    venue, date, lat, lng, details, genre, name,
+  } = req.body;
+
+  Event.create({
+    venue, date, lat, lng, details, genre, userId, name,
+  })
+    .then((data) => console.info(data))
+    .catch((err) => console.error(err));
+});
 
 // handles requests from new user  creation page and creates new user
 Profile.post('/create', (req, res) => {
@@ -20,7 +46,7 @@ Profile.post('/create', (req, res) => {
               profilePrompt: true,
               genreId: result.dataValues.id,
             },
-            { where: { userName: user } });
+              { where: { userName: user } });
           })
           .then(() => {
             res.status(201).send();

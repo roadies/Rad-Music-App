@@ -245,7 +245,7 @@ Shows.get('/genre', async (req, res) => {
               }
             });
         }
-      // throw error if no matches are found
+        // throw error if no matches are found
       } else {
         throw band;
       }
@@ -334,9 +334,7 @@ Shows.post('/', async (req, res) => {
           bandId,
           showId,
         });
-        // console.log('show created');
       } else {
-        // console.log('show already exists');
         res.status(409).send('ALREADY IN DATABASE');
       }
     });
