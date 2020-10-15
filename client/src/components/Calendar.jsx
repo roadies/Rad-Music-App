@@ -9,8 +9,6 @@ import './Calendar.css';
 function Calendar({ events, setEvents, userInfo }) {
   const [selected, setSelected] = useState({});
 
-  console.log(selected, '<===== selected');
-
   const deleteEvent = () => axios.delete(`/api/profile/event/${selected.id}`).then(() => axios.get(`/api/profile/events/${userInfo.id}`)
     .then(({ data }) => {
       setEvents(data);

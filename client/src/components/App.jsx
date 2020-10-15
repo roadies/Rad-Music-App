@@ -31,8 +31,6 @@ const App = () => {
   const [genre, setGenre] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(['testCookie']);
 
-  console.log(userInfo);
-
   useEffect(() => {
     if (cookies.testCookie && cookies.testCookie.loggedIn) {
       setUser(cookies.testCookie.userName);

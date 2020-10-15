@@ -6,8 +6,6 @@ import './Events.css';
 function Events({ user, userInfo }) {
   const [events, setEvents] = useState([]);
 
-  console.log(events);
-
   useEffect(() => {
     axios.get(`/api/profile/events/${userInfo.id}`)
       .then(({ data }) => {
