@@ -9,11 +9,11 @@ const LsListItem = (props) => {
 
     const handleClick = () => {
         isClicked ? toggleClicked(false) : toggleClicked(true);
-        console.log(isClicked, 'Clicked!');
+        // console.log(isClicked, 'Clicked!');
     }
 
     useEffect( () => {
-        console.log(props);
+        // console.log(props);
     }, [props.stream]);
     // if (!livestreams) {
     

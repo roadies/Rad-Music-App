@@ -10,11 +10,11 @@ const LsList = () => {
     useEffect( () => {
         axios.get('api/livestreams/live')
             .then(streams => {
-                console.log(streams.data.live, 'All live streams data');
+                // console.log(streams.data.live, 'All live streams data');
                 setStreamObjs(streams.data.live)
                 let names = Object.keys(streams.data.live)
                 setLivestreams(names);
-                console.log(names, 'Live stream names')
+                // console.log(names, 'Live stream names')
             })
     }, []);
     if (!livestreams) {

@@ -13,7 +13,7 @@ const { LsAdminName, LsAdminPass } = process.env;
 Livestreams.get('/live',  async (req, res) => {
     await axios.get('http://localhost:8000/api/streams')
         .then(results => {
-          console.log(results.data);
+          // console.log(results.data);
           res.send(results.data);
         })
         .catch(err => console.error(err));
