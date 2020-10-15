@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {} from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 import LsListItem from './lsListItem.jsx';
 const axios = require('axios');
 
@@ -20,7 +20,9 @@ const LsList = () => {
     if (!livestreams) {
         return (
             <div>
-                <h1>...Loading livestreams</h1>
+                <Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </Spinner>
             </div>
         )
     } else {

@@ -21,7 +21,9 @@ const SingleLivestream = (props) => {
         createPlayer()
     })
     return (
-        <video id={stream.publisher.clientId} controls height="400" width="600"></video>
+        <div>
+            <video id={stream.publisher.clientId} controls height="400" width="600"></video>
+        </div>
     );
 };
 
