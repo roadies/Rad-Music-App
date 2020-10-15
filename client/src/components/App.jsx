@@ -31,7 +31,6 @@ const App = () => {
   const [genre, setGenre] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(['testCookie']);
 
-
   console.log(userInfo);
 
   useEffect(() => {
@@ -75,7 +74,7 @@ const App = () => {
     } if (view === 'Discover') {
       return <Discover genre={genre} />;
     } if (view === 'Livestreams') {
-      return <LsList />
+      return <LsList />;
     }
     return <Splash />;
   };
@@ -114,17 +113,8 @@ const App = () => {
             <Nav.Link className="main-nav-link" onClick={() => setView('Search')}>Search</Nav.Link>
             <Nav.Link className="main-nav-link" onClick={() => setView('Events')}>Events</Nav.Link>
             <Nav.Link className="main-nav-link" onClick={() => setView('Gallery')}>Gallery</Nav.Link>
-<<<<<<< HEAD
             <Nav.Link className="main-nav-link" onClick={() => setView('Discover')}>Discover</Nav.Link>
             <Nav.Link className="main-nav-link" onClick={() => setView('Livestreams')}>Livestreams</Nav.Link>
-            <Nav.Link
-              onClick={() => {
-                logout();
-                setUser('');
-              }}
-            >
-              Logout
-=======
             <div className="logout">
               <Nav.Link
                 onClick={() => {
@@ -133,8 +123,7 @@ const App = () => {
                 }}
               >
                 Logout
->>>>>>> a692b70... (Add) Calendar fully functional
-            </Nav.Link>
+              </Nav.Link>
             </div>
           </Nav>
         </Navbar.Collapse>

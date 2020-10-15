@@ -49,11 +49,7 @@ const SetupProfile = ({
             <Form>
               <Form.Group>
                 <div>
-<<<<<<< HEAD
                   <FormLabel column="lg">Choose your username!</FormLabel>
-=======
-                  <FormLabel column="lg">Sign Up</FormLabel>
->>>>>>> a692b70... (Add) Calendar fully functional
                   <InputGroup>
                     <FormControl
                       placeholder="Enter here!"
