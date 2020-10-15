@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import moment from 'moment';
 import axios from 'axios';
 import './Calendar.css';
 
@@ -51,7 +52,7 @@ function Calendar({ events, setEvents, userInfo }) {
           <h1>Event Information</h1>
           <div className="card" style={{ width: '25rem' }}>
             <div className="card-body">
-              <h3 className="card-subtitle mb-2 text-muted">{date}</h3>
+              <h3 className="card-subtitle mb-2 text-muted"> <strong>date:</strong> {moment(date).format('MMMM Do YYYY')}</h3>
               <h2 className="card-title">{name}</h2>
               <h4 className="card-text">{genre}</h4>
               <h3 className="card-text">{venue}</h3>
