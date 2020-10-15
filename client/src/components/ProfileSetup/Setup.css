@@ -1,0 +1,12 @@
+.sign_in {
+  display: flex;
+  align-items: center;
+  /* padding-left:50%; */
+  margin: auto;
+  padding-top: 50px;
+  height: 200px;
+  padding: 10px;
+  background-color: aliceblue;
+  border-radius: 25px;
+  border: 2px solid black;
+}

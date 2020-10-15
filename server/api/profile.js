@@ -29,6 +29,18 @@ Profile.post('/events/:userId', (req, res) => {
     .catch((err) => console.error(err));
 });
 
+Profile.delete('/event/:id', (req, res) => {
+  const { id } = req.params;
+
+  Event.destroy({
+    where: {
+      id,
+    },
+  })
+    .then(() => res.send('erased'))
+    .catch((err) => console.error(err));
+});
+
 // handles requests from new user  creation page and creates new user
 Profile.post('/create', (req, res) => {
   const { userName, setupGenre, user } = req.body;

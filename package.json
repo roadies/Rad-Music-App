@@ -55,6 +55,9 @@
   "homepage": "https://github.com/Team-Schrodingers-Cats/Rad-Music-App#readme",
   "dependencies": {
     "@babel/plugin-transform-runtime": "^7.11.5",
+    "@fullcalendar/daygrid": "^5.3.2",
+    "@fullcalendar/interaction": "^5.3.1",
+    "@fullcalendar/react": "^5.3.1",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
@@ -77,6 +80,7 @@
     "flv.js": "^1.5.0",
     "jquery": "^3.5.1",
     "js-cookie": "^2.2.1",
+    "moment": "^2.29.1",
     "mysql2": "^2.2.5",
     "node-media-server": "^2.2.4",
     "nodemon": "^2.0.5",

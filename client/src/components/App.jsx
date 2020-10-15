@@ -72,7 +72,7 @@ const App = () => {
     } if (view === 'Discover') {
       return <Discover genre={genre} userId={userInfo.id}/>;
     } if (view === 'Livestreams') {
-      return <LsList />
+      return <LsList />;
     }
     return <Splash />;
   };
@@ -113,14 +113,16 @@ const App = () => {
             <Nav.Link className="main-nav-link" onClick={() => setView('Gallery')}>Gallery</Nav.Link>
             <Nav.Link className="main-nav-link" onClick={() => setView('Discover')}>Discover</Nav.Link>
             <Nav.Link className="main-nav-link" onClick={() => setView('Livestreams')}>Livestreams</Nav.Link>
-            <Nav.Link
-              onClick={() => {
-                logout();
-                setUser('');
-              }}
-            >
-              Logout
-            </Nav.Link>
+            <div className="logout">
+              <Nav.Link
+                onClick={() => {
+                  logout();
+                  setUser('');
+                }}
+              >
+                Logout
+              </Nav.Link>
+            </div>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
