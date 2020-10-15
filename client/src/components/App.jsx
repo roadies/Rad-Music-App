@@ -70,7 +70,7 @@ const App = () => {
     } if (view === 'Setup') {
       return <SetupProfile setView={setView} setUser={setUser} user={user} setGenre={setGenre} />;
     } if (view === 'Discover') {
-      return <Discover genre={genre} />;
+      return <Discover genre={genre} userId={userInfo.id}/>;
     } if (view === 'Livestreams') {
       return <LsList />
     }

@@ -13,7 +13,8 @@ const { Pictures } = require('./api/pictures');
 const { Oauth } = require('./api/oauth');
 const { Profile } = require('./api/profile');
 const { Twilio } = require('./api/twilio');
-const { Livestreams } = require ('./api/livestreams');
+const { Livestreams } = require('./api/livestreams');
+const { Discover } = require('./api/discover')
 
 const CLIENT_PATH = path.resolve(__dirname, '../client/dist');
 
@@ -32,6 +33,7 @@ app.use('/api/oauth', Oauth);
 app.use('/api/profile', Profile);
 app.use('/api/twilio', Twilio);
 app.use('/api/livestreams', Livestreams);
+app.use('/api/discover', Discover);
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
