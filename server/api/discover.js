@@ -62,7 +62,7 @@ Discover.get('/recs-from-genres/:genres', (req, res) => {
   }).then((authorization) => {
     // once you have token, get the recommendations based off genre
     const accessToken = authorization.data.access_token;
-    console.log(accessToken);
+    // console.log(accessToken);
     axios({
       url: 'https://api.spotify.com/v1/recommendations',
       method: 'get',

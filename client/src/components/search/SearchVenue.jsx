@@ -39,7 +39,7 @@ const SearchVenueLocation = ({
         // console.log('coords', 'lat', addressLat, 'lng', addressLng, 'address', addressDesc);
         // console.log(address);
       } catch (err) {
-        console.log('ERROR');
+        // console.log('ERROR');
       }
       // console.log(address);
     }}

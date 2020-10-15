@@ -72,7 +72,7 @@ const App = () => {
     } if (view === 'Discover') {
       return <Discover genre={genre} userId={userInfo.id}/>;
     } if (view === 'Livestreams') {
-      return <LsList />;
+      return <LsList user={user} />;
     }
     return <Splash />;
   };
