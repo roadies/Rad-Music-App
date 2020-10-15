@@ -141,13 +141,14 @@ const Search = ({ userInfo }) => {
       }}
       >
         {/* add in views here with tabs */}
-        <SearchTab getShows={getShows} markers={markers} />
+        <SearchTab className="search_tab" getShows={getShows} markers={markers} />
       </div>
       <div className="search-page-map">
+
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
-          zoom={12}
-          center={center}
+          zoom={9}
+          center={{ lat: 29.9511, lng: -90.0715 }}
           options={options}
           // onClick={onMapClick}
           onLoad={onMapLoad}
@@ -184,7 +185,7 @@ const Search = ({ userInfo }) => {
                 <p>
                   <SearchInfoVenue selected={selected} />
                 </p>
-                <div class="search_save-calendar">
+                <div className="search_save-calendar">
                   <a onClick={addEvent} href="#">Save to Calendar</a>
                   {saveButton ? <p><i>Saved</i></p> : ''}
                 </div>

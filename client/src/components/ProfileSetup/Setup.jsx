@@ -6,6 +6,7 @@ import {
   FormControl, DropdownButton, Dropdown,
   FormLabel, Form,
 } from 'react-bootstrap';
+import './Setup.css';
 
 const SetupProfile = ({
   view, setView, setUser, user, setGenre,
@@ -38,17 +39,21 @@ const SetupProfile = ({
     <div
       as={Container}
       style={{
-      // border: 'solid 2px black',
+        // border: 'solid 2px black',
         padding: '20px',
       }}
     >
       <Col>
         <Row>
-          <div>
+          <div className="sign_in">
             <Form>
               <Form.Group>
                 <div>
+<<<<<<< HEAD
                   <FormLabel column="lg">Choose your username!</FormLabel>
+=======
+                  <FormLabel column="lg">Sign Up</FormLabel>
+>>>>>>> a692b70... (Add) Calendar fully functional
                   <InputGroup>
                     <FormControl
                       placeholder="Enter here!"

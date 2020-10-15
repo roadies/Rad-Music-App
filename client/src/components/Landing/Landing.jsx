@@ -103,8 +103,8 @@ const Landing = ({ user, genre }) => {
       </div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={12}
-        center={center}
+        zoom={7}
+        center={{ lat: 29.9511, lng: -90.0715 }}
         options={options}
         onLoad={onMapLoad}
       >
