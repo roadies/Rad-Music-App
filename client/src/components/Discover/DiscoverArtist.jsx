@@ -14,7 +14,7 @@ const discoverArtist = ({ userId }) => {
         savedArtists.split();
       })
       .catch((err) => {
-        console.log('get recs by band', err);
+        // console.log('get recs by band', err);
       });
   };
 

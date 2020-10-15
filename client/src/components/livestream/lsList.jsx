@@ -3,7 +3,8 @@ import { Spinner } from 'react-bootstrap';
 import LsListItem from './lsListItem.jsx';
 const axios = require('axios');
 
-const LsList = () => {
+const LsList = (props) => {
+    const { user } = props;
     const [livestreams, setLivestreams] = useState();
     const [streamObjs, setStreamObjs] = useState();
 
@@ -29,7 +30,7 @@ const LsList = () => {
         return (
             <div>
                 {livestreams.map((property, index) => {
-                    return <LsListItem stream={streamObjs[property]} key={index} />
+                    return <LsListItem stream={streamObjs[property]} key={index} user={user}/>
                 })}
             </div>
         )

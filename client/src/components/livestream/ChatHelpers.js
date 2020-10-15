@@ -1,0 +1,1 @@
+//helper functions for chat.jsx go here

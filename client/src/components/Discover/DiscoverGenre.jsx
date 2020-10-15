@@ -32,12 +32,12 @@ const DiscoverGenre = ({ genre }) => {
             albumCover: rec.album.images[1].url,
             snippet: rec.album.preview_url,
           };
-          console.log('RECOMENDATION', recObj);
+          // console.log('RECOMENDATION', recObj);
           return recObj;
         });
       })
       .catch((err) => {
-        console.log('get recs by genre', err);
+        // consoles.log('get recs by genre', err);
       });
   };
 
@@ -48,7 +48,7 @@ const DiscoverGenre = ({ genre }) => {
         setGenreSeeds(response.data);
       })
       .catch((err) => {
-        console.log('DISCOVER JSX RES', err);
+        // console.log('DISCOVER JSX RES', err);
       });
   });
 
