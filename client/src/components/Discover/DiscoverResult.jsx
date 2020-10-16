@@ -2,27 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
-const DiscoverResult = ({ additionalGenres, setAdditionalGenres, recResults, setRecResults, setSearched }) => {
-  const [render, setRender] = useState(false);
-  const [message, setMessage] = useState(null);
-
+const DiscoverResult = ({
+  additionalGenres, setAdditionalGenres, recResults, setRecResults, setSearched,
+}) => {
   const reset = () => {
     setSearched(false);
     setAdditionalGenres([]);
     setRecResults([]);
   };
 
-  useEffect(() => {
-    // if (recResults.length) {
-    //   setRender(true);
-    // }
-  });
-
   return (
     <div className="container">
-      for fans of
-      {' '}
-      {additionalGenres.join(' + ')}
+      <div className="row align-items-center">
+        <h2>
+          for fans of
+          {' '}
+          {additionalGenres.join(' + ')}
+        </h2>
+      </div>
       <div className="row align-items-center">
         { recResults.map((result) => (
           <div className="col-md-4 mx-auto ">
