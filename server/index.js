@@ -21,8 +21,14 @@ io.on('connection', (socket) => {
 
 
   socket.on('clientSendMessage', (data) => {
-    // console.log(data);
-    io.in(roomName).emit('serverSendMessage', data);
+    console.log(data);
+    const { roomId } = data;
+    io.in(roomId).emit('serverSendMessage', data);
+  })
+
+  socket.on('disconnect', (data) => {
+    // const { username } = data;
+    console.log(`User ${username} disconnecting`)
   })
 })
 
