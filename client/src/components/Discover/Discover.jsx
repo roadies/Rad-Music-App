@@ -10,9 +10,9 @@ const Discover = (({ userId, genre }) => {
 
   return (
     <div>
-      <h2>find new tunes with radma </h2>
       {!searched ? (
         <div className="search">
+          <h2>find new tunes with radma </h2>
           <h3>
             you say
             {' '}

@@ -1,44 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import axios from 'axios';
 
-const DiscoverGenre = ({ genre }) => {
+const DiscoverGenre = ({
+  genre, additionalGenres, setAdditionalGenres, recResults, setRecResults, setSearched,
+}) => {
   const [genreSeeds, setGenreSeeds] = useState([]);
-  const [genres, setGenres] = useState([]);
-  // const [selected, setSelected] = useState('nothing yet');
-  const [completed, setCompleted] = useState('');
+  const [checked, setChecked] = useState([]);
+  const [completed, setCompleted] = useState(false);
 
   const select = (newGenre) => {
-    if (!genres.length) {
-      setGenres((genres) => genres.concat(genre));
-      setGenres((genres) => genres.concat(newGenre.seed));
-    } else if (genres.length < 5) {
-      setGenres((genres) => genres.concat(newGenre.seed));
-    } else if (genres.length === 5) {
-      setCompleted('Ok! Let\'s search');
+    setChecked(newGenre);
+    if (!additionalGenres.length) {
+      setAdditionalGenres((additionalGenres) => additionalGenres.concat(genre));
+      setAdditionalGenres((additionalGenres) => additionalGenres.concat(newGenre[0]));
+      setCompleted(true);
+    } else if (additionalGenres.length < 5) {
+      setAdditionalGenres((additionalGenres) => additionalGenres.concat(newGenre.slice(1)));
+      setCompleted(true);
     }
   };
 
   const searchGenres = () => {
-    const genreQueryString = genres.join();
+    const genreQueryString = additionalGenres.join();
     axios.get(`/api/discover/recs-from-genres/${genreQueryString}`)
       .then((response) => {
         // RECOMMENDATIONS BASED ON GENRE
+        setSearched(true);
         response.data.map((rec) => {
           const recObj = {
             name: rec.artists[0].name,
             album: rec.album.name,
             url: rec.external_urls.spotify,
             albumCover: rec.album.images[1].url,
-            snippet: rec.album.preview_url,
+            snippet: rec.preview_url,
           };
-          // console.log('RECOMENDATION', recObj);
-          return recObj;
+          setRecResults((recResults) => recResults.concat(recObj));
         });
       })
-      .catch((err) => {
-        // consoles.log('get recs by genre', err);
-      });
+      .catch();
   };
 
   useEffect(() => {
@@ -47,21 +47,36 @@ const DiscoverGenre = ({ genre }) => {
         // response contains the authorization token
         setGenreSeeds(response.data);
       })
-      .catch((err) => {
-        // console.log('DISCOVER JSX RES', err);
-      });
+      .catch();
   });
-
-  const genreSeedBtn = genreSeeds.map((seed) => <Button variant="outline-info" onClick={() => select({ seed })}>{seed}</Button>);
 
   return (
     <div>
-      <Button onClick={() => searchGenres()}>{completed}</Button>
-      <div className="genre-buttons">
-        {genreSeedBtn}
+      <div className="row align-items-center w-50 d-flex flex-row mx-auto">
+        <ToggleButtonGroup
+          type="checkbox"
+          value={checked}
+          onChange={(e) => select(e)}
+          style={{
+            flexWrap: 'wrap',
+          }}
+        >
+          {genreSeeds.map((seed) => (
+            <ToggleButton
+              className="p-2"
+              variant="outline-info"
+              value={seed}
+            >
+              {seed}
+            </ToggleButton>
+          ))}
+        </ToggleButtonGroup>
       </div>
+      {!completed ? <Button variant="dark" disabled>search</Button>
+        : <Button variant="dark" onClick={() => searchGenres()}>search</Button>}
     </div>
   );
 };
 
 export default DiscoverGenre;
+
