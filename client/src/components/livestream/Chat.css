@@ -1,0 +1,43 @@
+.messages {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin-top: -50px;
+  height: 40vh;
+  width: 22.5vw;
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+}
+
+.green {
+  padding: 5px;
+  background-color: lightgreen;
+  border-radius: 40px;
+  text-align: center;
+}
+
+.chat_text {
+  padding: 5px;
+  background-color: skyblue;
+  border-radius: 40px;
+  text-align: center;
+}
+
+.footer {
+  margin: auto;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20%;
+}
+
+.btn  {
+  color: black;
+  background-color: lightgreen;
+  align-items: center;
+}
+
+.container_chat {
+  
+  width: 25vw;
+}

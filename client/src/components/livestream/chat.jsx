@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import io from 'socket.io-client';
-import {} from 'react-bootstrap';
+import './Chat.css';
 
-//IMPORT CHAT HELPERS AFTER DEFINING THEM..... IF I DO DEFINE THEM, THAT IS
+// IMPORT CHAT HELPERS AFTER DEFINING THEM..... IF I DO DEFINE THEM, THAT IS
 
 const Chat = (props) => {
     const { roomId, user } = props;
@@ -10,10 +10,12 @@ const Chat = (props) => {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
 
-    const socket = io('localhost:8080', {query: {
-        roomName: roomId
-        }});
-    
+    const socket = io('localhost:8080', {
+        query: {
+            roomName: roomId,
+        },
+    });
+
     socket.on('serverSendMessage', (incMessage) => {
         receiveMessage(incMessage);
     });
@@ -21,41 +23,43 @@ const Chat = (props) => {
     const sendMessage = () => {
         socket.emit('clientSendMessage', {
             user: username,
-            body: message
-        })
+            body: message,
+        });
         setMessage('');
-    }
+    };
 
     const receiveMessage = (incMessage) => {
-        setMessages([...messages, incMessage])
+        setMessages([...messages, incMessage]);
     };
 
     return (
-        <div className="container">
-        <div className="row">
-            <div className="col-4">
-                <div className="card">
-                    <div className="card-body">
-                        <div className="card-title">Chat</div>
-                        <hr/>
-                        <div className="messages">
-                            {messages.map(message => {
-                                return (
-                                    //placeholder prop names
-                                    <div>{message.user} says: {message.body}</div>
-                                )
-                            })}
+        <div>
+            <div className="card-title" />
+            <br />
+            <br />
+            <br />
+            <div className="container_chat">
+                <div className="messages">
+                    {messages.map((message) => (
+                        // placeholder prop names
+                        <div className={!user ? 'chat_text' : 'green'}>
+                            <strong>{message.user}</strong>
+                            {' '}
+                            <strong>says:</strong>
+                            {' '}
+                            {message.body}
                         </div>
-                        <div className="footer">
-                            <input type="text" placeholder="Message" className="form-control" value={message} onChange={ev => setMessage(ev.target.value)}/>
-                            <br/>
-                            <button onClick={sendMessage} className="btn btn-primary form-control">Send</button>
-                        </div>
+                    ))}
+                </div>
+                <div className="input-group mb-3">
+                    <input type="text" className="form-control" placeholder="" aria-label="message" aria-describedby="basic-addon2" value={message} onChange={(ev) => setMessage(ev.target.value)} />
+                    <div className="input-group-append">
+
+                        <button className="btn btn-outline-secondary" type="button" onClick={sendMessage}>Send</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     );
 };
 

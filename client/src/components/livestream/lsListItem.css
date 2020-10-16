@@ -1,0 +1,20 @@
+.stream {
+  padding-top: 80px;
+}
+
+.stream_chat {
+  margin: auto;
+  padding-top: 70px;
+  /* width: 20%; */
+    float: left;
+    padding: 10px;
+    padding-right: -30%;
+}
+
+.stream_video {
+  /* padding-top: 70px; */
+     width: 70%;
+    float: left;
+    padding: 10px;
+    padding-left: 100px;
+}
