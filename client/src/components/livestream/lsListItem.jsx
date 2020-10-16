@@ -24,10 +24,9 @@ const LsListItem = (props) => {
             <div className="stream">
                 <div className="stream_video">
                     <SingleLivestream stream={stream} />
-                    <button onClick={handleClick}>Leave Stream</button>
+                    <button onClick={handleClick} type="button" class="btn btn-warning">Leave Stream</button>
                 </div>
                 <div className="stream_chat">
-
                     <Chat roomId={stream.publisher.clientId} user={user} />
                 </div>
             </div>
@@ -37,7 +36,7 @@ const LsListItem = (props) => {
 
         <div className="streamInfo">
             <h1>{stream.publisher.stream}</h1>
-            <button onClick={handleClick}>View Stream</button>
+            <button onClick={handleClick} type="button" class="btn btn-warning">View Stream</button>
         </div>
     );
 };

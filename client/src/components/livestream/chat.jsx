@@ -34,24 +34,30 @@ const Chat = (props) => {
 
     return (
         <div>
-            <div className="card-title"></div>
+            <div className="card-title" />
             <br />
             <br />
-            <div className="messages">
-                {messages.map((message) => (
-                    // placeholder prop names
-                    <div className="chat_text">
-                        <strong>{message.user}</strong>
-                        {' '}
-                        <strong>says:</strong>
-                        {' '}
-                        {message.body}
+            <br />
+            <div className="container_chat">
+                <div className="messages">
+                    {messages.map((message) => (
+                        // placeholder prop names
+                        <div className={!user ? 'chat_text' : 'green'}>
+                            <strong>{message.user}</strong>
+                            {' '}
+                            <strong>says:</strong>
+                            {' '}
+                            {message.body}
+                        </div>
+                    ))}
+                </div>
+                <div className="input-group mb-3">
+                    <input type="text" className="form-control" placeholder="" aria-label="message" aria-describedby="basic-addon2" value={message} onChange={(ev) => setMessage(ev.target.value)} />
+                    <div className="input-group-append">
+
+                        <button className="btn btn-outline-secondary" type="button" onClick={sendMessage}>Send</button>
                     </div>
-                ))}
-            </div>
-            <div className="footer">
-                <input type="text" placeholder="Message" className="form-control" value={message} onChange={(ev) => setMessage(ev.target.value)} />
-                <button onClick={sendMessage} className="btn btn-primary form-control">Send</button>
+                </div>
             </div>
         </div>
     );
