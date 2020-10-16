@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import SingleLivestream from './singleLivestream.jsx';
-import Chat from './chat.jsx';
 import { Container, Row, Col } from 'react-bootstrap';
+import SingleLivestream from './singleLivestream.jsx';
+import Chat from './chat';
+import './lsListItem.css';
 
 const LsListItem = (props) => {
     const { stream, user } = props;
@@ -11,41 +12,34 @@ const LsListItem = (props) => {
     const handleClick = () => {
         isClicked ? toggleClicked(false) : toggleClicked(true);
         // console.log(isClicked, 'Clicked!');
-    }
+    };
 
-    useEffect( () => {
+    useEffect(() => {
         // console.log(props);
     }, [props.stream]);
     // if (!livestreams) {
-    
-    if (isClicked){ 
+
+    if (isClicked) {
         return (
             <div className="stream">
-                <Container>
-                    <Row>
-                        <Col>
-                            <SingleLivestream stream={stream} />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Chat roomId={stream.publisher.clientId} user={user}/>
-                        </Col>
-                    </Row>
+                <div className="stream_video">
+                    <SingleLivestream stream={stream} />
                     <button onClick={handleClick}>Leave Stream</button>
-                </Container>
+                </div>
+                <div className="stream_chat">
+
+                    <Chat roomId={stream.publisher.clientId} user={user} />
+                </div>
             </div>
-        )
-    } else {
-        return (
-        
+        );
+    }
+    return (
+
         <div className="streamInfo">
             <h1>{stream.publisher.stream}</h1>
             <button onClick={handleClick}>View Stream</button>
         </div>
-        )
-    }
-
+    );
 };
 
 export default LsListItem;

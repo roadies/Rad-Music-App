@@ -1,0 +1,21 @@
+.messages {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin-top: -50px;
+  height: 40vh;
+  width: 24vw;
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+}
+
+.chat_text {
+  padding: 5px;
+  background-color: skyblue;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.form-control {
+  padding-left: 20px;
+}
