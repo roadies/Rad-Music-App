@@ -106,13 +106,13 @@ const App = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="justify-content-between">
-            <Nav.Link className="main-nav-link" onClick={() => setView('Home')}>Home</Nav.Link>
-            <Nav.Link className="main-nav-link" onClick={() => setView('Add')}>Add</Nav.Link>
-            <Nav.Link className="main-nav-link" onClick={() => setView('Search')}>Search</Nav.Link>
-            <Nav.Link className="main-nav-link" onClick={() => setView('Events')}>Events</Nav.Link>
-            <Nav.Link className="main-nav-link" onClick={() => setView('Gallery')}>Gallery</Nav.Link>
-            <Nav.Link className="main-nav-link" onClick={() => setView('Discover')}>Discover</Nav.Link>
-            <Nav.Link className="main-nav-link" onClick={() => setView('Livestreams')}>Livestreams</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Home')}>home</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Add')}>add</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Search')}>search</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Gallery')}>gallery</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Events')}>events</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Discover')}>wildcard</Nav.Link>
+            <Nav.Link className="main-nav-link" onClick={() => setView('Livestreams')}>livestreams</Nav.Link>
             <div className="logout">
               <Nav.Link
                 onClick={() => {
@@ -120,7 +120,7 @@ const App = () => {
                   setUser('');
                 }}
               >
-                Logout
+                logout
               </Nav.Link>
             </div>
           </Nav>
