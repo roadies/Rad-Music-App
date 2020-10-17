@@ -51,9 +51,10 @@ const DiscoverGenre = ({
   });
 
   return (
-    <div>
-      <div className="row align-items-center w-50 d-flex flex-row mx-auto">
+    <div className="container">
+      <div className="row align-items-center d-flex flex-row mx-auto">
         <ToggleButtonGroup
+          className="px-1"
           type="checkbox"
           value={checked}
           onChange={(e) => select(e)}
@@ -63,8 +64,11 @@ const DiscoverGenre = ({
         >
           {genreSeeds.map((seed) => (
             <ToggleButton
-              className="p-2"
-              variant="outline-info"
+              className="m-1"
+              variant="outline-dark"
+              style={{
+                borderRadius: '6px',
+              }}
               value={seed}
             >
               {seed}
@@ -72,11 +76,36 @@ const DiscoverGenre = ({
           ))}
         </ToggleButtonGroup>
       </div>
-      {!completed ? <Button variant="dark" disabled>search</Button>
-        : <Button variant="dark" onClick={() => searchGenres()}>search</Button>}
+      <div className="row align-items-center d-flex flex-row mt-1 mb-3 mx-auto">
+        {!completed ? (
+          <Button
+            variant="dark"
+            disabled
+            style={{
+              backgroundColor: '#49ad47',
+              fontWeight: 'bold',
+              fontSize: '11px',
+            }}
+          >
+            GET RECS →
+          </Button>
+        )
+          : (
+            <Button
+              variant="dark"
+              onClick={() => searchGenres()}
+              style={{
+                backgroundColor: '#49ad47',
+                fontWeight: 'bold',
+                fontSize: '12px',
+              }}
+            >
+              GET RECS →
+            </Button>
+          )}
+      </div>
     </div>
   );
 };
 
 export default DiscoverGenre;
-

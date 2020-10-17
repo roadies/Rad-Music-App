@@ -9,18 +9,32 @@ const Discover = (({ userId, genre }) => {
   const [recResults, setRecResults] = useState([]);
 
   return (
-    <div>
+    <div className="container">
       {!searched ? (
-        <div className="search">
-          <h2>find new tunes with radma </h2>
-          <h3>
-            you say
-            {' '}
-            {genre.toUpperCase()}
-            {' '}
-            is your favorite, but what else do you enjoy?
-          </h3>
-          <h7>add at least one & up to four</h7>
+        <div>
+          <div className="row justify-content-center align-items-baseline d-flex flex-row mt-3">
+            <p style={{
+              fontSize: '16px',
+            }}
+            >
+              WILDCARD: DISCOVER TUNES OLD & NEW WITH RADMA
+            </p>
+          </div>
+          <div className="row justify-content-around align-items-baseline d-flex flex-row mt-1 mb-1 mx-auto">
+            <h3>
+              <i>you say</i>
+              {' '}
+              <b>{genre}</b>
+              {' '}
+              <i>is your favorite, but what else do you enjoy?</i>
+            </h3>
+            <p style={{
+              fontSize: '11px',
+            }}
+            >
+              SELECT AT LEAST ONE & UP TO FOUR
+            </p>
+          </div>
           <DiscoverGenre
             genre={genre}
             additionalGenres={additionalGenres}
@@ -32,15 +46,13 @@ const Discover = (({ userId, genre }) => {
         </div>
       )
         : (
-          <div className="results">
-            <DiscoverResult
-              additionalGenres={additionalGenres}
-              setAdditionalGenres={setAdditionalGenres}
-              recResults={recResults}
-              setRecResults={setRecResults}
-              setSearched={setSearched}
-            />
-          </div>
+          <DiscoverResult
+            additionalGenres={additionalGenres}
+            setAdditionalGenres={setAdditionalGenres}
+            recResults={recResults}
+            setRecResults={setRecResults}
+            setSearched={setSearched}
+          />
         )}
     </div>
   );
